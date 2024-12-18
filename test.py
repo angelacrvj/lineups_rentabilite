@@ -147,7 +147,10 @@ opponent_players = extract_unique_players(opponent_data)
 player_filter_team = st.sidebar.multiselect("Joueurs de l'équipe de référence", team_players)
 player_filter_opponent = st.sidebar.multiselect("Joueurs de l'équipe adverse", opponent_players)
 
-# Filtrage des données des joueurs sélectionnés
+# Filtrage des données des joueurs sélectionnés (heatmaps uniquement)
+heatmap_team_data = team_data.copy()
+heatmap_opponent_data = opponent_data.copy()
+
 if player_filter_team:
     team_data = team_data[team_data["Player_1_name"].isin(player_filter_team) |
                           team_data["Player_2_name"].isin(player_filter_team) |
