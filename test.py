@@ -61,6 +61,62 @@ def plot_heatmap(df, title, ax):
     ax.set_xlabel("")
     st.pyplot(fig)
 
+# Fonction pour le radar chart
+def radar_chart(team1_lineups, team2_lineups):
+    categories = ["Points par poss. (offense)", "Points par poss. (defense)",
+                  "Poss par match (offense)", "Poss par match (defense)",
+                  "TS% (offense)", "TS% (defense)"]
+
+    fig = go.Figure()
+    unique_lineups = list(set(team1_lineups + team2_lineups))
+    color_mapping = {lineup: f"#{random.randint(0, 0xFFFFFF):06x}" for lineup in unique_lineups}
+
+    # Lineups équipe 1
+    for lineup in team1_lineups:
+        row = data[data["Lineup"] == lineup].iloc[0]
+        values = [row[f"centile_{col}"] for col in ["Rentabilite_possessions_equipe", "Rentabilite_possessions_opp",
+                   "Rentabilite_temps_equipe", "Rentabilite_temps_opp",
+                   "True_Shooting_equipe_%", "True_Shooting_opp_%"]]
+        fig.add_trace(go.Scatterpolar(
+            r=values,
+            theta=categories,
+            fill="toself",
+            name=f"{team_name} - {lineup}",
+            line=dict(color=color_mapping[lineup])
+        ))
+
+    # Lineups équipe 2
+    for lineup in team2_lineups:
+        row = data[data["Lineup"] == lineup].iloc[0]
+        values = [row[f"centile_{col}"] for col in ["Rentabilite_possessions_equipe", "Rentabilite_possessions_opp",
+                   "Rentabilite_temps_equipe", "Rentabilite_temps_opp",
+                   "True_Shooting_equipe_%", "True_Shooting_opp_%"]]
+        fig.add_trace(go.Scatterpolar(
+            r=values,
+            theta=categories,
+            fill="toself",
+            name=f"{opponent_name} - {lineup}",
+            line=dict(color=color_mapping[lineup])
+        ))
+
+    # mise en page bg 
+    fig.update_layout(
+        title="Graphique Radar : Comparaison des Lineups 🏀",
+        polar=dict(
+            radialaxis=dict(visible=True, range=[0, 100]),
+            angularaxis=dict(tickvals=[0, 1, 2, 3, 4, 5], ticktext=categories)  
+        ),
+        showlegend=True,
+        legend=dict(
+            orientation="h",  
+            yanchor="bottom", 
+            y=-0.5,  
+            xanchor="center", 
+            x=0.5  
+        )
+    )
+    st.plotly_chart(fig)
+
 # Interface Streamlit
 st.title("Analyse de Rentabilité des Lineups 🏀📊")
 st.sidebar.header("Filtres")
