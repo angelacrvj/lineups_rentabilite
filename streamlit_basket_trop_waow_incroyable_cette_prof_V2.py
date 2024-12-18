@@ -128,11 +128,18 @@ team_data = data[data["Equipe"] == team_name]
 opponent_data = data[data["Equipe"] == opponent_name]
 
 # Récupérer la liste des joueurs pour chaque équipe
-team_players = team_data["Player_1_name"].tolist() + team_data["Player_2_name"].tolist() + team_data["Player_3_name"].tolist() + \
-               team_data["Player_4_name"].tolist() + team_data["Player_5_name"].tolist()
+def extract_unique_players(df):
+    players = set(
+        df["Player_1_name"].tolist() +
+        df["Player_2_name"].tolist() +
+        df["Player_3_name"].tolist() +
+        df["Player_4_name"].tolist() +
+        df["Player_5_name"].tolist()
+    )
+    return sorted([player for player in players if pd.notnull(player)])
 
-opponent_players = opponent_data["Player_1_name"].tolist() + opponent_data["Player_2_name"].tolist() + opponent_data["Player_3_name"].tolist() + \
-                   opponent_data["Player_4_name"].tolist() + opponent_data["Player_5_name"].tolist()
+team_players = extract_unique_players(team_data)
+opponent_players = extract_unique_players(opponent_data)
 
 # Sélection des joueurs
 player_filter_team = st.sidebar.multiselect("Joueurs de l'équipe de référence", team_players)
