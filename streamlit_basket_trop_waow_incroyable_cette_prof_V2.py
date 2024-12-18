@@ -54,7 +54,7 @@ def plot_heatmap(df, title):
 
     # Ajouter une ligne verticale épaisse pour séparer les statistiques offensives et défensives
     separation_idx = len(offensive_stats)  # Position de la séparation
-    ax.axvline(x=separation_idx - 0.5, color="black", linewidth=2)
+    ax.axvline(x=separation_idx, color="black", linewidth=2)
 
     ax.set_title(title)
     st.pyplot(fig)
