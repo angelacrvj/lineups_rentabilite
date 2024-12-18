@@ -52,8 +52,9 @@ def plot_heatmap(df, title):
     df = df.rename(columns=stat_rename).set_index("Lineup").select_dtypes(include='number')
     sns.heatmap(df, annot=True, fmt=".1f", cmap="coolwarm", linewidths=0.5, ax=ax)
 
-    # Ajouter une ligne épaisse pour séparer les statistiques offensives et défensives
-    ax.hlines(y=len(offensive_stats), xmin=0, xmax=df.shape[1], linewidth=3, color='black')
+    # Ajouter une ligne verticale épaisse pour séparer les statistiques offensives et défensives
+    separation_idx = len(offensive_stats)  # Position de la séparation
+    ax.axvline(x=separation_idx - 0.5, color="black", linewidth=2)
 
     ax.set_title(title)
     st.pyplot(fig)
@@ -91,22 +92,35 @@ st.sidebar.header("Filtres")
 team_name = st.sidebar.selectbox("Équipe de référence", data["Equipe"].unique())
 opponent_name = st.sidebar.selectbox("Équipe adverse", [team for team in data["Equipe"].unique() if team != team_name])
 
-# Sélection des joueurs
-player_filter_team = st.sidebar.multiselect("Joueurs de l'équipe de référence", data.columns[2:7].unique())
-player_filter_opponent = st.sidebar.multiselect("Joueurs de l'équipe adverse", data.columns[2:7].unique())
-
-# Filtrage des données
+# Filtrage des joueurs en fonction de l'équipe sélectionnée
 team_data = data[data["Equipe"] == team_name]
-if player_filter_team:
-    team_data = team_data.query("Player_1_name in @player_filter_team or Player_2_name in @player_filter_team or \
-                                 Player_3_name in @player_filter_team or Player_4_name in @player_filter_team or \
-                                 Player_5_name in @player_filter_team")
-
 opponent_data = data[data["Equipe"] == opponent_name]
+
+# Récupérer la liste des joueurs pour chaque équipe
+team_players = team_data["Player_1_name"].tolist() + team_data["Player_2_name"].tolist() + team_data["Player_3_name"].tolist() + \
+               team_data["Player_4_name"].tolist() + team_data["Player_5_name"].tolist()
+
+opponent_players = opponent_data["Player_1_name"].tolist() + opponent_data["Player_2_name"].tolist() + opponent_data["Player_3_name"].tolist() + \
+                   opponent_data["Player_4_name"].tolist() + opponent_data["Player_5_name"].tolist()
+
+# Sélection des joueurs
+player_filter_team = st.sidebar.multiselect("Joueurs de l'équipe de référence", team_players)
+player_filter_opponent = st.sidebar.multiselect("Joueurs de l'équipe adverse", opponent_players)
+
+# Filtrage des données des joueurs sélectionnés
+if player_filter_team:
+    team_data = team_data[team_data["Player_1_name"].isin(player_filter_team) |
+                          team_data["Player_2_name"].isin(player_filter_team) |
+                          team_data["Player_3_name"].isin(player_filter_team) |
+                          team_data["Player_4_name"].isin(player_filter_team) |
+                          team_data["Player_5_name"].isin(player_filter_team)]
+
 if player_filter_opponent:
-    opponent_data = opponent_data.query("Player_1_name in @player_filter_opponent or Player_2_name in @player_filter_opponent or \
-                                         Player_3_name in @player_filter_opponent or Player_4_name in @player_filter_opponent or \
-                                         Player_5_name in @player_filter_opponent")
+    opponent_data = opponent_data[opponent_data["Player_1_name"].isin(player_filter_opponent) |
+                                  opponent_data["Player_2_name"].isin(player_filter_opponent) |
+                                  opponent_data["Player_3_name"].isin(player_filter_opponent) |
+                                  opponent_data["Player_4_name"].isin(player_filter_opponent) |
+                                  opponent_data["Player_5_name"].isin(player_filter_opponent)]
 
 # Affichage Heatmap
 st.subheader(f"Heatmap : {team_name} vs {opponent_name}")
