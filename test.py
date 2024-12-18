@@ -171,3 +171,10 @@ plot_heatmap(matchup_df, f"Heatmap pour {team_name} contre {opponent_name}", plt
 st.subheader(f"Heatmap : {opponent_name} vs {team_name}")
 matchup_df_opponent = calculate_matchup(opponent_data, team_data)
 plot_heatmap(matchup_df_opponent, f"Heatmap pour {opponent_name} contre {team_name}", plt.gca())
+
+
+# Affichage Radar Chart
+st.subheader("Radar Chart")
+team1_lineups = st.multiselect(f"Lineups de {team_name} :", options=team_data["Lineup"].unique())
+team2_lineups = st.multiselect(f"Lineups de {opponent_name} :", options=opponent_data["Lineup"].unique())
+radar_chart(team1_lineups, team2_lineups)
