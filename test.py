@@ -167,12 +167,12 @@ if player_filter_opponent:
 
 # Affichage Heatmap : Équipe de référence vs Équipe adverse
 st.subheader(f"Heatmap : {team_name} vs {opponent_name}")
-matchup_df = calculate_matchup(team_data, opponent_data)
+matchup_df = calculate_matchup(heatmap_team_data, heatmap_opponent_data)
 plot_heatmap(matchup_df, f"Heatmap pour {team_name} contre {opponent_name}", plt.gca())
 
 # Affichage Heatmap : Équipe adverse vs Équipe de référence
 st.subheader(f"Heatmap : {opponent_name} vs {team_name}")
-matchup_df_opponent = calculate_matchup(opponent_data, team_data)
+matchup_df_opponent = calculate_matchup(heatmap_team_data, heatmap_opponent_data)
 plot_heatmap(matchup_df_opponent, f"Heatmap pour {opponent_name} contre {team_name}", plt.gca())
 
 
