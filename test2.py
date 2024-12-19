@@ -126,6 +126,7 @@ def radar_chart(team1_lineups, team2_lineups):
             x=0.5  
         )
     )
+    st.plotly_chart(fig)
 
 
 # Interface Streamlit
