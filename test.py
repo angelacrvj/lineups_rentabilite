@@ -62,9 +62,13 @@ def plot_heatmap(df, title, ax):
     st.pyplot(fig)
 
 # Fonction pour le radar chart
-def radar_chart(team1_lineups, team2_lineups):
-    categories = ["Points par poss. (offense)", "Poss par match (offense)", "TS% (offense)",
-                  "Points par poss. (defense)", "Poss par match (defense)", "TS% (defense)"]
+def radar_chart(team1_lineups, team2_lineups):    
+    categories = ["Poss par match (defense)",
+                  "Points par poss. (defense)",
+                  "Points par poss. (offense)",
+                  "Poss par match (offense)",
+                  "TS% (offense)",
+                  "TS% (defense)"]
 
     fig = go.Figure()
     unique_lineups = list(set(team1_lineups + team2_lineups))
