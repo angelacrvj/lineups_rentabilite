@@ -162,7 +162,7 @@ player_filter_opponent = st.sidebar.multiselect("Joueurs de l'équipe adverse", 
 
 # Filtrage des données des joueurs sélectionnés (que pour les heatmap)
 if player_filter_team:
-    team_data = team_data[team_data["Player_1_name"].isin(player_filter_team) |
+    team_data_filtered = team_data[team_data["Player_1_name"].isin(player_filter_team) |
                           team_data["Player_2_name"].isin(player_filter_team) |
                           team_data["Player_3_name"].isin(player_filter_team) |
                           team_data["Player_4_name"].isin(player_filter_team) |
@@ -171,7 +171,7 @@ else:
     team_data_filtered = team_data  # on prévoit les cas où monsieur basket ne filtre pas les joueurs 
 
 if player_filter_opponent:
-    opponent_data = opponent_data[opponent_data["Player_1_name"].isin(player_filter_opponent) |
+    opponent_data_filtered = opponent_data[opponent_data["Player_1_name"].isin(player_filter_opponent) |
                                   opponent_data["Player_2_name"].isin(player_filter_opponent) |
                                   opponent_data["Player_3_name"].isin(player_filter_opponent) |
                                   opponent_data["Player_4_name"].isin(player_filter_opponent) |
