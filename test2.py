@@ -63,12 +63,12 @@ def plot_heatmap(df, title, ax):
 
 # Fonction pour le radar chart
 def radar_chart(team1_lineups, team2_lineups):    
-    categories = ["Poss par match (defense)",
-                  "Points par poss. (defense)",
-                  "Points par poss. (offense)",
-                  "Poss par match (offense)",
-                  "TS% (offense)",
-                  "TS% (defense)"]
+    categories = ["Poss par match (offense)", 
+                  "Points par poss. (offense)", 
+                  "Points par poss. (defense)", 
+                  "Poss par match (defense)", 
+                  "TS% (defense)", 
+                  "TS% (offense)"] 
 
     fig = go.Figure()
     unique_lineups = list(set(team1_lineups + team2_lineups))
@@ -85,7 +85,8 @@ def radar_chart(team1_lineups, team2_lineups):
             theta=categories,
             fill="toself",
             name=f"{team_name} - {lineup}",
-            line=dict(color=color_mapping[lineup])
+            line=dict(color=color_mapping[lineup]),
+            hovertemplate="<b>%{theta}</b>: %{r:.2f}<extra></extra>" #info-bulle
         ))
 
     # Lineups équipe 2
@@ -99,7 +100,8 @@ def radar_chart(team1_lineups, team2_lineups):
             theta=categories,
             fill="toself",
             name=f"{opponent_name} - {lineup}",
-            line=dict(color=color_mapping[lineup])
+            line=dict(color=color_mapping[lineup]),
+            hovertemplate="<b>%{theta}</b>: %{r:.2f}<extra></extra>" #info-bulle
         ))
 
     # mise en page bg 
