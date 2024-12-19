@@ -109,12 +109,11 @@ def radar_chart(team1_lineups, team2_lineups):
             radialaxis=dict(
                 visible=True,
                 range=[0, 100],
-                tickfont=dict(color="red")  # Changer la couleur des ticks radiaux
+                tickfont=dict(color="#1E2D24")  # Changer la couleur des ticks radiaux
             ),
             angularaxis=dict(
                 tickvals=[0, 1, 2, 3, 4, 5],
-                ticktext=categories,
-                tickfont=dict(color="blue")  # Changer la couleur des ticks angulaires
+                ticktext=categories
             )
         ),
         showlegend=True,
