@@ -217,28 +217,6 @@ with col2:
     matchup_df_opponent = calculate_matchup(opponent_data_filtered, team_data_filtered)
     plot_heatmap(matchup_df_opponent, f"Heatmap pour {opponent_name} contre {team_name}", plt.gca())
 
-#TEST 
-# Affichage Heatmap : Équipe de référence vs Équipe adverse
-st.subheader(f"Heatmap : {team_name} vs {opponent_name}")
-col1, col2 = st.columns([1, 5])  # Modifier ici pour ajuster la largeur de la colonne du logo
-with col1:
-    if team_name in team_logos:
-        st.image(team_logos[team_name], width=100)  # Ajuste la taille du logo si nécessaire
-with col2:
-    matchup_df = calculate_matchup(team_data_filtered, opponent_data_filtered)
-    plot_heatmap(matchup_df, f"Heatmap pour {team_name} contre {opponent_name}", plt.gca())
-
-# Affichage Heatmap : Équipe adverse vs Équipe de référence
-st.subheader(f"Heatmap : {opponent_name} vs {team_name}")
-col1, col2 = st.columns([1, 5])  # Même ajustement ici
-with col1:
-    if opponent_name in team_logos:
-        st.image(team_logos[opponent_name], width=100)  # Ajuste la taille du logo si nécessaire
-with col2:
-    matchup_df_opponent = calculate_matchup(opponent_data_filtered, team_data_filtered)
-    plot_heatmap(matchup_df_opponent, f"Heatmap pour {opponent_name} contre {team_name}", plt.gca())
-
-
 # Affichage Radar Chart
 st.subheader("Radar Chart")
 team1_lineups = st.multiselect(f"Lineups de {team_name} :", options=team_data["Lineup"].unique())
