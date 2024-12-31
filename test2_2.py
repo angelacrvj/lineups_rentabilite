@@ -154,11 +154,17 @@ st.sidebar.header("Filtres")
 
 # Sélection des équipes
 team_name = st.sidebar.selectbox("Équipe de référence", data["Equipe"].unique())
-opponent_name = st.sidebar.selectbox("Équipe adverse", [team for team in data["Equipe"].unique() if team != team_name])
+opponent_name = st.sidebar.selectbox("Équipe adverse", ["Ligue"] + [team for team in data["Equipe"].unique() if team != team_name])
 
 # Filtrage des joueurs en fonction de l'équipe sélectionnée
 team_data = data[data["Equipe"] == team_name]
-opponent_data = data[data["Equipe"] == opponent_name]
+#opponent_data = data[data["Equipe"] == opponent_name]
+
+if opponent_name == "Ligue":
+    opponent_data = data.groupby("Lineup")[all_stats].mean().reset_index()
+else:
+    opponent_data = data[data["Equipe"] == opponent_name]
+
 
 # Récupérer la liste des joueurs pour chaque équipe
 def extract_unique_players(df):
