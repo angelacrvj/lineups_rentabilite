@@ -6,17 +6,15 @@ import plotly.graph_objects as go
 import random
 import os
 
-# Chemin du fichier CSV
 script_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(script_dir, "lineups_rentabilite.csv")
+file_path = os.path.join(script_dir, "lineups_rentabilite_wt_league.csv")
 data = pd.read_csv(file_path)
 
-# Définir les statistiques
+# Stats 
 offensive_stats = ["Rentabilite_possessions_equipe", "Rentabilite_temps_equipe", "True_Shooting_equipe_%"]
 defensive_stats = ["Rentabilite_possessions_opp", "Rentabilite_temps_opp", "True_Shooting_opp_%"]
 all_stats = offensive_stats + defensive_stats
 
-# Dictionnaire pour renommer les statistiques
 stat_rename = {
     "Rentabilite_possessions_equipe": "Points par poss. (offense)",
     "Rentabilite_temps_equipe": "Poss par match (offense)",
@@ -26,11 +24,32 @@ stat_rename = {
     "True_Shooting_opp_%": "TS% (defense)"
 }
 
-# Fonction pour calculer les comparaisons de matchups
+#logos équpipes
+team_logos = {
+    'Le Mans' : "logos_equipes/Le_Mans.png",
+    'Ligue' : "logos_equipes/Logo_Betclic_Elite_Pro_A_50px.png",
+    'JL Bourg-en-Bresse' : "logos_equipes/JL_Bourg_en_Bresse.png", 
+    'Chalon Saone' : "logos_equipes/Chalon_Saone.png", 
+    'Cholet Basket' : "logos_equipes/Cholet_Basket.png",
+    'BCM Gravelines-Dunkerque' : "logos_equipes/BCM_Gravelines_Dunkerque.png", 
+    'JDA Dijon Basket' : "logos_equipes/JDA_Dijon_Basket.png",
+    'La Rochelle Rupella' : "logos_equipes/La_Rochelle_Rupella.png",
+    'CSP Limoges' : "logos_equipes/CSP_Limoges.png",
+    'ESSM Le Portel' : "logos_equipes/ESSM_Le_Portel.png",
+    'ASVEL Lyon-Villeurbanne' : "logos_equipes/ASVEL_Lyon_Villeurbanne.png",
+    'AS Monaco Basket' : "logos_equipes/AS_Monaco_Basket.png",
+    'SLUC Nancy Basket' : "logos_equipes/SLUC_Nancy_Basket.png",
+    'Nanterre 92' : "logos_equipes/Nanterre_92.png", 
+    'Paris Basketball' : "logos_equipes/Paris_Basketball.png", 
+    'Saint-Quentin' : "logos_equipes/Saint-Quentin.png",
+    'SIG Strasbourg' : "logos_equipes/SIG_Strasbourg.png"
+}
+
+# Calculs comparaisons de matchups
 def calculate_matchup(team_lineups, opponent_lineups):
     results = []
     for _, lineup in team_lineups.iterrows():
-        lineup_id = f"{lineup['Lineup']} ({lineup['Plus/Minus']})"  # Identifiant combiné
+        lineup_id = f"{lineup['Lineup']} (+/- : {lineup['Plus/Minus']}, min: {lineup['Minutes']})"  
         row = {"Lineup": lineup_id}
 
         for stat in all_stats:
@@ -46,14 +65,14 @@ def calculate_matchup(team_lineups, opponent_lineups):
         results.append(row)
     return pd.DataFrame(results)
 
-# Fonction pour afficher la heatmap
+# Fonction heatmap pete sa mère
 def plot_heatmap(df, title, ax):
     fig, ax = plt.subplots()
     df = df.rename(columns=stat_rename).set_index("Lineup").select_dtypes(include='number')
     sns.heatmap(df, annot=True, fmt=".1f", cmap="coolwarm", linewidths=0.5, ax=ax)
 
-    # Ajouter une ligne verticale épaisse pour séparer les statistiques offensives et défensives
-    separation_idx = len(offensive_stats)  # Position de la séparation
+    # Ligne de séparation des stats offensives et défensives
+    separation_idx = len(offensive_stats)  # position
     ax.axvline(x=separation_idx, color="black", linewidth=2)
 
     ax.set_title(title)
@@ -61,7 +80,7 @@ def plot_heatmap(df, title, ax):
     ax.set_xlabel("")
     st.pyplot(fig)
 
-# Fonction pour le radar chart
+# Fonction radar chart pete sa mère
 def radar_chart(team1_lineups, team2_lineups):    
     categories = ["Poss par match (offense)", 
                   "Points par poss. (offense)", 
@@ -86,7 +105,7 @@ def radar_chart(team1_lineups, team2_lineups):
             fill="toself",
             name=f"{team_name} - {lineup}",
             line=dict(color=color_mapping[lineup]),
-            hovertemplate="<b>%{theta}</b>: %{r:.2f}<extra></extra>" #info-bulle
+            hovertemplate="<b>%{theta}</b>: %{r:.2f}<extra></extra>" #génération d'info-bulle
         ))
 
     # Lineups équipe 2
@@ -136,11 +155,17 @@ st.sidebar.header("Filtres")
 
 # Sélection des équipes
 team_name = st.sidebar.selectbox("Équipe de référence", data["Equipe"].unique())
-opponent_name = st.sidebar.selectbox("Équipe adverse", [team for team in data["Equipe"].unique() if team != team_name])
+opponent_name = st.sidebar.selectbox("Équipe adverse", ["Ligue"] + [team for team in data["Equipe"].unique() if team != team_name])
 
 # Filtrage des joueurs en fonction de l'équipe sélectionnée
 team_data = data[data["Equipe"] == team_name]
-opponent_data = data[data["Equipe"] == opponent_name]
+#opponent_data = data[data["Equipe"] == opponent_name]
+
+if opponent_name == "Ligue":
+    opponent_data = data.groupby("Lineup")[all_stats].mean().reset_index()
+else:
+    opponent_data = data[data["Equipe"] == opponent_name]
+
 
 # Récupérer la liste des joueurs pour chaque équipe
 def extract_unique_players(df):
@@ -156,35 +181,48 @@ def extract_unique_players(df):
 team_players = extract_unique_players(team_data)
 opponent_players = extract_unique_players(opponent_data)
 
-# Sélection des joueurs
+# Filtre des joueurs
 player_filter_team = st.sidebar.multiselect("Joueurs de l'équipe de référence", team_players)
 player_filter_opponent = st.sidebar.multiselect("Joueurs de l'équipe adverse", opponent_players)
 
-# Filtrage des données des joueurs sélectionnés
+# Filtrage des données des joueurs sélectionnés (que pour les heatmap)
 if player_filter_team:
-    team_data = team_data[team_data["Player_1_name"].isin(player_filter_team) |
+    team_data_filtered = team_data[team_data["Player_1_name"].isin(player_filter_team) |
                           team_data["Player_2_name"].isin(player_filter_team) |
                           team_data["Player_3_name"].isin(player_filter_team) |
                           team_data["Player_4_name"].isin(player_filter_team) |
                           team_data["Player_5_name"].isin(player_filter_team)]
+else:
+    team_data_filtered = team_data  # on prévoit les cas où monsieur basket ne filtre pas les joueurs 
 
 if player_filter_opponent:
-    opponent_data = opponent_data[opponent_data["Player_1_name"].isin(player_filter_opponent) |
+    opponent_data_filtered = opponent_data[opponent_data["Player_1_name"].isin(player_filter_opponent) |
                                   opponent_data["Player_2_name"].isin(player_filter_opponent) |
                                   opponent_data["Player_3_name"].isin(player_filter_opponent) |
                                   opponent_data["Player_4_name"].isin(player_filter_opponent) |
                                   opponent_data["Player_5_name"].isin(player_filter_opponent)]
+else:
+    opponent_data_filtered = opponent_data  # on prévoit les cas où monsieur basket ne filtre pas les joueurs 
 
 # Affichage Heatmap : Équipe de référence vs Équipe adverse
 st.subheader(f"Heatmap : {team_name} vs {opponent_name}")
-matchup_df = calculate_matchup(team_data, opponent_data)
-plot_heatmap(matchup_df, f"Heatmap pour {team_name} contre {opponent_name}", plt.gca())
+col1, col2 = st.columns([0.5, 5])  
+with col1:
+    if team_name in team_logos:
+        st.image(team_logos[team_name])
+with col2:
+    matchup_df = calculate_matchup(team_data_filtered, opponent_data_filtered)
+    plot_heatmap(matchup_df, f"Heatmap pour {team_name} contre {opponent_name}", plt.gca())
 
 # Affichage Heatmap : Équipe adverse vs Équipe de référence
 st.subheader(f"Heatmap : {opponent_name} vs {team_name}")
-matchup_df_opponent = calculate_matchup(opponent_data, team_data)
-plot_heatmap(matchup_df_opponent, f"Heatmap pour {opponent_name} contre {team_name}", plt.gca())
-
+col1, col2 = st.columns([0.5, 5])
+with col1:
+    if opponent_name in team_logos:
+        st.image(team_logos[opponent_name])
+with col2:
+    matchup_df_opponent = calculate_matchup(opponent_data_filtered, team_data_filtered)
+    plot_heatmap(matchup_df_opponent, f"Heatmap pour {opponent_name} contre {team_name}", plt.gca())
 
 # Affichage Radar Chart
 st.subheader("Radar Chart")
