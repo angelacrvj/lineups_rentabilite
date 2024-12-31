@@ -84,7 +84,7 @@ def radar_chart(team1_lineups, team2_lineups):
             fill="toself",
             name=f"{team_name} - {lineup}",
             line=dict(color=color_mapping[lineup]),
-            hovertemplate="<b>%{theta}</b>: %{r:.2f}<extra></extra>" #info-bulle
+            hovertemplate="<b>%{theta}</b>: %{r:.2f}<extra></extra>" #génération d'info-bulle
         ))
 
     # Lineups équipe 2

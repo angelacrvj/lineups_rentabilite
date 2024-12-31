@@ -26,23 +26,23 @@ stat_rename = {
 
 #logos équpipes
 team_logos = {
-    'Le Mans' : "logos_equipes/Le_Mans.png",
+    'Le Mans' : "logos_equipes/Le_Mans_50px.png",
     'Ligue' : "logos_equipes/Logo_Betclic_Elite_Pro_A_50px.png",
-    'JL Bourg-en-Bresse' : "logos_equipes/JL_Bourg_en_Bresse.png", 
-    'Chalon Saone' : "logos_equipes/Chalon_Saone.png", 
-    'Cholet Basket' : "logos_equipes/Cholet_Basket.png",
-    'BCM Gravelines-Dunkerque' : "logos_equipes/BCM_Gravelines_Dunkerque.png", 
-    'JDA Dijon Basket' : "logos_equipes/JDA_Dijon_Basket.png",
-    'La Rochelle Rupella' : "logos_equipes/La_Rochelle_Rupella.png",
-    'CSP Limoges' : "logos_equipes/CSP_Limoges.png",
-    'ESSM Le Portel' : "logos_equipes/ESSM_Le_Portel.png",
-    'ASVEL Lyon-Villeurbanne' : "logos_equipes/ASVEL_Lyon_Villeurbanne.png",
-    'AS Monaco Basket' : "logos_equipes/AS_Monaco_Basket.png",
-    'SLUC Nancy Basket' : "logos_equipes/SLUC_Nancy_Basket.png",
-    'Nanterre 92' : "logos_equipes/Nanterre_92.png", 
-    'Paris Basketball' : "logos_equipes/Paris_Basketball.png", 
-    'Saint-Quentin' : "logos_equipes/Saint-Quentin.png",
-    'SIG Strasbourg' : "logos_equipes/SIG_Strasbourg.png"
+    'JL Bourg-en-Bresse' : "logos_equipes/JL_Bourg_en_Bresse_50px.png", 
+    'Chalon Saone' : "logos_equipes/Chalon_Saone_50px.png", 
+    'Cholet Basket' : "logos_equipes/Cholet_Basket_50px.png",
+    'BCM Gravelines-Dunkerque' : "logos_equipes/BCM_Gravelines_Dunkerque_50px.png", 
+    'JDA Dijon Basket' : "logos_equipes/JDA_Dijon_Basket_50px.png",
+    'La Rochelle Rupella' : "logos_equipes/La_Rochelle_Rupella_50px.png",
+    'CSP Limoges' : "logos_equipes/CSP_Limoges_50px.png",
+    'ESSM Le Portel' : "logos_equipes/ESSM_Le_Portel_50px.png",
+    'ASVEL Lyon-Villeurbanne' : "logos_equipes/ASVEL_Lyon_Villeurbanne_50px.png",
+    'AS Monaco Basket' : "logos_equipes/AS_Monaco_Basket_50px.png",
+    'SLUC Nancy Basket' : "logos_equipes/SLUC_Nancy_Basket_50px.png",
+    'Nanterre 92' : "logos_equipes/Nanterre_92_50px.png", 
+    'Paris Basketball' : "logos_equipes/Paris_Basketball_50px.png", 
+    'Saint-Quentin' : "logos_equipes/Saint-Quentin_50px.png",
+    'SIG Strasbourg' : "logos_equipes/SIG_Strasbourg_50px.png"
 }
 
 # Calculs comparaisons de matchups
