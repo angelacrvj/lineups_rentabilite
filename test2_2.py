@@ -48,7 +48,7 @@ team_logos = {
 def calculate_matchup(team_lineups, opponent_lineups):
     results = []
     for _, lineup in team_lineups.iterrows():
-        lineup_id = f"{lineup['Lineup']}\n(+/- : {lineup['Plus/Minus']}, min: {lineup['Minutes']})"  
+        lineup_id = f"{lineup['Lineup']} (+/- : {lineup['Plus/Minus']}, min: {lineup['Minutes']})"  
         row = {"Lineup": lineup_id}
 
         for stat in all_stats:
