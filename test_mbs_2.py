@@ -26,7 +26,7 @@ stat_rename = {
 
 #logos équpipes
 team_logos = {
-    'Le Mans' : "logos_equipes/Le_Mans.png", 
+    'Le Mans' : "logos_equipes/Le_Mans.png",
     'JL Bourg-en-Bresse' : "logos_equipes/JL_Bourg_en_Bresse.png", 
     'Chalon Saone' : "logos_equipes/Chalon_Saone.png", 
     'Cholet Basket' : "logos_equipes/Cholet_Basket.png",
