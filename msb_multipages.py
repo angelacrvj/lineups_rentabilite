@@ -253,7 +253,124 @@ def page_analyse_rentabilite():
 
 def page_statistiques_lineups():
     st.title("Statistiques des Lineups 🎯")
-    st.dataframe(data)
+    st.write("Cette page contient **4 tableaux** avec les statistiques clés des lineups. "
+             "Vous pouvez cliquer sur les liens ci-dessous pour naviguer directement vers chaque tableau.")
+    
+    # Liste des tableaux avec liens cliquables
+    st.markdown("""
+    **Tableaux disponibles :**
+    - [Offense](#offense)
+    - [Offense/Shooting](#offense-shooting)
+    - [Defense / Overall](#defense-overall)
+    - [Défense / Shooting](#defense-shooting)
+    """)
+
+    # Table 1 : Offense
+    st.markdown("### Offense", unsafe_allow_html=True)
+    st.write("Ce tableau présente les statistiques offensives générales des lineups.")
+    offense_columns = {
+        "Lineup": "Lineup",
+        "Plus/Minus": "Plus/Minus",
+        "Minutes": "Minutes",
+        "Possessions Equipe": "Possessions Equipe",
+        "Points Equipe": "Points Equipe",
+        "Rentabilite_possessions_equipe": "Points par 100 possessions",
+        "centile_Rentabilite_possessions_equipe": "Centile Points par 100 possessions",
+        "Rentabilite_temps_equipe": "Possessions par 40 minutes",
+        "centile_Rentabilite_temps_equipe": "Centile Possessions par 40 minutes",
+        "Pts_Tirs_Tentes_equipe": "Point par tir tenté",
+        "centile_Pts_Tirs_Tentes_opp": "Centile Point par tir tenté",
+        "Rebounds Equipe": "Rebounds Equipe",
+        "Offensive rebounds Equipe": "Offensive rebounds Equipe",
+        "Defensive rebounds Equipe": "Defensive rebounds Equipe",
+        "Assists Equipe": "Assists Equipe",
+        "Steals Equipe": "Steals Equipe",
+        "Turnovers Equipe": "Turnovers Equipe",
+        "Fouls Equipe": "Fouls Equipe"
+    }
+    st.dataframe(data[offense_columns.keys()].rename(columns=offense_columns))
+
+    # Table 2 : Offense/Shooting
+    st.markdown("### Offense/Shooting", unsafe_allow_html=True)
+    st.write("Ce tableau montre les statistiques offensives liées au tir, comme le True Shooting %.")
+    offense_shooting_columns = {
+        "True_Shooting_equipe_%": "True Shooting%",
+        "centile_True_Shooting_equipe_%": "Centile True Shooting%",
+        "Field goals attempted Equipe": "Field goals attempted Equipe",
+        "Field goals made Equipe": "Field goals made Equipe",
+        "2-pt field goals attempted Equipe": "2-pt field goals attempted Equipe",
+        "2-pt field goals made Equipe": "2-pt field goals made Equipe",
+        "2-pt field goals, % Equipe": "2-pt field goals, % Equipe",
+        "centile_2-pt field goals, % Equipe": "Centile 2-pt field goals, % Equipe",
+        "3-pt field goals attempted Equipe": "3-pt field goals attempted Equipe",
+        "3-pt field goals made Equipe": "3-pt field goals made Equipe",
+        "3-pt field goals, % Equipe": "3-pt field goals, % Equipe",
+        "centile_3-pt field goals, % Equipe": "Centile 3-pt field goals, % Equipe",
+        "Free throws attempted Equipe": "Free throws attempted Equipe",
+        "Free throws made Equipe": "Free throws made Equipe",
+        "Free throws, % Equipe": "Free throws, % Equipe",
+        "Rebounds Equipe": "Rebounds Equipe",
+        "Offensive rebounds Equipe": "Offensive rebounds Equipe",
+        "Defensive rebounds Equipe": "Defensive rebounds Equipe",
+        "Assists Equipe": "Assists Equipe",
+        "Steals Equipe": "Steals Equipe",
+        "Turnovers Equipe": "Turnovers Equipe",
+        "Fouls Equipe": "Fouls Equipe"
+    }
+    st.dataframe(data[offense_shooting_columns.keys()].rename(columns=offense_shooting_columns))
+
+    # Table 3 : Defense / Overall
+    st.markdown("### Defense / Overall", unsafe_allow_html=True)
+    st.write("Ce tableau résume les statistiques globales défensives des lineups.")
+    defense_overall_columns = {
+        "Lineup": "Lineup",
+        "Plus/Minus": "Plus/Minus",
+        "Minutes": "Minutes",
+        "Possessions Opposant": "Possessions Opposant",
+        "Points Opposant": "Points Opposant",
+        "Rentabilite_possessions_opp": "Points par 100 possessions",
+        "centile_Rentabilite_possessions_opp": "Centile Points par 100 possessions",
+        "Rentabilite_temps_opp": "Possessions par 40 minutes",
+        "centile_Rentabilite_temps_opp": "Centile Possessions par 40 minutes",
+        "Pts_Tirs_Tentes_equipe": "Point par tir tenté",
+        "centile_Pts_Tirs_Tentes_opp": "Centile Point par tir tenté",
+        "Rebounds Opposant": "Rebounds Opposant",
+        "Offensive rebounds Opposant": "Offensive rebounds Opposant",
+        "Defensive rebounds Opposant": "Defensive rebounds Opposant",
+        "Assists Opposant": "Assists Opposant",
+        "Steals Opposant": "Steals Opposant",
+        "Turnovers Opposant": "Turnovers Opposant",
+        "Fouls Opposant": "Fouls Opposant"
+    }
+    st.dataframe(data[defense_overall_columns.keys()].rename(columns=defense_overall_columns))
+
+    # Table 4 : Défense / Shooting
+    st.markdown("### Défense / Shooting", unsafe_allow_html=True)
+    st.write("Ce tableau met en avant les statistiques défensives liées au tir.")
+    defense_shooting_columns = {
+        "True_Shooting_equipe_%": "True Shooting%",
+        "centile_True_Shooting_equipe_%": "Centile True Shooting%",
+        "Field goals attempted Opposant": "Field goals attempted Opposant",
+        "Field goals made Opposant": "Field goals made Opposant",
+        "2-pt field goals attempted Opposant": "2-pt field goals attempted Opposant",
+        "2-pt field goals made Opposant": "2-pt field goals made Opposant",
+        "2-pt field goals, % Opposant": "2-pt field goals, % Opposant",
+        "centile_2-pt field goals, % Opposant": "Centile 2-pt field goals, % Opposant",
+        "3-pt field goals attempted Opposant": "3-pt field goals attempted Opposant",
+        "3-pt field goals made Opposant": "3-pt field goals made Opposant",
+        "3-pt field goals, % Opposant": "3-pt field goals, % Opposant",
+        "centile_3-pt field goals, % Opposant": "Centile 3-pt field goals, % Opposant",
+        "Free throws attempted Opposant": "Free throws attempted Opposant",
+        "Free throws made Opposant": "Free throws made Opposant",
+        "Free throws, % Opposant": "Free throws, % Opposant",
+        "Assists Opposant": "Assists Opposant",
+        "Steals Opposant": "Steals Opposant",
+        "Turnovers Opposant": "Turnovers Opposant",
+        "Fouls Opposant": "Fouls Opposant"
+    }
+    st.dataframe(data[defense_shooting_columns.keys()].rename(columns=defense_shooting_columns))
+
+    
 #|-----------------------------------------------------------------------------|
 
 # Définir la navigation
