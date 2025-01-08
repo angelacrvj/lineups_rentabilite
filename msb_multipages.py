@@ -11,13 +11,6 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 file_path = os.path.join(script_dir, "lineups_rentabilite_wt_league.csv")
 data = pd.read_csv(file_path)
 
-# Configuration générale
-st.set_page_config(
-    page_title="Analyse Rentabilité Lineups MSB 🏀",
-    page_icon="🏀",
-    layout="wide",
-)
-
 # Stats 
 offensive_stats = ["Rentabilite_possessions_equipe", "Rentabilite_temps_equipe", "True_Shooting_equipe_%"]
 defensive_stats = ["Rentabilite_possessions_opp", "Rentabilite_temps_opp", "True_Shooting_opp_%"]
@@ -155,17 +148,33 @@ def radar_chart(team1_lineups, team2_lineups, team_name, opponent_name):
         )
     )
     st.plotly_chart(fig)
+#|-----------------------------------------------------------------------------|
+#|------------------------------- Création Site -------------------------------|
+#|-----------------------------------------------------------------------------|
 
-
-# Définir les pages
+# Configuration générale
+st.set_page_config(
+    page_title="Analyse Rentabilité Lineups MSB 🏀",
+    page_icon="🏀",
+    layout="wide",
+)
+#|-----------------------------------------------------------------------------|
+# Définition des pages
+    #|---------------------------- Page d'acceuil ----------------------------|
 def page_accueil():
     st.title("Analyse des Lineups MSB 🏀")
-    st.write("Ce site permet de visualiser et analyser la rentabilité des lineups des équipes de basket Betclic Elite.")
+    st.write("Ce site trop waow va te permettre de visualiser et analyser la rentabilité des lineups des équipes de basket Betclic Elite 😍​🤯.")
+    st.markdown("""
+    **Fonctionnalités principales :**
+    - **Analyse Rentabilité** : Compare les performances des équipes/lineups grâce à mes viz trop waow.
+    - **Statistiques des Lineups** : Explorez les statistiques détaillées des lineups dans des tables trop waow.
+    """)
     st.image("easter_egg.png")
 
+    #|----------------------------- Renta lineups -----------------------------|
 def page_analyse_rentabilite():
     # Interface Streamlit
-    st.title("Analyse de Rentabilité des Lineups 🏀")
+    st.title("Analyse de Rentabilité des Lineups 🏀📊")
     st.sidebar.header("Filtres")
 
     # Sélection des équipes
@@ -240,19 +249,21 @@ def page_analyse_rentabilite():
     team2_lineups = st.multiselect(f"Lineups de {opponent_name} :", options=opponent_data["Lineup"].unique())
     radar_chart(team1_lineups, team2_lineups, team_name, opponent_name)
 
+    #|----------------------------- Stats tableau -----------------------------|
 
 def page_statistiques_lineups():
-    st.title("Statistiques des Lineups 📊")
+    st.title("Statistiques des Lineups 🎯")
     st.dataframe(data)
+#|-----------------------------------------------------------------------------|
 
 # Définir la navigation
 pages = {
     "Accueil": page_accueil,
     "Analyse Rentabilité": page_analyse_rentabilite,
-    "Statistiques Lineups": page_statistiques_lineups,
+    "Statistiques Lineups": page_statistiques_lineups
 }
 
-st.sidebar.title("Navigation")
+st.sidebar.title("Menu")
 selection = st.sidebar.radio("Aller à :", list(pages.keys()))
 
 # Afficher la page sélectionnée
