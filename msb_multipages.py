@@ -169,7 +169,7 @@ def page_accueil():
     - **Analyse Rentabilité** : Compare les performances des équipes/lineups grâce à mes viz trop waow.
     - **Statistiques des Lineups** : Explorez les statistiques détaillées des lineups dans des tables trop waow.
     """)
-    st.image("easter_egg.png")
+#    st.image("easter_egg.png")
 
     #|----------------------------- Renta lineups -----------------------------|
 def page_analyse_rentabilite():
