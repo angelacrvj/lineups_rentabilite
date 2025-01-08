@@ -89,7 +89,7 @@ def plot_heatmap(df, title, ax):
     st.pyplot(fig)
 
 # Fonction radar chart pete sa mère
-def radar_chart(team1_lineups, team2_lineups):    
+def radar_chart(team1_lineups, team2_lineups, team_name, opponent_name):    
     categories = ["Poss par match (offense)", 
                   "Points par poss. (offense)", 
                   "Points par poss. (defense)", 
@@ -238,7 +238,7 @@ def page_analyse_rentabilite():
     st.subheader("Radar Chart")
     team1_lineups = st.multiselect(f"Lineups de {team_name} :", options=team_data["Lineup"].unique())
     team2_lineups = st.multiselect(f"Lineups de {opponent_name} :", options=opponent_data["Lineup"].unique())
-    radar_chart(team1_lineups, team2_lineups)
+    radar_chart(team1_lineups, team2_lineups, team_name, opponent_name)
 
 
 def page_statistiques_lineups():
