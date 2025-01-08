@@ -169,7 +169,7 @@ def page_accueil():
     - **Analyse Rentabilité** : Compare les performances des équipes/lineups grâce à mes viz trop waow.
     - **Statistiques des Lineups** : Explorez les statistiques détaillées des lineups dans des tables trop waow.
     """)
-#    st.image("easter_egg.png")
+#    st.image("Easter egg\01.png")
 
     #|----------------------------- Renta lineups -----------------------------|
 def page_analyse_rentabilite():
@@ -262,7 +262,7 @@ def page_statistiques_lineups():
     - [Offense](#offense)
     - [Offense/Shooting](#offense-shooting)
     - [Defense / Overall](#defense-overall)
-    - [Défense / Shooting](#defense-shooting)
+    - [Defense / Shooting](#defense-shooting)
     """)
 
     # Table 1 : Offense
@@ -345,7 +345,7 @@ def page_statistiques_lineups():
     st.dataframe(data[defense_overall_columns.keys()].rename(columns=defense_overall_columns))
 
     # Table 4 : Défense / Shooting
-    st.markdown("### Défense / Shooting", unsafe_allow_html=True)
+    st.markdown("### Defense / Shooting", unsafe_allow_html=True)
     st.write("Ce tableau met en avant les statistiques défensives liées au tir.")
     defense_shooting_columns = {
         "True_Shooting_equipe_%": "True Shooting%",
