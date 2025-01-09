@@ -237,8 +237,10 @@ def page_analyse_rentabilite():
         if team_name in team_logos:
             st.image(team_logos[team_name])
     with col2:
+        # Taille fixe pour la première heatmap
+        fig, ax = plt.subplots(figsize=(8, 6))  # Taille fixe
         matchup_df = calculate_matchup(team_data_filtered, opponent_data_filtered)
-        plot_heatmap(matchup_df, f"Heatmap pour {team_name} contre {opponent_name}", ax=None, opponent_name=opponent_name)
+        plot_heatmap(matchup_df, f"Heatmap pour {team_name} contre {opponent_name}", ax)
 
     # Affichage Heatmap : Équipe adverse vs Équipe de référence
     st.subheader(f"Heatmap : {opponent_name} vs {team_name}")
@@ -247,9 +249,13 @@ def page_analyse_rentabilite():
         if opponent_name in team_logos:
             st.image(team_logos[opponent_name])
     with col2:
+        # Dimensionnement dynamique pour la deuxième heatmap
+        if opponent_name == "Ligue":
+            fig, ax = plt.subplots(figsize=(10, 2))  # Ajuste selon la taille souhaitée pour "Ligue"
+        else:
+            fig, ax = plt.subplots(figsize=(8, 6))  # Taille normale pour les autres équipes
         matchup_df_opponent = calculate_matchup(opponent_data_filtered, team_data_filtered)
-        #plot_heatmap(matchup_df_opponent, f"Heatmap pour {opponent_name} contre {team_name}", plt.gca())
-        plot_heatmap(matchup_df_opponent, f"Heatmap pour {opponent_name} contre {team_name}", ax=None, opponent_name=team_name)
+        plot_heatmap(matchup_df_opponent, f"Heatmap pour {opponent_name} contre {team_name}", ax)
 
 
     # Affichage Radar Chart
