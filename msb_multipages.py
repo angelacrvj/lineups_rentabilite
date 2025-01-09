@@ -226,7 +226,7 @@ def page_analyse_rentabilite():
     # Dimensionnement de la heatmap si "Ligue" sélectionné 
     if opponent_name == "Ligue":
         # Taille personnalisée pour "Ligue"
-        plt.figure(figsize=(10, 8))  # Ajuste selon la taille souhaitée pour "Ligue"
+        plt.figure(figsize=(10, 4))  # Ajuste selon la taille souhaitée pour "Ligue"
     else:
         # Pas de figsize spécifié ici, matplotlib ajustera automatiquement la taille
         plt.figure()
