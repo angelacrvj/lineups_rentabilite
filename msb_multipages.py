@@ -176,7 +176,14 @@ def page_accueil():
                 
     """)
 #    st.image("Easter egg\01.png")
-    st.image(r"Easter egg/GIF/crying.gif")
+    #st.image(r"Easter egg/GIF/crying.gif")
+
+    gif_html = """
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <img src="Easter egg/GIF/crying.gif">
+    </div>
+    """
+    st.markdown(gif_html, unsafe_allow_html=True)
 
     #|----------------------------- Renta lineups -----------------------------|
 
