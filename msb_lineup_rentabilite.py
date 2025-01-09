@@ -196,5 +196,4 @@ radar_chart(team1_lineups, team2_lineups)
 
 
 st.title("Désolé pour le contre-temps bg : ma bouille en contre-partie")
-st.image("Easter egg/03.jpg")
 st.image("Easter egg/08.png")
