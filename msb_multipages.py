@@ -178,7 +178,7 @@ def page_accueil():
 
     st.image(r"Easter egg/GIF/crying.gif")
 
-    st.title("Du coup on va se contenter des vannes de cette **dame** 👇")
+    st.title("Du coup on va se contenter des vannes de cette dame 👇")
     st.image("Easter egg/09.png")
 
     #|----------------------------- Renta lineups -----------------------------|
@@ -402,6 +402,16 @@ pages = {
 }
 
 st.sidebar.title("Menu")
+
+# HTML pour ajouter l'image et le texte côte à côte
+st.sidebar.markdown("""
+    <div style="display: flex; align-items: center;">
+        <img src=""Easter egg/07.png"" width="50" height="50" style="margin-right: 10px;">
+        <span><strong>Menu</strong></span>
+    </div>
+""", unsafe_allow_html=True)
+
+
 selection = st.sidebar.radio("Aller à :", list(pages.keys()))
 
 # Afficher la page sélectionnée
