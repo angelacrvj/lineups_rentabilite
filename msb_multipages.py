@@ -171,10 +171,16 @@ def page_accueil():
     **Fonctionnalités principales :**
     - **Analyse Rentabilité** : Compare les performances des équipes/lineups grâce à mes viz trop waow.
     - **Statistiques des Lineups** : Explorez les statistiques détaillées des lineups dans des tables trop waow.
+    
+    Pas folichon pour le moment mais bon je n'ai pas reçu la prose de la frappe de Chicagre 😢
+                
     """)
 #    st.image("Easter egg\01.png")
+    st.image("Easter egg\GIF\crying.gif")
 
     #|----------------------------- Renta lineups -----------------------------|
+
+
 def page_analyse_rentabilite():
     # Interface Streamlit
     st.title("Analyse de Rentabilité des Lineups 🏀📊")
