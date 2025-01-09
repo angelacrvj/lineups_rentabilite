@@ -172,7 +172,7 @@ def page_accueil():
     """, unsafe_allow_html=True)
 
     st.markdown("""
-    <h2 style="text-align: center; font-size: 24px;">Les chiffres ne mentent pas : analysez pour gagner !</h2>
+    <h2 style="text-align: center; font-size: 22px;">Les chiffres ne mentent pas : analysez pour gagner !</h2>
     <br><br><br>
     """, unsafe_allow_html=True)
 
