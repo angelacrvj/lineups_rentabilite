@@ -67,8 +67,9 @@ def calculate_matchup(team_lineups, opponent_lineups):
     return pd.DataFrame(results)
 
 # Fonction heatmap pete sa mère
-def plot_heatmap(df, title, ax, figsize):
-    fig, ax = plt.subplots()
+####def plot_heatmap(df, title, ax):
+def plot_heatmap(df, title, ax, figsize=(10, 8)):  # ajout de figsize
+    fig, ax = plt.subplots(figsize=figsize)
     df = df.rename(columns=stat_rename).set_index("Lineup").select_dtypes(include='number')
     sns.heatmap(df, annot=True, fmt=".1f", cmap="coolwarm", linewidths=0.5, ax=ax)
 
@@ -224,12 +225,18 @@ def page_analyse_rentabilite():
         opponent_data_filtered = opponent_data  # on prévoit les cas où monsieur basket ne filtre pas les joueurs 
 
     # Dimensionnement de la heatmap si "Ligue" sélectionné 
+    ####if opponent_name == "Ligue":
+        # Taille personnalisée pour "Ligue"
+    ####    fig, ax = plt.subplots(figsize=(10, 2))  # Ajuste selon la taille souhaitée pour "Ligue"
+    ####else:
+        # Pas de figsize spécifié ici, matplotlib ajustera automatiquement la taille
+    ####    fig, ax = plt.subplots()
+    # Dimensionnement de la heatmap si "Ligue" sélectionné 
     if opponent_name == "Ligue":
         # Taille personnalisée pour "Ligue"
-        fig, ax = plt.subplots(figsize=(10, 2))  # Ajuste selon la taille souhaitée pour "Ligue"
+        plot_heatmap(matchup_df, f"Heatmap pour {team_name} contre {opponent_name}", ax, figsize=(10, 2))  # petite taille
     else:
-        # Pas de figsize spécifié ici, matplotlib ajustera automatiquement la taille
-        fig, ax = plt.subplots()
+        plot_heatmap(matchup_df, f"Heatmap pour {team_name} contre {opponent_name}", ax)
 
 
     # Affichage Heatmap : Équipe de référence vs Équipe adverse
