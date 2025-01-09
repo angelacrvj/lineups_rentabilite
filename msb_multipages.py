@@ -401,18 +401,7 @@ pages = {
     "Statistiques Lineups": page_statistiques_lineups
 }
 
-#st.sidebar.title("Menu")
-
-# Afficher le titre "Menu" avec l'image à côté
-st.sidebar.markdown("""
-    <div style="display: flex; align-items: center;">
-        <span style="font-size: 24px; font-weight: bold;">Menu</span>
-        <img src="Easter egg/07.png" style="margin-left: 10px;">
-    </div>
-""", unsafe_allow_html=True)
-
-
-
+st.sidebar.title("Menu")
 selection = st.sidebar.radio("Aller à :", list(pages.keys()))
 
 # Afficher la page sélectionnée
