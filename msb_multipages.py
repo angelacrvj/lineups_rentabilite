@@ -176,7 +176,7 @@ def page_accueil():
                 
     """)
 #    st.image("Easter egg\01.png")
-    #st.image("Easter egg\GIF\crying.gif")
+    st.image(r"Easter egg\GIF\crying.gif")
 
     #|----------------------------- Renta lineups -----------------------------|
 
