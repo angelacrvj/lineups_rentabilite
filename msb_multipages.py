@@ -234,9 +234,9 @@ def page_analyse_rentabilite():
     # Dimensionnement de la heatmap si "Ligue" sélectionné 
     if opponent_name == "Ligue":
         # Taille personnalisée pour "Ligue"
-        plot_heatmap(matchup_df, f"Heatmap pour {team_name} contre {opponent_name}", ax, figsize=(10, 2))  # petite taille
+        plot_heatmap(matchup_df_opponent, f"Heatmap pour {team_name} contre {opponent_name}", ax, figsize=(10, 2))  # petite taille
     else:
-        plot_heatmap(matchup_df, f"Heatmap pour {team_name} contre {opponent_name}", ax)
+        plot_heatmap(matchup_df_opponent, f"Heatmap pour {team_name} contre {opponent_name}", ax)
 
 
     # Affichage Heatmap : Équipe de référence vs Équipe adverse
