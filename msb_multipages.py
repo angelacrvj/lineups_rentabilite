@@ -404,7 +404,7 @@ pages = {
 st.sidebar.title("Menu")
 
 # HTML pour ajouter l'image et le texte côte à côte
-st.image("Easter egg/07.png")
+#st.image("Easter egg/07.png")
 
 selection = st.sidebar.radio("Aller à :", list(pages.keys()))
 
