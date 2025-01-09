@@ -67,7 +67,7 @@ def calculate_matchup(team_lineups, opponent_lineups):
     return pd.DataFrame(results)
 
 # Fonction heatmap pete sa mère
-def plot_heatmap(df, title, ax):
+def plot_heatmap(df, title, ax, figsize):
     fig, ax = plt.subplots()
     df = df.rename(columns=stat_rename).set_index("Lineup").select_dtypes(include='number')
     sns.heatmap(df, annot=True, fmt=".1f", cmap="coolwarm", linewidths=0.5, ax=ax)
