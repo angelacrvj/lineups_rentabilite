@@ -401,14 +401,14 @@ pages = {
     "Statistiques Lineups": page_statistiques_lineups
 }
 
-st.sidebar.title("Menu")
+#st.sidebar.title("Menu")
 
-# HTML pour ajouter l'image et le texte côte à côte
+# Afficher le titre "Menu" avec l'image à côté
 st.sidebar.markdown("""
     <div style="display: flex; align-items: center;">
-        <img src="Easter egg/07.png" width="50" height="50" style="margin-right: 10px;">
+        <span style="font-size: 24px; font-weight: bold;">Menu</span>
+        <img src="Easter egg/07.png" width="30" height="30" style="margin-left: 10px;">
     </div>
-    <div style="font-weight: bold;">Menu</div>
 """, unsafe_allow_html=True)
 
 
