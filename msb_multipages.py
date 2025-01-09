@@ -173,8 +173,7 @@ def page_accueil():
     """, unsafe_allow_html=True)
 
     st.markdown("""
-    <h2 style="text-align: center; margin-bottom: 30px;">Les chiffres ne mentent pas : analysez pour gagner !</h2>
-    <br><br><br>
+    <h2 style="text-align: center; margin-bottom: 30px; font-size: 18px;">Les chiffres ne mentent pas : analysez pour gagner !</h2>
     """, unsafe_allow_html=True)
 
     st.write("Ce site trop waow va te permettre de visualiser et analyser la rentabilité des lineups des équipes de basket Betclic Elite 😍​🤯.")
