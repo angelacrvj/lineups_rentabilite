@@ -175,8 +175,11 @@ def page_accueil():
     Pas folichon pour le moment mais bon je n'ai pas reçu la prose de la frappe de Chicagre 😢
                 
     """)
-#    st.image("Easter egg\01.png")
+
     st.image(r"Easter egg/GIF/crying.gif")
+
+    st.write("Ducoup on va se contenter des vannes de cette **dame** 👇")
+    st.image("Easter egg/09.png")
 
     #|----------------------------- Renta lineups -----------------------------|
 
