@@ -404,7 +404,14 @@ pages = {
 st.sidebar.title("Menu")
 
 # HTML pour ajouter l'image et le texte côte à côte
-#st.image("Easter egg/07.png")
+st.sidebar.markdown("""
+    <div style="display: flex; align-items: center;">
+        <img src="Easter egg/07.png" width="50" height="50" style="margin-right: 10px;">
+    </div>
+    <div style="font-weight: bold;">Menu</div>
+""", unsafe_allow_html=True)
+
+
 
 selection = st.sidebar.radio("Aller à :", list(pages.keys()))
 
