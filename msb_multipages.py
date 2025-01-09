@@ -178,7 +178,7 @@ def page_accueil():
 
     st.image(r"Easter egg/GIF/crying.gif")
 
-    st.write("Ducoup on va se contenter des vannes de cette **dame** 👇")
+    st.title("Ducoup on va se contenter des vannes de cette **dame** 👇")
     st.image("Easter egg/09.png")
 
     #|----------------------------- Renta lineups -----------------------------|
