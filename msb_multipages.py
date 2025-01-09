@@ -407,7 +407,7 @@ pages = {
 st.sidebar.markdown("""
     <div style="display: flex; align-items: center;">
         <span style="font-size: 24px; font-weight: bold;">Menu</span>
-        <img src="Easter egg/07.png" width="30" height="30" style="margin-left: 10px;">
+        <img src="Easter egg/07.png" style="margin-left: 10px;">
     </div>
 """, unsafe_allow_html=True)
 
