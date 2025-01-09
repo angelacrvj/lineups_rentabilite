@@ -80,6 +80,8 @@ def plot_heatmap(df, title, ax):
     ax.set_ylabel("Lineup")
     ax.set_xlabel("")
     ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha="right")
+    ax.set_yticklabels(ax.get_yticklabels(), rotation=0, ha="right")  
+
     st.pyplot(fig)
 
 # Fonction radar chart pete sa mère
