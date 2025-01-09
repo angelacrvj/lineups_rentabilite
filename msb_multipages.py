@@ -169,6 +169,7 @@ def page_accueil():
 
     st.markdown("""
     <h1 style="text-align: center;">Analyse des Lineups MSB 🏀</h1>
+    <br><br><br>
     """, unsafe_allow_html=True)
 
     st.write("Ce site trop waow va te permettre de visualiser et analyser la rentabilité des lineups des équipes de basket Betclic Elite 😍​🤯.")
