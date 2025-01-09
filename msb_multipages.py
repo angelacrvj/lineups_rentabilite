@@ -230,7 +230,7 @@ def page_analyse_rentabilite():
     with col1:
         if team_name in team_logos:
             st.image(team_logos[team_name])
-    with col2:
+    with col2:x
         matchup_df = calculate_matchup(team_data_filtered, opponent_data_filtered)
         plot_heatmap(matchup_df, f"Heatmap pour {team_name} contre {opponent_name}", plt.gca())
 
@@ -242,21 +242,9 @@ def page_analyse_rentabilite():
             st.image(team_logos[opponent_name])
     with col2:
         matchup_df_opponent = calculate_matchup(opponent_data_filtered, team_data_filtered)
-        #plot_heatmap(matchup_df_opponent, f"Heatmap pour {opponent_name} contre {team_name}", plt.gca())
+        plot_heatmap(matchup_df_opponent, f"Heatmap pour {opponent_name} contre {team_name}", plt.gca())
         
-        # Ajustement de la heatmap selon si la Ligue est l'équipe adverse
-        if opponent_name == "Ligue":
-            plot_heatmap(matchup_df, f"Heatmap pour {team_name} contre {opponent_name}", plt.gca(), adjust_size=True)
-        else:
-            plot_heatmap(matchup_df, f"Heatmap pour {team_name} contre {opponent_name}", plt.gca())
-    
-    
-    
-    
-    
-    
-    
-    
+
     # Affichage Radar Chart
     st.subheader("Radar Chart")
     team1_lineups = st.multiselect(f"Lineups de {team_name} :", options=team_data["Lineup"].unique())
