@@ -170,10 +170,3 @@ st.subheader("Radar Chart")
 team1_lineups = st.multiselect(f"Lineups de {team_name} :", options=team_data["Lineup"].unique())
 team2_lineups = st.multiselect(f"Lineups de {opponent_name} :", options=opponent_data["Lineup"].unique())
 radar_chart(team1_lineups, team2_lineups)
-
-
-
-
-st.title("Désolé pour le contre-temps bg : ma bouille en contre-partie")
-st.image(r"Easter egg/03.jpg")
-#st.image(r"Easter egg/08.png")
