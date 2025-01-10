@@ -75,9 +75,12 @@ def radar_chart(team1_lineups, team2_lineups):
     # Lineups équipe 1
     for lineup in team1_lineups:
         row = data[data["Lineup"] == lineup].iloc[0]
-        values = [row[f"centile_{col}"] for col in ["Rentabilite_possessions_equipe", "Rentabilite_possessions_opp",
-                   "Rentabilite_temps_equipe", "Rentabilite_temps_opp",
-                   "True_Shooting_equipe_%", "True_Shooting_opp_%"]]
+        values = [row[f"centile_{col}"] for col in ["Rentabilite_temps_equipe",
+                                                    "Rentabilite_possessions_equipe", 
+                                                    "Rentabilite_possessions_opp",
+                                                    "Rentabilite_temps_opp",
+                                                    "True_Shooting_opp_%",
+                                                    "True_Shooting_equipe_%"]]
         fig.add_trace(go.Scatterpolar(
             r=values,
             theta=categories,
@@ -90,9 +93,12 @@ def radar_chart(team1_lineups, team2_lineups):
     # Lineups équipe 2
     for lineup in team2_lineups:
         row = data[data["Lineup"] == lineup].iloc[0]
-        values = [row[f"centile_{col}"] for col in ["Rentabilite_possessions_equipe", "Rentabilite_possessions_opp",
-                   "Rentabilite_temps_equipe", "Rentabilite_temps_opp",
-                   "True_Shooting_equipe_%", "True_Shooting_opp_%"]]
+        values = [row[f"centile_{col}"] for col in ["Rentabilite_temps_equipe",
+                                                    "Rentabilite_possessions_equipe", 
+                                                    "Rentabilite_possessions_opp",
+                                                    "Rentabilite_temps_opp",
+                                                    "True_Shooting_opp_%",
+                                                    "True_Shooting_equipe_%"]]
         fig.add_trace(go.Scatterpolar(
             r=values,
             theta=categories,
