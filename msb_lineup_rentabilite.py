@@ -12,7 +12,7 @@ data = pd.read_csv(file_path)
 
 # Stats 
 offensive_stats = ["Rentabilite_possessions_equipe", "Rentabilite_temps_equipe", "True_Shooting_equipe_%"]
-defensive_stats = ["Rentabilite_possessions_opp", "Rentabilite_temps_opp", "True_Shooting_%_opp"]
+defensive_stats = ["Rentabilite_possessions_opp", "Rentabilite_temps_opp", "True_Shooting_opp_%"]
 all_stats = offensive_stats + defensive_stats
 
 stat_rename = {
@@ -21,7 +21,7 @@ stat_rename = {
     "True_Shooting_equipe_%": "TS% (offense)",
     "Rentabilite_possessions_opp": "Points par poss. (defense)",
     "Rentabilite_temps_opp": "Poss par match (defense)",
-    "True_Shooting_%_opp": "TS% (defense)"
+    "True_Shooting_opp_%": "TS% (defense)"
 }
 
 # Calculs comparaisons de matchups
@@ -68,6 +68,7 @@ def radar_chart(team1_lineups, team2_lineups):
                   "TS% (defense)", 
                   "TS% (offense)"] 
 
+
     fig = go.Figure()
     unique_lineups = list(set(team1_lineups + team2_lineups))
     color_mapping = {lineup: f"#{random.randint(0, 0xFFFFFF):06x}" for lineup in unique_lineups}
@@ -79,7 +80,7 @@ def radar_chart(team1_lineups, team2_lineups):
                                                     "Rentabilite_possessions_equipe", 
                                                     "Rentabilite_possessions_opp",
                                                     "Rentabilite_temps_opp",
-                                                    "True_Shooting_%_opp",
+                                                    "True_Shooting_opp_%",
                                                     "True_Shooting_equipe_%"]]
         fig.add_trace(go.Scatterpolar(
             r=values,
@@ -97,7 +98,7 @@ def radar_chart(team1_lineups, team2_lineups):
                                                     "Rentabilite_possessions_equipe", 
                                                     "Rentabilite_possessions_opp",
                                                     "Rentabilite_temps_opp",
-                                                    "True_Shooting_%_opp",
+                                                    "True_Shooting_opp_%",
                                                     "True_Shooting_equipe_%"]]
         fig.add_trace(go.Scatterpolar(
             r=values,
@@ -203,6 +204,3 @@ radar_chart(team1_lineups, team2_lineups)
 
 st.title("Désolé pour le contre-temps bg : ma bouille en contre-partie")
 st.image("Easter egg/08.png")
-
-st.texte("une deuxième pour tenter de te remonter le moral ... ou au moins te changer les idées 🤍")
-st.image("Easter egg/03.jpg")
