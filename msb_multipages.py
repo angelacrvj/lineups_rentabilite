@@ -67,34 +67,10 @@ def calculate_matchup(team_lineups, opponent_lineups):
     return pd.DataFrame(results)
 
 # Fonction heatmap pete sa mère
-#def plot_heatmap(df, title, ax):
-#    fig, ax = plt.subplots()
-#    df = df.rename(columns=stat_rename).set_index("Lineup").select_dtypes(include='number')
-#    sns.heatmap(df, annot=True, fmt=".1f", cmap="coolwarm", linewidths=0.5, ax=ax)
-#
-#    # Ligne de séparation des stats offensives et défensives
-#    separation_idx = len(offensive_stats)  # position
-#    ax.axvline(x=separation_idx, color="black", linewidth=2)
-#
-#    ax.set_title(title)
-#    ax.set_ylabel("Lineup")
-#    ax.set_xlabel("")
-#    ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha="right")
-#    ax.set_yticklabels(ax.get_yticklabels(), rotation=0, ha="right")  
-#
-#    st.pyplot(fig)
-################################################################################
 def plot_heatmap(df, title, ax):
     fig, ax = plt.subplots()
     df = df.rename(columns=stat_rename).set_index("Lineup").select_dtypes(include='number')
-
-    # Séparer les stats offensives et défensives
-    offensive_df = df[offensive_stats]
-    defensive_df = df[defensive_stats]
-
-    # Appliquer une échelle de couleur différente pour les statistiques défensives (inversée)
-    sns.heatmap(offensive_df, annot=True, fmt=".1f", cmap="coolwarm", linewidths=0.5, ax=ax, cbar_kws={'label': 'Offensive Stats'})
-    sns.heatmap(-defensive_df, annot=True, fmt=".1f", cmap="coolwarm_r", linewidths=0.5, ax=ax, cbar_kws={'label': 'Defensive Stats'}, alpha=0.7)
+    sns.heatmap(df, annot=True, fmt=".1f", cmap="coolwarm", linewidths=0.5, ax=ax)
 
     # Ligne de séparation des stats offensives et défensives
     separation_idx = len(offensive_stats)  # position
@@ -104,10 +80,10 @@ def plot_heatmap(df, title, ax):
     ax.set_ylabel("Lineup")
     ax.set_xlabel("")
     ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha="right")
-    ax.set_yticklabels(ax.get_yticklabels(), rotation=0, ha="right")
+    ax.set_yticklabels(ax.get_yticklabels(), rotation=0, ha="right")  
 
     st.pyplot(fig)
-################################################################################
+
 
 # Fonction radar chart pete sa mère
 def radar_chart(team1_lineups, team2_lineups, team_name, opponent_name):    
@@ -276,12 +252,12 @@ def page_analyse_rentabilite():
         opponent_data_filtered = opponent_data  # on prévoit les cas où monsieur basket ne filtre pas les joueurs 
 
     # Dimensionnement de la heatmap si "Ligue" sélectionné 
-    if opponent_name == "Ligue":
+    #if opponent_name == "Ligue":
         # Taille personnalisée pour "Ligue"
-        fig, ax = plt.subplots(figsize=(10, 2))  # Ajuste selon la taille souhaitée pour "Ligue"
-    else:
+    #    fig, ax = plt.subplots(figsize=(10, 2))  # Ajuste selon la taille souhaitée pour "Ligue"
+    #else:
         # Pas de figsize spécifié ici, matplotlib ajustera automatiquement la taille
-        fig, ax = plt.subplots()
+    #    fig, ax = plt.subplots()
 
 
     # Affichage Heatmap : Équipe de référence vs Équipe adverse
