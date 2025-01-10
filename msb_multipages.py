@@ -84,7 +84,6 @@ def plot_heatmap(df, title, ax):
 
     st.pyplot(fig)
 
-
 # Fonction radar chart pete sa mère
 def radar_chart(team1_lineups, team2_lineups, team_name, opponent_name):    
     categories = ["Poss par match (offense)", 
@@ -252,12 +251,12 @@ def page_analyse_rentabilite():
         opponent_data_filtered = opponent_data  # on prévoit les cas où monsieur basket ne filtre pas les joueurs 
 
     # Dimensionnement de la heatmap si "Ligue" sélectionné 
-    #if opponent_name == "Ligue":
+    if opponent_name == "Ligue":
         # Taille personnalisée pour "Ligue"
-    #    fig, ax = plt.subplots(figsize=(10, 2))  # Ajuste selon la taille souhaitée pour "Ligue"
-    #else:
+        fig, ax = plt.subplots(figsize=(10, 2))  # Ajuste selon la taille souhaitée pour "Ligue"
+    else:
         # Pas de figsize spécifié ici, matplotlib ajustera automatiquement la taille
-    #    fig, ax = plt.subplots()
+        fig, ax = plt.subplots()
 
 
     # Affichage Heatmap : Équipe de référence vs Équipe adverse
