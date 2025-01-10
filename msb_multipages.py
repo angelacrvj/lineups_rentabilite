@@ -264,7 +264,7 @@ def page_analyse_rentabilite():
     col1, col2 = st.columns([0.6, 5])  
     with col1:
         if team_name in team_logos:
-            st.image(team_logos[team_name], use_column_width=False, width=100)
+            st.image(team_logos[team_name], width=100)
     with col2:
         matchup_df = calculate_matchup(team_data_filtered, opponent_data_filtered)
         plot_heatmap(matchup_df, f"Heatmap pour {team_name} contre {opponent_name}", ax)
@@ -274,7 +274,7 @@ def page_analyse_rentabilite():
     col1, col2 = st.columns([0.6, 5])
     with col1:
         if opponent_name in team_logos:
-            st.image(team_logos[opponent_name], use_column_width=False, width=100)
+            st.image(team_logos[opponent_name], width=100)
     with col2:
         matchup_df_opponent = calculate_matchup(opponent_data_filtered, team_data_filtered)
         plot_heatmap(matchup_df_opponent, f"Heatmap pour {opponent_name} contre {team_name}", plt.gca())
