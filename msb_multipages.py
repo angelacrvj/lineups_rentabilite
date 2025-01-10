@@ -261,7 +261,7 @@ def page_analyse_rentabilite():
 
     # Affichage Heatmap : Équipe de référence vs Équipe adverse
     st.subheader(f"Heatmap : {team_name} vs {opponent_name}")
-    col1, col2 = st.columns([0.6, 5])  
+    col1, col2 = st.columns([1, 5])  
     with col1:
         if team_name in team_logos:
             st.image(team_logos[team_name], width=50)
@@ -271,7 +271,7 @@ def page_analyse_rentabilite():
 
     # Affichage Heatmap : Équipe adverse vs Équipe de référence
     st.subheader(f"Heatmap : {opponent_name} vs {team_name}")
-    col1, col2 = st.columns([0.6, 5])
+    col1, col2 = st.columns([1, 5])
     with col1:
         if opponent_name in team_logos:
             st.image(team_logos[opponent_name], width=50)
