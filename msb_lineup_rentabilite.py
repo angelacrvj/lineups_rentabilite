@@ -7,18 +7,18 @@ import random
 import os
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(script_dir, "lineups_rentabilite_1301.csv")
+file_path = os.path.join(script_dir, "lineups_rentabilite_1301_clean.csv")
 data = pd.read_csv(file_path)
 
 # Stats 
-offensive_stats = ["Rentabilite_possessions_equipe", "Rentabilite_temps_equipe", "True_Shooting_equipe_%"]
+offensive_stats = ["Rentabilite_possessions_equipe", "Rentabilite_temps_equipe", "True_Shooting_%_equipe"]
 defensive_stats = ["Rentabilite_possessions_opp", "Rentabilite_temps_opp", "True_Shooting_%_opp"]
 all_stats = offensive_stats + defensive_stats
 
 stat_rename = {
     "Rentabilite_possessions_equipe": "Points par poss. (offense)",
     "Rentabilite_temps_equipe": "Poss par match (offense)",
-    "True_Shooting_equipe_%": "TS% (offense)",
+    "True_Shooting_%_equipe": "TS% (offense)",
     "Rentabilite_possessions_opp": "Points par poss. (defense)",
     "Rentabilite_temps_opp": "Poss par match (defense)",
     "True_Shooting_%_opp": "TS% (defense)"
@@ -26,6 +26,11 @@ stat_rename = {
 
 # Calculs comparaisons de matchups
 def calculate_matchup(team_lineups, opponent_lineups):
+    """
+    Calculate the matchup differences for each lineup vs. the opponent.
+    For offensive stats, difference = lineup_offensive_stat - opponent_defensive_mean.
+    For defensive stats, difference = lineup_defensive_stat - opponent_offensive_mean.
+    """
     results = []
     for _, lineup in team_lineups.iterrows():
         lineup_id = f"{lineup['Lineup']} ({lineup['Plus/Minus']})"  # Identifiant combiné
@@ -46,6 +51,10 @@ def calculate_matchup(team_lineups, opponent_lineups):
 
 # Fonction heatmap pete sa mère
 def plot_heatmap(df, title, ax):
+    """
+    Plot a heatmap with Lineup as the row index and stats as columns.
+    Renames columns, separates offense and defense, and draws a line between them.
+    """
     fig, ax = plt.subplots()
     df = df.rename(columns=stat_rename).set_index("Lineup").select_dtypes(include='number')
     sns.heatmap(df, annot=True, fmt=".1f", cmap="coolwarm", linewidths=0.5, ax=ax)
@@ -81,7 +90,7 @@ def radar_chart(team1_lineups, team2_lineups):
                                                     "Rentabilite_possessions_opp",
                                                     "Rentabilite_temps_opp",
                                                     "True_Shooting_%_opp",
-                                                    "True_Shooting_equipe_%"]]
+                                                    "True_Shooting_%_equipe"]]
         fig.add_trace(go.Scatterpolar(
             r=values,
             theta=categories,
@@ -99,7 +108,7 @@ def radar_chart(team1_lineups, team2_lineups):
                                                     "Rentabilite_possessions_opp",
                                                     "Rentabilite_temps_opp",
                                                     "True_Shooting_%_opp",
-                                                    "True_Shooting_equipe_%"]]
+                                                    "True_Shooting_%_equipe"]]
         fig.add_trace(go.Scatterpolar(
             r=values,
             theta=categories,
