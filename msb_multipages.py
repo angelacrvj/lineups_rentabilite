@@ -207,7 +207,7 @@ def page_analyse_rentabilite():
 
     # Sélection des équipes
     team_name = st.sidebar.selectbox("Équipe de référence", data["Equipe"].unique())
-    opponent_name = st.sidebar.selectbox("Équipe adverse", ["Ligue"] + [team for team in data["Equipe"].unique() if team != team_name])
+    opponent_name = st.sidebar.selectbox("Équipe adverse",[team for team in data["Equipe"].unique() if team != team_name])
     
     # Filtrage des joueurs en fonction de l'équipe sélectionnée
     team_data = data[data["Equipe"] == team_name]
@@ -249,14 +249,6 @@ def page_analyse_rentabilite():
                                     opponent_data["Player_5_name"].isin(player_filter_opponent)]
     else:
         opponent_data_filtered = opponent_data  # on prévoit les cas où monsieur basket ne filtre pas les joueurs 
-
-    # Dimensionnement de la heatmap si "Ligue" sélectionné 
-    if opponent_name == "Ligue":
-        # Taille personnalisée pour "Ligue"
-        fig, ax = plt.subplots(figsize=(10, 2))  # Ajuste selon la taille souhaitée pour "Ligue"
-    else:
-        # Pas de figsize spécifié ici, matplotlib ajustera automatiquement la taille
-        fig, ax = plt.subplots()
 
 
     # Affichage Heatmap : Équipe de référence vs Équipe adverse
