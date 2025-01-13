@@ -172,7 +172,6 @@ st.set_page_config(
     #|---------------------------- Page d'acceuil ----------------------------|
 def page_accueil():
     #st.title("Analyse des Lineups MSB 🏀")
-    import streamlit as st
 
     # Ajout logo Ligue Betclic Elite 
     st.markdown(
