@@ -311,14 +311,10 @@ def page_statistiques_lineups():
         "centile_Pts_Tirs_Tentes_opp": "Centile Point par tir tenté",
         "Rebounds Equipe": "Rebounds Equipe",
         "Offensive rebounds Equipe": "Offensive rebounds Equipe",
-        "Defensive rebounds Equipe": "Defensive rebounds Equipe",
         "Assists Equipe": "Assists Equipe",
-        "Steals Equipe": "Steals Equipe",
-        "Turnovers Equipe": "Turnovers Equipe",
-        "Fouls Equipe": "Fouls Equipe"
+        "Turnovers Equipe": "Turnovers Equipe"
     }
-    formatted_columns = {col: f"**{name}**" for col, name in offense_columns.items()}
-    st.dataframe(data[offense_columns.keys()].rename(columns=formatted_columns).round(1))
+    st.dataframe(data[offense_columns.keys()].rename(columns=offense_columns).round(1))
 
     # Table 2 : Offense / Shooting
     st.markdown("### Offense / Shooting", unsafe_allow_html=True)
@@ -371,11 +367,8 @@ def page_statistiques_lineups():
         "centile_Pts_Tirs_Tentes_opp": "Centile Point par tir tenté",
         "Rebounds Opposant": "Rebounds Opposant",
         "Offensive rebounds Opposant": "Offensive rebounds Opposant",
-        "Defensive rebounds Opposant": "Defensive rebounds Opposant",
         "Assists Opposant": "Assists Opposant",
-        "Steals Opposant": "Steals Opposant",
-        "Turnovers Opposant": "Turnovers Opposant",
-        "Fouls Opposant": "Fouls Opposant"
+        "Turnovers Opposant": "Turnovers Opposant"
     }
     st.dataframe(data[defense_overall_columns.keys()].rename(columns=defense_overall_columns).round(1))
 
