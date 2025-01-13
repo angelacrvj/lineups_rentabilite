@@ -8,7 +8,7 @@ import os
 
 # Chargement des données
 script_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(script_dir, "lineups_rentabilite_wt_league.csv")
+file_path = os.path.join(script_dir, "lineups_rentabilite_1301_clean.csv")
 data = pd.read_csv(file_path)
 
 # Stats 
