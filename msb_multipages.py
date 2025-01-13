@@ -176,24 +176,23 @@ def page_accueil():
 
     # Ajout logo Ligue Betclic Elite 
     st.markdown(
-        f"""
-        <style>
-            .logo-container {{
-                position: fixed;
-                top: 10px;
-                right: 10px;
-                z-index: 1;
-            }}
-            .logo-container img {{
-                width: 100px;
-            }}
-        </style>
-        <div class="logo-container">
-            <img src="data:image/png;base64,{st.file_uploader("logos_equipes/Logo_Betclic_Elite_Pro_A.png")}" alt="Logo Ligue">
-        </div>
-        """,
-        unsafe_allow_html=True
+    f"""
+    <style>
+        .stApp {{
+            position: relative;
+        }}
+        .stImage {{
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 80px;
+        }}
+    </style>
+    """, 
+    unsafe_allow_html=True
     )
+
+    st.image("logos_equipes/Logo_Betclic_Elite_Pro_A.png")
 
 
     st.markdown("""
