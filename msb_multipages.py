@@ -173,27 +173,6 @@ st.set_page_config(
 def page_accueil():
     #st.title("Analyse des Lineups MSB 🏀")
 
-    # Ajout logo Ligue Betclic Elite 
-    st.markdown(
-    f"""
-    <style>
-        .stApp {{
-            position: relative;
-        }}
-        .stImage {{
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 80px;
-        }}
-    </style>
-    """, 
-    unsafe_allow_html=True
-    )
-
-    st.image("logos_equipes/Logo_Betclic_Elite_Pro_A.png")
-
-
     st.markdown("""
     <h1 style="text-align: center; margin-bottom: 30px; ">Analyse des Lineups MSB 🏀</h1>
     """, unsafe_allow_html=True)
