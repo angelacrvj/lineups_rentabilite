@@ -287,21 +287,22 @@ def page_statistiques_lineups():
     # Liste des tableaux avec liens cliquables
     st.markdown("""
     **Tableaux disponibles :**
-    - [Offense](#offense)
-    - [Offense/Shooting](#offense-shooting)
+    - [Offense  / Overall](#offense)
+    - [Offense / Shooting](#offense-shooting)
     - [Defense / Overall](#defense-overall)
     - [Defense / Shooting](#defense-shooting)
     """)
 
-    # Table 1 : Offense
-    st.markdown("### Offense", unsafe_allow_html=True)
+    # Table 1 : Offense  / Overall
+    st.markdown("### Offense / Overall", unsafe_allow_html=True)
     st.write("Ce tableau présente les statistiques offensives générales des lineups.")
     offense_columns = {
+        "Equipe" :  "Equipe",
         "Lineup": "Lineup",
         "Plus/Minus": "Plus/Minus",
         "Minutes": "Minutes",
-        "Possessions Equipe": "Possessions Equipe",
-        "Points Equipe": "Points Equipe",
+        "Possessions Equipe": "Possessions attaque",
+        "Points Equipe": "Points marqués",
         "Rentabilite_possessions_equipe": "Points par 100 possessions",
         "centile_Rentabilite_possessions_equipe": "Centile Points par 100 possessions",
         "Rentabilite_temps_equipe": "Possessions par 40 minutes",
@@ -316,12 +317,13 @@ def page_statistiques_lineups():
         "Turnovers Equipe": "Turnovers Equipe",
         "Fouls Equipe": "Fouls Equipe"
     }
-    st.dataframe(data[offense_columns.keys()].rename(columns=offense_columns))
+    st.dataframe(data[offense_columns.keys()].rename(columns=offense_columns).round(1))
 
-    # Table 2 : Offense/Shooting
-    st.markdown("### Offense/Shooting", unsafe_allow_html=True)
+    # Table 2 : Offense / Shooting
+    st.markdown("### Offense / Shooting", unsafe_allow_html=True)
     st.write("Ce tableau montre les statistiques offensives liées au tir, comme le True Shooting %.")
     offense_shooting_columns = {
+        "Equipe" :  "Equipe",
         "Lineup": "Lineup",
         "Plus/Minus": "Plus/Minus",
         "Minutes": "Minutes",
@@ -348,12 +350,13 @@ def page_statistiques_lineups():
         "Turnovers Equipe": "Turnovers Equipe",
         "Fouls Equipe": "Fouls Equipe"
     }
-    st.dataframe(data[offense_shooting_columns.keys()].rename(columns=offense_shooting_columns))
+    st.dataframe(data[offense_shooting_columns.keys()].rename(columns=offense_shooting_columns).round(1))
 
     # Table 3 : Defense / Overall
     st.markdown("### Defense / Overall", unsafe_allow_html=True)
     st.write("Ce tableau résume les statistiques globales défensives des lineups.")
     defense_overall_columns = {
+        "Equipe" :  "Equipe",
         "Lineup": "Lineup",
         "Plus/Minus": "Plus/Minus",
         "Minutes": "Minutes",
@@ -373,12 +376,13 @@ def page_statistiques_lineups():
         "Turnovers Opposant": "Turnovers Opposant",
         "Fouls Opposant": "Fouls Opposant"
     }
-    st.dataframe(data[defense_overall_columns.keys()].rename(columns=defense_overall_columns))
+    st.dataframe(data[defense_overall_columns.keys()].rename(columns=defense_overall_columns).round(1))
 
     # Table 4 : Défense / Shooting
     st.markdown("### Defense / Shooting", unsafe_allow_html=True)
     st.write("Ce tableau met en avant les statistiques défensives liées au tir.")
     defense_shooting_columns = {
+        "Equipe" :  "Equipe",
         "Lineup": "Lineup",
         "Plus/Minus": "Plus/Minus",
         "Minutes": "Minutes",
@@ -402,7 +406,7 @@ def page_statistiques_lineups():
         "Turnovers Opposant": "Turnovers Opposant",
         "Fouls Opposant": "Fouls Opposant"
     }
-    st.dataframe(data[defense_shooting_columns.keys()].rename(columns=defense_shooting_columns))
+    st.dataframe(data[defense_shooting_columns.keys()].rename(columns=defense_shooting_columns).round(1))
 
     
 #|-----------------------------------------------------------------------------|
