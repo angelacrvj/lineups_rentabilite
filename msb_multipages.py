@@ -172,6 +172,29 @@ st.set_page_config(
     #|---------------------------- Page d'acceuil ----------------------------|
 def page_accueil():
     #st.title("Analyse des Lineups MSB 🏀")
+    import streamlit as st
+
+    # Ajout logo Ligue Betclic Elite 
+    st.markdown(
+        f"""
+        <style>
+            .logo-container {{
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                z-index: 1;
+            }}
+            .logo-container img {{
+                width: 100px;
+            }}
+        </style>
+        <div class="logo-container">
+            <img src="data:image/png;base64,{st.file_uploader("logos_equipes/Logo_Betclic_Elite_Pro_A.png")}" alt="Logo Ligue">
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
 
     st.markdown("""
     <h1 style="text-align: center; margin-bottom: 30px; ">Analyse des Lineups MSB 🏀</h1>
@@ -249,15 +272,6 @@ def page_analyse_rentabilite():
                                     opponent_data["Player_5_name"].isin(player_filter_opponent)]
     else:
         opponent_data_filtered = opponent_data  # on prévoit les cas où monsieur basket ne filtre pas les joueurs 
-
-    # Dimensionnement de la heatmap si "Ligue" sélectionné 
-    #if opponent_name == "Ligue":
-        # Taille personnalisée pour "Ligue"
-    #    fig, ax = plt.subplots(figsize=(10, 2))  # Ajuste selon la taille souhaitée pour "Ligue"
-    #else:
-        # Pas de figsize spécifié ici, matplotlib ajustera automatiquement la taille
-    #    fig, ax = plt.subplots()
-
 
     # Affichage Heatmap : Équipe de référence vs Équipe adverse
     st.subheader(f"Heatmap : {team_name} vs {opponent_name}")
