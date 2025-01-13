@@ -12,17 +12,17 @@ file_path = os.path.join(script_dir, "lineups_rentabilite_wt_league.csv")
 data = pd.read_csv(file_path)
 
 # Stats 
-offensive_stats = ["Rentabilite_possessions_equipe", "Rentabilite_temps_equipe", "True_Shooting_equipe_%"]
-defensive_stats = ["Rentabilite_possessions_opp", "Rentabilite_temps_opp", "True_Shooting_opp_%"]
+offensive_stats = ["Rentabilite_possessions_equipe", "Rentabilite_temps_equipe", "True_Shooting_%_equipe"]
+defensive_stats = ["Rentabilite_possessions_opp", "Rentabilite_temps_opp", "True_Shooting_%_opp"]
 all_stats = offensive_stats + defensive_stats
 
 stat_rename = {
     "Rentabilite_possessions_equipe": "Points par poss. (offense)",
     "Rentabilite_temps_equipe": "Poss par match (offense)",
-    "True_Shooting_equipe_%": "TS% (offense)",
+    "True_Shooting_%_equipe": "TS% (offense)",
     "Rentabilite_possessions_opp": "Points par poss. (defense)",
     "Rentabilite_temps_opp": "Poss par match (defense)",
-    "True_Shooting_opp_%": "TS% (defense)"
+    "True_Shooting_%_opp": "TS% (defense)"
 }
 
 # logos équpipes
@@ -104,8 +104,8 @@ def radar_chart(team1_lineups, team2_lineups, team_name, opponent_name):
                                                     "Rentabilite_possessions_equipe", 
                                                     "Rentabilite_possessions_opp",
                                                     "Rentabilite_temps_opp",
-                                                    "True_Shooting_opp_%",
-                                                    "True_Shooting_equipe_%"]]
+                                                    "True_Shooting_%_opp",
+                                                    "True_Shooting_%_equipe"]]
         fig.add_trace(go.Scatterpolar(
             r=values,
             theta=categories,
@@ -122,8 +122,8 @@ def radar_chart(team1_lineups, team2_lineups, team_name, opponent_name):
                                                     "Rentabilite_possessions_equipe", 
                                                     "Rentabilite_possessions_opp",
                                                     "Rentabilite_temps_opp",
-                                                    "True_Shooting_opp_%",
-                                                    "True_Shooting_equipe_%"]]
+                                                    "True_Shooting_%_opp",
+                                                    "True_Shooting_%_equipe"]]
         fig.add_trace(go.Scatterpolar(
             r=values,
             theta=categories,
@@ -331,8 +331,11 @@ def page_statistiques_lineups():
     st.markdown("### Offense/Shooting", unsafe_allow_html=True)
     st.write("Ce tableau montre les statistiques offensives liées au tir, comme le True Shooting %.")
     offense_shooting_columns = {
-        "True_Shooting_equipe_%": "True Shooting%",
-        "centile_True_Shooting_equipe_%": "Centile True Shooting%",
+        "Lineup": "Lineup",
+        "Plus/Minus": "Plus/Minus",
+        "Minutes": "Minutes",
+        "True_Shooting_%_equipe": "True Shooting%",
+        "centile_True_Shooting_%_equipe": "Centile True Shooting%",
         "Field goals attempted Equipe": "Field goals attempted Equipe",
         "Field goals made Equipe": "Field goals made Equipe",
         "2-pt field goals attempted Equipe": "2-pt field goals attempted Equipe",
@@ -385,8 +388,11 @@ def page_statistiques_lineups():
     st.markdown("### Defense / Shooting", unsafe_allow_html=True)
     st.write("Ce tableau met en avant les statistiques défensives liées au tir.")
     defense_shooting_columns = {
-        "True_Shooting_equipe_%": "True Shooting%",
-        "centile_True_Shooting_equipe_%": "Centile True Shooting%",
+        "Lineup": "Lineup",
+        "Plus/Minus": "Plus/Minus",
+        "Minutes": "Minutes",
+        "True_Shooting_%_equipe": "True Shooting%",
+        "centile_True_Shooting_%_equipe": "Centile True Shooting%",
         "Field goals attempted Opposant": "Field goals attempted Opposant",
         "Field goals made Opposant": "Field goals made Opposant",
         "2-pt field goals attempted Opposant": "2-pt field goals attempted Opposant",
