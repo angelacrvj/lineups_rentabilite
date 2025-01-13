@@ -351,7 +351,6 @@ def page_statistiques_lineups():
         "Turnovers Equipe": "Turnovers Equipe",
         "Fouls Equipe": "Fouls Equipe"
     }
-    formatted_columns = {col: f"**{name}**" for col, name in offense_shooting_columns.items()}
     st.dataframe(data[offense_shooting_columns.keys()].rename(columns=offense_shooting_columns).round(1))
 
     # Table 3 : Defense / Overall
@@ -378,7 +377,6 @@ def page_statistiques_lineups():
         "Turnovers Opposant": "Turnovers Opposant",
         "Fouls Opposant": "Fouls Opposant"
     }
-    formatted_columns = {col: f"**{name}**" for col, name in defense_overall_columns.items()}
     st.dataframe(data[defense_overall_columns.keys()].rename(columns=defense_overall_columns).round(1))
 
     # Table 4 : Défense / Shooting
@@ -409,7 +407,6 @@ def page_statistiques_lineups():
         "Turnovers Opposant": "Turnovers Opposant",
         "Fouls Opposant": "Fouls Opposant"
     }
-    formatted_columns = {col: f"**{name}**" for col, name in defense_shooting_columns.items()}
     st.dataframe(data[defense_shooting_columns.keys()].rename(columns=defense_shooting_columns).round(1))
 
     
