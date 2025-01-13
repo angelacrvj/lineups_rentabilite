@@ -213,3 +213,5 @@ radar_chart(team1_lineups, team2_lineups)
 
 st.title("Désolé pour le contre-temps bg : ma bouille en contre-partie")
 st.image("Easter egg/08.png")
+st.texte("tu as le droit à un bonus pour le délai de maj et pour essayer de te changer les idées en espérant que tu ailles mieux 🤍")
+st.image("Easter egg/03.jpg")
