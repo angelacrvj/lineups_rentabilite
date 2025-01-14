@@ -423,6 +423,30 @@ def page_statistiques_lineups():
     - [Defense / Shooting](#defense-shooting)
     """)
 
+
+    # Ajout du CSS pour la colonne 'Lineups' et les titres en gras
+    st.markdown("""
+    <style>
+        /* Fixer la colonne 'Lineups' */
+        .stDataFrame tbody tr td:first-child {
+            position: -webkit-sticky;
+            position: sticky;
+            left: 0;
+            background-color: white;
+            z-index: 2;
+        }
+
+        /* Mettre les intitulés de colonnes en gras */
+        .stDataFrame thead th {
+            font-weight: bold;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
+
+
+
+
     # Table 1 : Offense  / Overall
     st.markdown("### Offense / Overall", unsafe_allow_html=True)
     st.write("Ce tableau présente les statistiques offensives générales des lineups.")
@@ -444,7 +468,7 @@ def page_statistiques_lineups():
         "Assists Equipe": "Assists Equipe",
         "Turnovers Equipe": "Turnovers Equipe"
     }
-    st.dataframe(filtered_data[offense_columns.keys()].rename(columns=offense_columns).round(1))
+    #st.dataframe(filtered_data[offense_columns.keys()].rename(columns=offense_columns).round(1))
 
     # Table 2 : Offense / Shooting
     st.markdown("### Offense / Shooting", unsafe_allow_html=True)
