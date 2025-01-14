@@ -87,13 +87,15 @@ def plot_heatmap(df, title, ax):
     sns.heatmap(df_offense, annot=True, fmt=".1f", cmap="coolwarm", linewidths=0.5, ax=axes[0])
     axes[0].set_title("Statistiques Offensives")
     axes[0].set_ylabel("Lineup")  # Garde les ylabels ici
+    axes[0].tick_params(axis='x', rotation=45)
     
     # Heatmap défensive (colormap inversée)
     sns.heatmap(df_defense, annot=True, fmt=".1f", cmap="coolwarm_r", linewidths=0.5, ax=axes[1])
     axes[1].set_title("Statistiques Défensives")
     axes[1].set_ylabel("")  # Supprime les ylabels
     axes[1].tick_params(left=False)  # Désactive les ticks à gauche
-    
+    axes[1].tick_params(axis='x', rotation=45)
+
     # Titre global
     fig.suptitle(title, fontsize=16)
     st.pyplot(fig)
