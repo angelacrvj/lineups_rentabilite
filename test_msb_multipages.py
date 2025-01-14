@@ -372,7 +372,7 @@ def page_analyse_rentabilite():
 
     #|----------------------------- Stats tableau -----------------------------|
 
-def page_statistiques_lineups(data):
+def page_statistiques_lineups():
 
     st.sidebar.header("Filtres")
 
