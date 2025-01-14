@@ -424,24 +424,12 @@ def page_statistiques_lineups():
     """)
 
 
-    # Ajout du CSS pour la colonne 'Lineups' et les titres en gras
-    st.markdown("""
-    <style>
-        /* Fixer la colonne 'Lineups' */
-        .stDataFrame tbody tr td:first-child {
-            position: -webkit-sticky;
-            position: sticky;
-            left: 0;
-            background-color: white;
-            z-index: 2;
-        }
-
-        /* Mettre les intitulés de colonnes en gras */
-        .stDataFrame thead th {
-            font-weight: bold;
-        }
-    </style>
-    """, unsafe_allow_html=True)
+    # Fonction pour appliquer le style des tableaux avec la colonne "Lineup" figée et titres en gras
+    def styled_dataframe(df, columns_mapping):
+        return df[columns_mapping.keys()].rename(columns=columns_mapping).style.set_table_styles([
+            {'selector': 'th', 'props': [('font-weight', 'bold')]},  # Titres en gras
+            {'selector': 'td:nth-child(2)', 'props': [('position', 'sticky'), ('left', '0'), ('background-color', 'white')]},  # Fixer la colonne Lineup
+        ])
 
 
 
@@ -469,6 +457,7 @@ def page_statistiques_lineups():
         "Turnovers Equipe": "Turnovers Equipe"
     }
     #st.dataframe(filtered_data[offense_columns.keys()].rename(columns=offense_columns).round(1))
+    st.dataframe(styled_dataframe(filtered_data, offense_columns).round(1))
 
     # Table 2 : Offense / Shooting
     st.markdown("### Offense / Shooting", unsafe_allow_html=True)
@@ -501,7 +490,8 @@ def page_statistiques_lineups():
         "Turnovers Equipe": "Turnovers Equipe",
         "Fouls Equipe": "Fouls Equipe"
     }
-    st.dataframe(filtered_data[offense_shooting_columns.keys()].rename(columns=offense_shooting_columns).round(1))
+    #st.dataframe(filtered_data[offense_shooting_columns.keys()].rename(columns=offense_shooting_columns).round(1))
+    st.dataframe(styled_dataframe(filtered_data, offense_shooting_columns).round(1))
 
     # Table 3 : Defense / Overall
     st.markdown("### Defense / Overall", unsafe_allow_html=True)
@@ -524,7 +514,8 @@ def page_statistiques_lineups():
         "Assists Opposant": "Assists Opposant",
         "Turnovers Opposant": "Turnovers Opposant"
     }
-    st.dataframe(filtered_data[defense_overall_columns.keys()].rename(columns=defense_overall_columns).round(1))
+    #st.dataframe(filtered_data[defense_overall_columns.keys()].rename(columns=defense_overall_columns).round(1))
+    st.dataframe(styled_dataframe(filtered_data, defense_overall_columns).round(1))
 
     # Table 4 : Défense / Shooting
     st.markdown("### Defense / Shooting", unsafe_allow_html=True)
@@ -554,7 +545,8 @@ def page_statistiques_lineups():
         "Turnovers Opposant": "Turnovers Opposant",
         "Fouls Opposant": "Fouls Opposant"
     }
-    st.dataframe(filtered_data[defense_shooting_columns.keys()].rename(columns=defense_shooting_columns).round(1))
+    #st.dataframe(filtered_data[defense_shooting_columns.keys()].rename(columns=defense_shooting_columns).round(1))
+    st.dataframe(styled_dataframe(filtered_data, defense_shooting_columns).round(1))
 
     
 #|-----------------------------------------------------------------------------|
