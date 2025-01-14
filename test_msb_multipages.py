@@ -10,6 +10,7 @@ import os
 script_dir = os.path.dirname(os.path.abspath(__file__))
 file_path = os.path.join(script_dir, "lineups_rentabilite (2).csv")
 data = pd.read_csv(file_path)
+data["minutes_filtre_num"] = data["minutes_filtre"].dt.total_seconds() / 60
 
 # Stats 
 offensive_stats = ["Rentabilite_possessions_equipe", "Rentabilite_temps_equipe", "True_Shooting_%_equipe"]
@@ -43,7 +44,7 @@ team_logos = {
     'Nanterre 92': "logos_equipes/Nanterre_92.png",
     'Paris Basketball': "logos_equipes/Paris_Basketball.png",
     'Saint-Quentin': "logos_equipes/Saint-Quentin.png",
-    'SIG Strasbourg': "logos_equipes/SIG_Strasbourg.png",
+    'SIG Strasbourg': "logos_equipes/SIG_Strasbourg.png"
 }
 
 # --------------------- Calculs comparaisons de matchups --------------------- #
@@ -203,7 +204,12 @@ def filters_analyse_rentabilite(data):
     # Sélection des équipes
     team_name = st.sidebar.selectbox("Équipe de référence", data["Equipe"].unique())
     opponent_name = st.sidebar.selectbox("Équipe adverse", [team for team in data["Equipe"].unique() if team != team_name])
-    
+
+    # Filtre sur la plage de minutes jouées
+    min_minutes = int(data["minutes_filtre_num"].min())
+    max_minutes = int(data["minutes_filtre_num"].max())
+    selected_range = st.sidebar.slider("Plage de minutes jouées", min_value=min_minutes, max_value=max_minutes, value=(min_minutes, max_minutes))
+
     # Récupérer la liste des joueurs pour chaque équipe
     def extract_unique_players(df):
         players = set(
@@ -222,7 +228,10 @@ def filters_analyse_rentabilite(data):
     player_filter_team = st.sidebar.multiselect("Joueurs de l'équipe de référence", team_players)
     player_filter_opponent = st.sidebar.multiselect("Joueurs de l'équipe adverse", opponent_players)
 
-    return team_name, opponent_name, player_filter_team, player_filter_opponent
+    # Filtrage des données en fonction des minutes
+    filtre_temporel = data[(data["minutes_filtre_num"] >= selected_range[0]) & (data["minutes_filtre_num"] <= selected_range[1])]
+
+    return team_name, opponent_name, player_filter_team, player_filter_opponent, filtre_temporel
 
 # Filtres pour la page : Statistiques Lineups 
 
@@ -232,7 +241,13 @@ def filters_stats_lineups(data):
     """
     # Sélection des équipes
     team_names = st.sidebar.multiselect("Sélectionner les équipes", data["Equipe"].unique(), default=[])
+ 
+    # Filtre sur la plage de minutes jouées
+    min_minutes = int(data["minutes_filtre_num"].min())
+    max_minutes = int(data["minutes_filtre_num"].max())
+    selected_range = st.sidebar.slider("Plage de minutes jouées", min_value=min_minutes, max_value=max_minutes, value=(min_minutes, max_minutes))
     
+
     # Filtrage des joueurs en fonction des équipes sélectionnées
     if team_names:
         players_in_selected_teams = data[data["Equipe"].isin(team_names)]
@@ -254,10 +269,11 @@ def filters_stats_lineups(data):
         )
     
     player_filter = st.sidebar.multiselect("Sélectionner les joueurs", sorted([player for player in team_players if pd.notnull(player)]))
-    
-    return team_names, player_filter
 
+    # Filtrage des données en fonction des minutes
+    filtre_temporel = data[(data["minutes_filtre_num"] >= selected_range[0]) & (data["minutes_filtre_num"] <= selected_range[1])]
 
+    return team_names, player_filter, filtre_temporel
 
 
 
