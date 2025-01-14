@@ -192,8 +192,8 @@ def radar_chart(team1_lineups, team2_lineups, team_name, opponent_name):
     st.plotly_chart(fig)
 
 # --------------------- Création des filtres centralisés --------------------- #
-
-def filters(data):
+# Filtres pour la page : Analyse Rentabilité 
+def filters_analyse_rentabilite(data):
     """
     Crée les filtres pour la sélection de l'équipe, de l'équipe adverse, et des joueurs.
     
@@ -224,7 +224,38 @@ def filters(data):
 
     return team_name, opponent_name, player_filter_team, player_filter_opponent
 
+# Filtres pour la page : Statistiques Lineups 
 
+def filters_stats_lineups(data):
+    """
+    Crée les filtres pour la page Statistiques Lineups : sélection des équipes et des joueurs.
+    """
+    # Sélection des équipes
+    team_names = st.sidebar.multiselect("Sélectionner les équipes", data["Equipe"].unique(), default=data["Equipe"].unique())
+    
+    # Filtrage des joueurs en fonction des équipes sélectionnées
+    if team_names:
+        players_in_selected_teams = data[data["Equipe"].isin(team_names)]
+        team_players = set(
+            players_in_selected_teams["Player_1_name"].tolist() +
+            players_in_selected_teams["Player_2_name"].tolist() +
+            players_in_selected_teams["Player_3_name"].tolist() +
+            players_in_selected_teams["Player_4_name"].tolist() +
+            players_in_selected_teams["Player_5_name"].tolist()
+        )
+    else:
+        # Si aucune équipe n'est sélectionnée, on affiche tous les joueurs
+        team_players = set(
+            data["Player_1_name"].tolist() +
+            data["Player_2_name"].tolist() +
+            data["Player_3_name"].tolist() +
+            data["Player_4_name"].tolist() +
+            data["Player_5_name"].tolist()
+        )
+    
+    player_filter = st.sidebar.multiselect("Sélectionner les joueurs", sorted([player for player in team_players if pd.notnull(player)]))
+    
+    return team_names, player_filter
 
 
 
@@ -286,7 +317,7 @@ def page_analyse_rentabilite():
     st.sidebar.header("Filtres")
 
     # ajout des filtres centralisés 
-    team_name, opponent_name,  player_filter_team, player_filter_opponent = filters(data)
+    team_name, opponent_name,  player_filter_team, player_filter_opponent = filters_analyse_rentabilite(data)
 
     # Filtrage des joueurs en fonction de l'équipe sélectionnée
     team_data = data[data["Equipe"] == team_name]
@@ -346,7 +377,21 @@ def page_statistiques_lineups():
     st.sidebar.header("Filtres")
 
     # ajout des filtres centralisés 
-    team_name, opponent_name,  player_filter_team, player_filter_opponent = filters(data)
+    team_names, player_filter = filters_stats_lineups(data)
+
+    # Filtrage des données en fonction des équipes et des joueurs sélectionnés
+    if team_names:
+        filtered_data = data[data["Equipe"].isin(team_names)]
+    else:
+        filtered_data = data  # Si aucune équipe n'est sélectionnée, on garde toutes les équipes
+    
+    if player_filter:
+        filtered_data = filtered_data[filtered_data["Player_1_name"].isin(player_filter) |
+                                      filtered_data["Player_2_name"].isin(player_filter) |
+                                      filtered_data["Player_3_name"].isin(player_filter) |
+                                      filtered_data["Player_4_name"].isin(player_filter) |
+                                      filtered_data["Player_5_name"].isin(player_filter)]
+    
 
     st.title("Statistiques des Lineups 🎯")
     st.write("Cette page contient **4 tableaux** avec les statistiques clés des lineups. "
