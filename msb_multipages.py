@@ -67,21 +67,53 @@ def calculate_matchup(team_lineups, opponent_lineups):
     return pd.DataFrame(results)
 
 # Fonction heatmap pete sa mère
-def plot_heatmap(df, title, ax):
-    fig, ax = plt.subplots()
-    df = df.rename(columns=stat_rename).set_index("Lineup").select_dtypes(include='number')
-    sns.heatmap(df, annot=True, fmt=".1f", cmap="coolwarm", linewidths=0.5, ax=ax)
+#def plot_heatmap(df, title, ax):
+#    fig, ax = plt.subplots()
+#    df = df.rename(columns=stat_rename).set_index("Lineup").select_dtypes(include='number')
+#    sns.heatmap(df, annot=True, fmt=".1f", cmap="coolwarm", linewidths=0.5, ax=ax)
 
     # Ligne de séparation des stats offensives et défensives
-    separation_idx = len(offensive_stats)  # position
-    ax.axvline(x=separation_idx, color="black", linewidth=2)
+#    separation_idx = len(offensive_stats)  # position
+#    ax.axvline(x=separation_idx, color="black", linewidth=2)
 
-    ax.set_title(title)
-    ax.set_ylabel("Lineup")
-    ax.set_xlabel("")
-    ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha="right")
-    ax.set_yticklabels(ax.get_yticklabels(), rotation=0, ha="right")  
+#    ax.set_title(title)
+#    ax.set_ylabel("Lineup")
+#    ax.set_xlabel("")
+#    ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha="right")
+#    ax.set_yticklabels(ax.get_yticklabels(), rotation=0, ha="right")  
 
+#    st.pyplot(fig)
+
+def plot_heatmap(df, title, ax):
+    """
+    Plot two heatmaps: one for offensive stats and one for defensive stats.
+    Offensive stats have a blue-to-red colormap, while defensive stats have a red-to-blue colormap.
+    """
+    # Renommer les colonnes et définir l'index
+    df = df.rename(columns=stat_rename).set_index("Lineup").select_dtypes(include='number')
+    
+    # Séparer les données offensives et défensives
+    df_offense = df[[stat_rename[stat] for stat in offensive_stats]]
+    df_defense = df[[stat_rename[stat] for stat in defensive_stats]]
+    
+    # Créer les sous-graphes
+    fig, axes = plt.subplots(1, 2, figsize=(15, 8), sharey=True, gridspec_kw={'wspace': 0.1})
+    
+    # Heatmap offensive
+    sns.heatmap(df_offense, annot=True, fmt=".1f", cmap="coolwarm", linewidths=0.5, ax=axes[0])
+    axes[0].set_title("Statistiques Offensives")
+    axes[0].set_ylabel("Lineup")  # Garde les ylabels ici
+    axes[0].tick_params(axis='x', rotation=45)
+    
+    # Heatmap défensive (colormap inversée)
+    sns.heatmap(df_defense, annot=True, fmt=".1f", cmap="coolwarm_r", linewidths=0.5, ax=axes[1])
+    axes[1].set_title("Statistiques Défensives")
+    axes[1].set_ylabel("")  # Supprime les ylabels
+    axes[1].tick_params(left=False)  # Désactive les ticks à gauche
+    axes[1].tick_params(axis='x', rotation=45)
+
+    # Titre global
+    fig.suptitle(title, fontsize=16)
     st.pyplot(fig)
 
 # Fonction radar chart pete sa mère
