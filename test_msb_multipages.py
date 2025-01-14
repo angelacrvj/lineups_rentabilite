@@ -344,9 +344,9 @@ def page_analyse_rentabilite():
 def page_statistiques_lineups():
 
     st.sidebar.header("Filtres")
-    # ajout des filtres centralisés 
-    team_name, opponent_name, player_filter_team, player_filter_opponent, team_data_filtered, opponent_data_filtered = filters(data)
 
+    # ajout des filtres centralisés 
+    team_name, opponent_name,  player_filter_team, player_filter_opponent = filters(data)
 
     st.title("Statistiques des Lineups 🎯")
     st.write("Cette page contient **4 tableaux** avec les statistiques clés des lineups. "
