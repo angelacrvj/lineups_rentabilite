@@ -333,7 +333,8 @@ def page_analyse_rentabilite():
     st.sidebar.header("Filtres")
 
     # ajout des filtres centralisés 
-    team_name, opponent_name,  player_filter_team, player_filter_opponent = filters_analyse_rentabilite(data)
+    team_name, opponent_name,  player_filter_team, player_filter_opponent, filtre_temporel = filters_analyse_rentabilite(data)
+    
 
     # Filtrage des joueurs en fonction de l'équipe sélectionnée
     team_data = data[data["Equipe"] == team_name]
@@ -393,7 +394,7 @@ def page_statistiques_lineups():
     st.sidebar.header("Filtres")
 
     # ajout des filtres centralisés 
-    team_names, player_filter = filters_stats_lineups(data)
+    team_names, player_filter, filtre_temporel = filters_stats_lineups(data)
 
     # Filtrage des données en fonction des équipes et des joueurs sélectionnés
     if team_names:
