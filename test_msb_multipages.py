@@ -272,9 +272,9 @@ def filters_stats_lineups(data):
     player_filter = st.sidebar.multiselect("Sélectionner les joueurs", sorted([player for player in team_players if pd.notnull(player)]))
 
     # Filtrage des données en fonction des minutes
-    filtre_temporel = data[(data["minutes_filtre_num"] >= selected_range[0]) & (data["minutes_filtre_num"] <= selected_range[1])]
+    filtre_temporel_stats = data[(data["minutes_filtre_num"] >= selected_range[0]) & (data["minutes_filtre_num"] <= selected_range[1])]
 
-    return team_names, player_filter, filtre_temporel
+    return team_names, player_filter, filtre_temporel_stats
 
 
 
@@ -395,13 +395,13 @@ def page_statistiques_lineups():
     st.sidebar.header("Filtres")
 
     # ajout des filtres centralisés 
-    team_names, player_filter, filtre_temporel = filters_stats_lineups(data)
+    team_names, player_filter, filtre_temporel_stats = filters_stats_lineups(data)
 
     # Filtrage des données en fonction des équipes et des joueurs sélectionnés
     if team_names:
-        filtered_data = filtre_temporel[filtre_temporel["Equipe"].isin(team_names)]
+        filtered_data = filtre_temporel_stats[filtre_temporel_stats["Equipe"].isin(team_names)]
     else:
-        filtered_data = filtre_temporel  # Si aucune équipe n'est sélectionnée, on garde toutes les équipes
+        filtered_data = filtre_temporel_stats  # Si aucune équipe n'est sélectionnée, on garde toutes les équipes
     
     if player_filter:
         filtered_data = filtered_data[filtered_data["Player_1_name"].isin(player_filter) |
