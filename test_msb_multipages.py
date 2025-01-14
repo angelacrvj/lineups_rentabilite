@@ -209,7 +209,7 @@ def filters_analyse_rentabilite(data):
     # Filtre sur la plage de minutes jouées
     min_minutes = int(data["minutes_filtre_num"].min())
     max_minutes = int(data["minutes_filtre_num"].max())
-    selected_range = st.sidebar.slider("Plage de minutes jouées", min_value=0, max_value=max_minutes, value=(min_minutes, max_minutes))
+    selected_range = st.sidebar.slider("Plage de minutes jouées", min_value=0, max_value=max_minutes, value=(0, max_minutes))
 
     # Récupérer la liste des joueurs pour chaque équipe
     def extract_unique_players(df):
@@ -246,7 +246,7 @@ def filters_stats_lineups(data):
     # Filtre sur la plage de minutes jouées
     min_minutes = int(data["minutes_filtre_num"].min())
     max_minutes = int(data["minutes_filtre_num"].max())
-    selected_range = st.sidebar.slider("Plage de minutes jouées", min_value=0, max_value=max_minutes, value=(min_minutes, max_minutes))
+    selected_range = st.sidebar.slider("Plage de minutes jouées", min_value=0, max_value=max_minutes, value=(0, max_minutes))
     
 
     # Filtrage des joueurs en fonction des équipes sélectionnées
