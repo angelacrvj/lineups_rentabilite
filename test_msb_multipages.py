@@ -415,13 +415,27 @@ def page_statistiques_lineups():
              "Vous pouvez cliquer sur les liens ci-dessous pour naviguer directement vers chaque tableau.")
     
     # Liste des tableaux avec liens cliquables
+#    st.markdown("""
+#    **Tableaux disponibles :**
+#    - [Offense  / Overall](#offense)
+#    - [Offense / Shooting](#offense-shooting)
+#    - [Defense / Overall](#defense-overall)
+#    - [Defense / Shooting](#defense-shooting)
+#    """)
+
+
+
+    # Liste des tableaux avec liens cliquables et descriptions à côté
     st.markdown("""
     **Tableaux disponibles :**
-    - [Offense  / Overall](#offense)
-    - [Offense / Shooting](#offense-shooting)
-    - [Defense / Overall](#defense-overall)
-    - [Defense / Shooting](#defense-shooting)
+    - [Offense / Overall](#offense) : Ce tableau présente les statistiques offensives générales des lineups.
+    - [Offense / Shooting](#offense-shooting) : Ce tableau montre les statistiques offensives liées au tir, comme le True Shooting %.
+    - [Defense / Overall](#defense-overall) : Ce tableau résume les statistiques globales défensives des lineups.
+    - [Defense / Shooting](#defense-shooting) : Ce tableau met en avant les statistiques défensives liées au tir.
     """)
+
+
+
 
     # Table 1 : Offense  / Overall
     st.markdown("### Offense / Overall", unsafe_allow_html=True)
