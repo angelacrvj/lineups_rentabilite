@@ -195,16 +195,15 @@ def radar_chart(team1_lineups, team2_lineups, team_name, opponent_name):
 
 def filters(data):
     """
-    Fonction pour créer des filtres relatifs aux équipes, aux joueurs et aux données filtrées.
+    Crée les filtres pour la sélection de l'équipe, de l'équipe adverse, et des joueurs.
+    
+    :param data: Le DataFrame contenant toutes les données.
+    :return: Les filtres appliqués et les équipes sélectionnées.
     """
     # Sélection des équipes
     team_name = st.sidebar.selectbox("Équipe de référence", data["Equipe"].unique())
     opponent_name = st.sidebar.selectbox("Équipe adverse", [team for team in data["Equipe"].unique() if team != team_name])
-
-    # Filtrage des joueurs en fonction de l'équipe sélectionnée
-    team_data = data[data["Equipe"] == team_name]
-    opponent_data = data[data["Equipe"] == opponent_name]
-
+    
     # Récupérer la liste des joueurs pour chaque équipe
     def extract_unique_players(df):
         players = set(
@@ -216,33 +215,14 @@ def filters(data):
         )
         return sorted([player for player in players if pd.notnull(player)])
 
-    team_players = extract_unique_players(team_data)
-    opponent_players = extract_unique_players(opponent_data)
+    team_players = extract_unique_players(data[data["Equipe"] == team_name])
+    opponent_players = extract_unique_players(data[data["Equipe"] == opponent_name])
 
-    # Filtre des joueurs
+    # Sélection des joueurs à filtrer
     player_filter_team = st.sidebar.multiselect("Joueurs de l'équipe de référence", team_players)
     player_filter_opponent = st.sidebar.multiselect("Joueurs de l'équipe adverse", opponent_players)
 
-    # Filtrage des données des joueurs sélectionnés (que pour les heatmap)
-    if player_filter_team:
-        team_data_filtered = team_data[team_data["Player_1_name"].isin(player_filter_team) |
-                                       team_data["Player_2_name"].isin(player_filter_team) |
-                                       team_data["Player_3_name"].isin(player_filter_team) |
-                                       team_data["Player_4_name"].isin(player_filter_team) |
-                                       team_data["Player_5_name"].isin(player_filter_team)]
-    else:
-        team_data_filtered = team_data  # on prévoit les cas où monsieur basket ne filtre pas les joueurs 
-
-    if player_filter_opponent:
-        opponent_data_filtered = opponent_data[opponent_data["Player_1_name"].isin(player_filter_opponent) |
-                                                opponent_data["Player_2_name"].isin(player_filter_opponent) |
-                                                opponent_data["Player_3_name"].isin(player_filter_opponent) |
-                                                opponent_data["Player_4_name"].isin(player_filter_opponent) |
-                                                opponent_data["Player_5_name"].isin(player_filter_opponent)]
-    else:
-        opponent_data_filtered = opponent_data  # on prévoit les cas où monsieur basket ne filtre pas les joueurs 
-
-    return team_name, opponent_name, player_filter_team, player_filter_opponent, team_data_filtered, opponent_data_filtered
+    return team_name, opponent_name, player_filter_team, player_filter_opponent
 
 
 
@@ -306,7 +286,30 @@ def page_analyse_rentabilite():
     st.sidebar.header("Filtres")
 
     # ajout des filtres centralisés 
-    team_name, opponent_name, player_filter_team, player_filter_opponent, team_data_filtered, opponent_data_filtered = filters(data)
+    team_name, opponent_name,  player_filter_team, player_filter_opponent = filters(data)
+
+    # Filtrage des joueurs en fonction de l'équipe sélectionnée
+    team_data = data[data["Equipe"] == team_name]
+    opponent_data = data[data["Equipe"] == opponent_name]
+
+    # Filtrage des données des joueurs sélectionnés (que pour les heatmap)
+    if player_filter_team:
+        team_data_filtered = team_data[team_data["Player_1_name"].isin(player_filter_team) |
+                                       team_data["Player_2_name"].isin(player_filter_team) |
+                                       team_data["Player_3_name"].isin(player_filter_team) |
+                                       team_data["Player_4_name"].isin(player_filter_team) |
+                                       team_data["Player_5_name"].isin(player_filter_team)]
+    else:
+        team_data_filtered = team_data  # on prévoit les cas où monsieur basket ne filtre pas les joueurs 
+
+    if player_filter_opponent:
+        opponent_data_filtered = opponent_data[opponent_data["Player_1_name"].isin(player_filter_opponent) |
+                                                opponent_data["Player_2_name"].isin(player_filter_opponent) |
+                                                opponent_data["Player_3_name"].isin(player_filter_opponent) |
+                                                opponent_data["Player_4_name"].isin(player_filter_opponent) |
+                                                opponent_data["Player_5_name"].isin(player_filter_opponent)]
+    else:
+        opponent_data_filtered = opponent_data  # on prévoit les cas où monsieur basket ne filtre pas les joueurs 
 
 
     # Affichage Heatmap : Équipe de référence vs Équipe adverse
