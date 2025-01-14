@@ -8,7 +8,7 @@ import os
 
 # Chargement des données
 script_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(script_dir, "lineups_rentabilite_1301_clean.csv")
+file_path = os.path.join(script_dir, "lineups_rentabilite (2).csv")
 data = pd.read_csv(file_path)
 
 # Stats 
@@ -372,7 +372,7 @@ def page_analyse_rentabilite():
 
     #|----------------------------- Stats tableau -----------------------------|
 
-def page_statistiques_lineups():
+def page_statistiques_lineups(data):
 
     st.sidebar.header("Filtres")
 
@@ -427,7 +427,7 @@ def page_statistiques_lineups():
         "Assists Equipe": "Assists Equipe",
         "Turnovers Equipe": "Turnovers Equipe"
     }
-    st.dataframe(data[offense_columns.keys()].rename(columns=offense_columns).round(1))
+    st.dataframe(filtered_data[offense_columns.keys()].rename(columns=offense_columns).round(1))
 
     # Table 2 : Offense / Shooting
     st.markdown("### Offense / Shooting", unsafe_allow_html=True)
@@ -460,7 +460,7 @@ def page_statistiques_lineups():
         "Turnovers Equipe": "Turnovers Equipe",
         "Fouls Equipe": "Fouls Equipe"
     }
-    st.dataframe(data[offense_shooting_columns.keys()].rename(columns=offense_shooting_columns).round(1))
+    st.dataframe(filtered_data[offense_shooting_columns.keys()].rename(columns=offense_shooting_columns).round(1))
 
     # Table 3 : Defense / Overall
     st.markdown("### Defense / Overall", unsafe_allow_html=True)
@@ -483,7 +483,7 @@ def page_statistiques_lineups():
         "Assists Opposant": "Assists Opposant",
         "Turnovers Opposant": "Turnovers Opposant"
     }
-    st.dataframe(data[defense_overall_columns.keys()].rename(columns=defense_overall_columns).round(1))
+    st.dataframe(filtered_data[defense_overall_columns.keys()].rename(columns=defense_overall_columns).round(1))
 
     # Table 4 : Défense / Shooting
     st.markdown("### Defense / Shooting", unsafe_allow_html=True)
@@ -513,7 +513,7 @@ def page_statistiques_lineups():
         "Turnovers Opposant": "Turnovers Opposant",
         "Fouls Opposant": "Fouls Opposant"
     }
-    st.dataframe(data[defense_shooting_columns.keys()].rename(columns=defense_shooting_columns).round(1))
+    st.dataframe(filtered_data[defense_shooting_columns.keys()].rename(columns=defense_shooting_columns).round(1))
 
     
 #|-----------------------------------------------------------------------------|
