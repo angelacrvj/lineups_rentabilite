@@ -68,7 +68,7 @@ def calculate_matchup(team_lineups, opponent_lineups):
 #    ax.set_xlabel("")
 #    st.pyplot(fig)
 
-def plot_heatmap(df, title):
+def plot_heatmap(df, title, ax):
     """
     Plot two heatmaps: one for offensive stats and one for defensive stats.
     Offensive stats have a blue-to-red colormap, while defensive stats have a red-to-blue colormap.
