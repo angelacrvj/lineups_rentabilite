@@ -206,11 +206,6 @@ def filters_analyse_rentabilite(data):
     team_name = st.sidebar.selectbox("Équipe de référence", data["Equipe"].unique())
     opponent_name = st.sidebar.selectbox("Équipe adverse", [team for team in data["Equipe"].unique() if team != team_name])
 
-    # Filtre sur la plage de minutes jouées
-    min_minutes = int(data["minutes_filtre_num"].min())
-    max_minutes = int(data["minutes_filtre_num"].max())
-    selected_range = st.sidebar.slider("Plage de minutes jouées", min_value=0, max_value=max_minutes, value=(0, max_minutes))
-
     # Récupérer la liste des joueurs pour chaque équipe
     def extract_unique_players(df):
         players = set(
@@ -229,6 +224,11 @@ def filters_analyse_rentabilite(data):
     player_filter_team = st.sidebar.multiselect("Joueurs de l'équipe de référence", team_players)
     player_filter_opponent = st.sidebar.multiselect("Joueurs de l'équipe adverse", opponent_players)
 
+    # Filtre sur la plage de minutes jouées
+    min_minutes = int(data["minutes_filtre_num"].min())
+    max_minutes = int(data["minutes_filtre_num"].max())
+    selected_range = st.sidebar.slider("Plage de minutes jouées", min_value=0, max_value=max_minutes, value=(0, max_minutes))
+
     # Filtrage des données en fonction des minutes
     filtre_temporel = data[(data["minutes_filtre_num"] >= selected_range[0]) & (data["minutes_filtre_num"] <= selected_range[1])]
 
@@ -242,12 +242,6 @@ def filters_stats_lineups(data):
     """
     # Sélection des équipes
     team_names = st.sidebar.multiselect("Sélectionner les équipes", data["Equipe"].unique(), default=[])
- 
-    # Filtre sur la plage de minutes jouées
-    min_minutes = int(data["minutes_filtre_num"].min())
-    max_minutes = int(data["minutes_filtre_num"].max())
-    selected_range = st.sidebar.slider("Plage de minutes jouées", min_value=0, max_value=max_minutes, value=(0, max_minutes))
-    
 
     # Filtrage des joueurs en fonction des équipes sélectionnées
     if team_names:
@@ -271,6 +265,11 @@ def filters_stats_lineups(data):
     
     player_filter = st.sidebar.multiselect("Sélectionner les joueurs", sorted([player for player in team_players if pd.notnull(player)]))
 
+    # Filtre sur la plage de minutes jouées
+    min_minutes = int(data["minutes_filtre_num"].min())
+    max_minutes = int(data["minutes_filtre_num"].max())
+    selected_range = st.sidebar.slider("Plage de minutes jouées", min_value=0, max_value=max_minutes, value=(0, max_minutes))
+    
     # Filtrage des données en fonction des minutes
     filtre_temporel = data[(data["minutes_filtre_num"] >= selected_range[0]) & (data["minutes_filtre_num"] <= selected_range[1])]
 
