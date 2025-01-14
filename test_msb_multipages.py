@@ -338,8 +338,8 @@ def page_analyse_rentabilite():
     
 
     # Filtrage des joueurs en fonction de l'équipe sélectionnée
-    team_data = data[data["Equipe"] == team_name]
-    opponent_data = data[data["Equipe"] == opponent_name]
+    team_data = filtre_temporel[filtre_temporel["Equipe"] == team_name]
+    opponent_data = filtre_temporel[filtre_temporel["Equipe"] == opponent_name]
 
     # Filtrage des données des joueurs sélectionnés (que pour les heatmap)
     if player_filter_team:
@@ -399,9 +399,9 @@ def page_statistiques_lineups():
 
     # Filtrage des données en fonction des équipes et des joueurs sélectionnés
     if team_names:
-        filtered_data = data[data["Equipe"].isin(team_names)]
+        filtered_data = filtre_temporel[filtre_temporel["Equipe"].isin(team_names)]
     else:
-        filtered_data = data  # Si aucune équipe n'est sélectionnée, on garde toutes les équipes
+        filtered_data = filtre_temporel  # Si aucune équipe n'est sélectionnée, on garde toutes les équipes
     
     if player_filter:
         filtered_data = filtered_data[filtered_data["Player_1_name"].isin(player_filter) |
