@@ -231,7 +231,7 @@ def filters_stats_lineups(data):
     Crée les filtres pour la page Statistiques Lineups : sélection des équipes et des joueurs.
     """
     # Sélection des équipes
-    team_names = st.sidebar.multiselect("Sélectionner les équipes", data["Equipe"].unique(), default=data["Equipe"].unique())
+    team_names = st.sidebar.multiselect("Sélectionner les équipes", data["Equipe"].unique(), default=[])
     
     # Filtrage des joueurs en fonction des équipes sélectionnées
     if team_names:
