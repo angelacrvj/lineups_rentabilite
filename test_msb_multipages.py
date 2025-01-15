@@ -341,7 +341,7 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
     # CSS personnalisé pour les en-têtes
     custom_css = {
         ".custom-header": {
-            "font-size": "32px",  # Taille du texte des en-têtes
+            "font-size": "16px",  # Taille du texte des en-têtes
             "font-weight": "bold"  # Gras pour les intitulés
         }
     }
