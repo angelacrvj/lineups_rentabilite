@@ -307,7 +307,7 @@ def filters_stats_lineups(data):
 def display_aggrid_table(dataframe, fixed_column="Lineup"):
     # Création des options de configuration
     gb = GridOptionsBuilder.from_dataframe(dataframe)
-    gb.configure_default_column(headerStyle={'fontWeight': 'bold', 'fontSize': '16px'})  # Intitulés en gras
+    gb.configure_default_column(headerStyle={'fontWeight': 'bold', 'fontSize': '32px'})  # Intitulés en gras
     gb.configure_column(fixed_column, pinned="left")  # Fixe la colonne spécifiée
     
     # Génère les options de tableau
