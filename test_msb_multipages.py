@@ -327,16 +327,51 @@ def filters_stats_lineups(data):
 
 
 # Nouvelle fonction pour afficher les tableaux avec AgGrid
-def display_aggrid_table(dataframe, fixed_column="Lineup"):
+#def display_aggrid_table(dataframe, fixed_column="Lineup"):
     # Création des options de configuration
-    gb = GridOptionsBuilder.from_dataframe(dataframe)
-    gb.configure_column(fixed_column, pinned="left")  # Fixe la colonne spécifiée
+#    gb = GridOptionsBuilder.from_dataframe(dataframe)
+#    gb.configure_column(fixed_column, pinned="left")  # Fixe la colonne spécifiée
     
     # Génère les options de tableau avec une classe CSS pour les en-têtes
+#    grid_options = gb.build()
+#    grid_options["defaultColDef"] = {
+#        "headerClass": "custom-header"  # Applique la classe CSS personnalisée
+#    }
+
+    # CSS personnalisé pour les en-têtes
+#    custom_css = {
+#        ".custom-header": {
+#            "font-size": "14px",  # Taille du texte des en-têtes
+#            "font-weight": "bold"  # Gras pour les intitulés
+#        }
+#    }
+
+    # Affiche le tableau avec les options configurées
+#    AgGrid(
+#        dataframe,
+ #       gridOptions=grid_options,
+ #       height=400,
+ #       fit_columns_on_grid_load=False,  # Ajuste automatiquement les colonnes
+ #       custom_css=custom_css,  # Injecte le CSS personnalisé
+ #       enable_enterprise_modules=False
+ #   )
+
+# Nouvelle fonction pour afficher les tableaux avec AgGrid
+def display_aggrid_table(dataframe, fixed_column="Lineup"):
+
+    # Création des options de configuration
+    gb = GridOptionsBuilder.from_dataframe(dataframe)
+    
+    # Fixe la colonne spécifiée
+    gb.configure_column(fixed_column, pinned="left")
+    
+    # Applique la classe CSS personnalisée à chaque colonne
+    columns = dataframe.columns.tolist()  # Liste des noms de colonnes
+    for col in columns:
+        gb.configure_column(col, headerClass='custom-header')  # Applique à chaque colonne
+
+    # Génère les options de tableau avec les colonnes configurées
     grid_options = gb.build()
-    grid_options["defaultColDef"] = {
-        "headerClass": "custom-header"  # Applique la classe CSS personnalisée
-    }
 
     # CSS personnalisé pour les en-têtes
     custom_css = {
@@ -355,7 +390,6 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
         custom_css=custom_css,  # Injecte le CSS personnalisé
         enable_enterprise_modules=False
     )
-
 
 
 
@@ -416,12 +450,21 @@ def page_accueil():
     """, unsafe_allow_html=True)
 
     st.write("Ce site trop waow va te permettre de visualiser et analyser la rentabilité des lineups des équipes de basket Betclic Elite 😍​🤯.")
+#    st.markdown("""
+#    **Fonctionnalités principales :**
+#    - **Analyse Rentabilité** : Compare les performances des équipes/lineups grâce à mes viz trop waow.
+#    - **Statistiques des Lineups** : Explorez les statistiques détaillées des lineups dans des tables trop waow.
+    
+#    Pas folichon pour le moment mais bon je n'ai pas reçu la prose de la frappe de Chicagre 😢
+                
+#    """)
+
     st.markdown("""
     **Fonctionnalités principales :**
     - **Analyse Rentabilité** : Compare les performances des équipes/lineups grâce à mes viz trop waow.
     - **Statistiques des Lineups** : Explorez les statistiques détaillées des lineups dans des tables trop waow.
     
-    Pas folichon pour le moment mais bon je n'ai pas reçu la prose de la frappe de Chicagre 😢
+    Pas folichon pour le moment mais bon je n'ai pas reçu les textes du collègue 😢
                 
     """)
 
