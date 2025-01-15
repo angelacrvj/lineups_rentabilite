@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 import random
 import os
+from st_aggrid import AgGrid, GridOptionsBuilder
+
 
 # Chargement des données
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -283,6 +285,81 @@ def filters_stats_lineups(data):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Nouvelle fonction pour afficher les tableaux avec AgGrid
+def display_aggrid_table(dataframe, fixed_column="Lineup"):
+    # Création des options de configuration
+    gb = GridOptionsBuilder.from_dataframe(dataframe)
+    gb.configure_default_column(headerClass='bold-header')  # Intitulés en gras
+    gb.configure_column(fixed_column, pinned="left")  # Fixe la colonne spécifiée
+    
+    # Génère les options de tableau
+    grid_options = gb.build()
+    
+    # Affiche le tableau AgGrid
+    AgGrid(
+        dataframe,
+        gridOptions=grid_options,
+        height=400,
+        fit_columns_on_grid_load=True,  # Ajuste automatiquement les colonnes
+        enable_enterprise_modules=False
+    )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #|-----------------------------------------------------------------------------|
 #|------------------------------- Création Site -------------------------------|
 #|-----------------------------------------------------------------------------|
@@ -458,7 +535,11 @@ def page_statistiques_lineups():
         "Assists Equipe": "Assists Equipe",
         "Turnovers Equipe": "Turnovers Equipe"
     }
-    st.dataframe(filtered_data[offense_columns.keys()].rename(columns=offense_columns).round(1))
+    #st.dataframe(filtered_data[offense_columns.keys()].rename(columns=offense_columns).round(1))
+
+    df1 = filtered_data[offense_columns.keys()].rename(columns=offense_columns).round(1)
+    display_aggrid_table(df1)
+
 
     # Table 2 : Offense / Shooting
     st.markdown("### Offense / Shooting", unsafe_allow_html=True)
@@ -491,7 +572,12 @@ def page_statistiques_lineups():
         "Turnovers Equipe": "Turnovers Equipe",
         "Fouls Equipe": "Fouls Equipe"
     }
-    st.dataframe(filtered_data[offense_shooting_columns.keys()].rename(columns=offense_shooting_columns).round(1))
+    #st.dataframe(filtered_data[offense_shooting_columns.keys()].rename(columns=offense_shooting_columns).round(1))
+
+    df2 = filtered_data[offense_shooting_columns.keys()].rename(columns=offense_shooting_columns).round(1)
+    display_aggrid_table(df2)
+
+
 
     # Table 3 : Defense / Overall
     st.markdown("### Defense / Overall", unsafe_allow_html=True)
@@ -514,7 +600,11 @@ def page_statistiques_lineups():
         "Assists Opposant": "Assists Opposant",
         "Turnovers Opposant": "Turnovers Opposant"
     }
-    st.dataframe(filtered_data[defense_overall_columns.keys()].rename(columns=defense_overall_columns).round(1))
+    #st.dataframe(filtered_data[defense_overall_columns.keys()].rename(columns=defense_overall_columns).round(1))
+
+    df3 = filtered_data[defense_overall_columns.keys()].rename(columns=defense_overall_columns).round(1)
+    display_aggrid_table(df3)
+
 
     # Table 4 : Défense / Shooting
     st.markdown("### Defense / Shooting", unsafe_allow_html=True)
@@ -544,7 +634,14 @@ def page_statistiques_lineups():
         "Turnovers Opposant": "Turnovers Opposant",
         "Fouls Opposant": "Fouls Opposant"
     }
-    st.dataframe(filtered_data[defense_shooting_columns.keys()].rename(columns=defense_shooting_columns).round(1))
+    #st.dataframe(filtered_data[defense_shooting_columns.keys()].rename(columns=defense_shooting_columns).round(1))
+
+
+    df4 = filtered_data[defense_shooting_columns.keys()].rename(columns=defense_shooting_columns).round(1)
+    display_aggrid_table(df4)
+
+
+
 
     
 #|-----------------------------------------------------------------------------|
