@@ -329,7 +329,7 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
     css = """
     <style>
     .bold-header {
-        font-size: 16px !important;  /* Taille similaire à celle de st.dataframe() */
+        font-size: 22px !important;  /* Taille similaire à celle de st.dataframe() */
         font-weight: bold !important;
     }
     </style>
