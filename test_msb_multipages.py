@@ -318,7 +318,7 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
         dataframe,
         gridOptions=grid_options,
         height=400,
-        fit_columns_on_grid_load=True,  # Ajuste automatiquement les colonnes
+        fit_columns_on_grid_load=False,  # Ajuste automatiquement les colonnes
         enable_enterprise_modules=False
     )
 
