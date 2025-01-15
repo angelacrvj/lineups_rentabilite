@@ -304,41 +304,10 @@ def filters_stats_lineups(data):
 
 
 # Nouvelle fonction pour afficher les tableaux avec AgGrid
-#def display_aggrid_table(dataframe, fixed_column="Lineup"):
-    # Création des options de configuration
-#    gb = GridOptionsBuilder.from_dataframe(dataframe)
-#    gb.configure_default_column(headerClass='bold-header')  # Intitulés en gras
-#    gb.configure_column(fixed_column, pinned="left")  # Fixe la colonne spécifiée
-    
-    # Génère les options de tableau
-#    grid_options = gb.build()
-    
-    # Affiche le tableau AgGrid
-#    AgGrid(
-#        dataframe,
-#        gridOptions=grid_options,
-#        height=400,
-#        fit_columns_on_grid_load=False,  # Ajuste automatiquement les colonnes
-#        enable_enterprise_modules=False
-#    )
-
-
-# Nouvelle fonction pour afficher les tableaux avec AgGrid
 def display_aggrid_table(dataframe, fixed_column="Lineup"):
-    # Ajout de style CSS pour ajuster la taille des intitulés de colonnes
-    css = """
-    <style>
-    .bold-header {
-        font-size: 22px !important;  /* Taille similaire à celle de st.dataframe() */
-        font-weight: bold !important;
-    }
-    </style>
-    """
-    st.markdown(css, unsafe_allow_html=True)
-    
     # Création des options de configuration
     gb = GridOptionsBuilder.from_dataframe(dataframe)
-    gb.configure_default_column(headerClass='bold-header')  # Intitulés en gras et personnalisés
+    gb.configure_default_column(headerStyle={'fontWeight': 'bold', 'fontSize': '14px'})  # Intitulés en gras
     gb.configure_column(fixed_column, pinned="left")  # Fixe la colonne spécifiée
     
     # Génère les options de tableau
@@ -352,6 +321,7 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
         fit_columns_on_grid_load=False,  # Ajuste automatiquement les colonnes
         enable_enterprise_modules=False
     )
+
 
 
 
