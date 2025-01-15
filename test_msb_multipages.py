@@ -644,10 +644,10 @@ def page_statistiques_lineups():
         "Turnovers Equipe": "Turnovers Equipe",
         "Fouls Equipe": "Fouls Equipe"
     }
-    st.dataframe(filtered_data[offense_shooting_columns.keys()].rename(columns=offense_shooting_columns).round(1))
+    #st.dataframe(filtered_data[offense_shooting_columns.keys()].rename(columns=offense_shooting_columns).round(1))
 
-    #df2 = filtered_data[offense_shooting_columns.keys()].rename(columns=offense_shooting_columns).round(1)
-    #display_aggrid_table(df2)
+    df2 = filtered_data[offense_shooting_columns.keys()].rename(columns=offense_shooting_columns).round(1)
+    display_aggrid_table(df2)
 
 
 
