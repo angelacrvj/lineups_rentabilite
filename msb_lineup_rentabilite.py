@@ -447,7 +447,6 @@ def page_statistiques_lineups():
 #    """)
 
 
-
     # Liste des tableaux avec liens cliquables et descriptions à côté
     st.markdown("""
     **Tableaux disponibles :**
