@@ -657,7 +657,7 @@ def page_secret():
     <h2 style="text-align: center; font-size: 22px;">Tes efforts ont payés, tu as trouvé la page secrète ! 🕵️</h2>
     <br><br><br>
     """, unsafe_allow_html=True)
-    st.image("Easter egg/secret.jpg")  # Ajoute une image secrète, si tu le souhaites.
+    st.image("Easter egg/06.jpg")  # Ajoute une image secrète, si tu le souhaites.
 
 
 
