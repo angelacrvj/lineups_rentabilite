@@ -438,15 +438,32 @@ def page_analyse_rentabilite():
   # Affichage Heatmap : Équipe de référence vs Équipe adverse
     st.subheader(f"Heatmap : {team_name} vs {opponent_name}")
     col1, col2 = st.columns([0.5, 5])  
+    #with col1:
+    #    if team_name in team_logos:
+    #        # Si le logo du Mans est sélectionné, rediriger vers la page secrète
+    #        if team_name == "Le Mans":
+    #            if st.image(team_logos[team_name], use_container_width=True, output_format="auto"):
+    #                st.session_state["page"] = "Page Secrète"
+    #                st.experimental_rerun()
+    #        else:
+    #            st.image(team_logos[team_name], use_container_width=True, output_format="auto")
+
+
     with col1:
         if team_name in team_logos:
-            # Si le logo du Mans est sélectionné, rediriger vers la page secrète
             if team_name == "Le Mans":
-                if st.image(team_logos[team_name], use_container_width=True, output_format="auto"):
-                    st.session_state["page"] = "Page Secrète"
-                    st.experimental_rerun()
+                # Afficher l'image et mettre un clic sur le logo
+                st.markdown(
+                    f"<a href='/' style='text-decoration: none;'><img src='{team_logos[team_name]}' style='width: 100%; cursor: pointer;'></a>",
+                    unsafe_allow_html=True,
+                )
+                # Changer la page directement dans l'état
+                st.session_state["page"] = "Page Secrète"
             else:
-                st.image(team_logos[team_name], use_container_width=True, output_format="auto")
+                st.image(team_logos[team_name], use_container_width=True)
+
+
+
 
     with col2:
         matchup_df = calculate_matchup(team_data_filtered, opponent_data_filtered)
@@ -708,5 +725,14 @@ if selection != st.session_state["page"]:
     st.session_state["page"] = selection
 
 # Afficher la page correspondant à l'état
-pages[st.session_state["page"]]()
+#pages[st.session_state["page"]]()
 
+
+
+
+#
+# Vérifier si la page actuelle est la page secrète
+if st.session_state["page"] == "Page Secrète":
+    page_secrete()
+else:
+    pages[st.session_state["page"]]()
