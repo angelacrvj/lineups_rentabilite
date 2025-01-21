@@ -446,12 +446,10 @@ def page_analyse_rentabilite():
         if team_name == "Le Mans":
             # Logo du Mans avec bouton caché
             st.markdown(
-            """
-            <div style="position: relative; display: inline-block;">
-                <img src="logos_equipes/Le_Mans.png" alt="Logo Le Mans" style="display: block;"/>
-            </div>
-            """,
-            unsafe_allow_html=True
+                """
+                <img src="logos_equipes/Le_Mans.png" alt="Logo Le Mans" style="width: 100%; display: block;"/>
+                """,
+                unsafe_allow_html=True
             )
         elif team_name in team_logos:
             # Logos des autres équipes
