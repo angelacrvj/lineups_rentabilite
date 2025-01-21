@@ -441,10 +441,36 @@ def page_analyse_rentabilite():
         if team_name in team_logos:
             # Si le logo du Mans est sélectionné, rediriger vers la page secrète
             if team_name == "Le Mans":
-                if st.button(" ", key="secret_button"):
+                if st.image(team_logos[team_name], use_container_width=True, output_format="auto"):
                     st.session_state["page"] = "Page Secrète"
             else:
                 st.image(team_logos[team_name], use_container_width=True, output_format="auto")
+
+
+
+
+    with col1:
+        if team_name in team_logos:
+            # Si le logo du Mans est sélectionné
+            if team_name == "Le Mans":
+                # Bouton invisible derrière le logo
+                if st.button(" ", key="secret_button"):
+                    st.session_state["page"] = "Page Secrète"
+                # Afficher le logo
+                st.image(team_logos[team_name], use_container_width=True, output_format="auto")
+            else:
+                # Affichage classique pour les autres équipes
+                st.image(team_logos[team_name], use_container_width=True, output_format="auto")
+
+
+
+
+
+
+
+
+
+
 
 
 
