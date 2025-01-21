@@ -441,10 +441,10 @@ def page_analyse_rentabilite():
         if team_name in team_logos:
             # Si le logo du Mans est sélectionné, rediriger vers la page secrète
             if team_name == "Le Mans":
-                if st.image(team_logos[team_name], use_column_width=True, output_format="auto"):
+                if st.image(team_logos[team_name], use_container_width=True, output_format="auto"):
                     st.session_state["page"] = "Page Secrète"
             else:
-                st.image(team_logos[team_name], use_column_width=True)
+                st.image(team_logos[team_name], use_container_width=True)
 
 
 
