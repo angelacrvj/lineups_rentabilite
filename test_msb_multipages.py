@@ -7,6 +7,11 @@ import random
 import os
 from st_aggrid import AgGrid, GridOptionsBuilder
 
+import time
+from streamlit.components.v1 import html  # Pour intégrer le pop-up avec JS
+import math
+
+
 
 # Chargement des données
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -279,83 +284,6 @@ def filters_stats_lineups(data):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Nouvelle fonction pour afficher les tableaux avec AgGrid
-#def display_aggrid_table(dataframe, fixed_column="Lineup"):
-    # Création des options de configuration
-#    gb = GridOptionsBuilder.from_dataframe(dataframe)
-#    gb.configure_default_column(headerClass='bold-header')  # Intitulés en gras
-#    gb.configure_column(fixed_column, pinned="left")  # Fixe la colonne spécifiée
-    
-    # Génère les options de tableau
-#    grid_options = gb.build()
-    
-    # Affiche le tableau AgGrid
-#    AgGrid(
-#        dataframe,
-#        gridOptions=grid_options,
-#        height=400,
-#        fit_columns_on_grid_load=False,  # Ajuste automatiquement les colonnes
-#        enable_enterprise_modules=False
-#    )
-
-
-
-
-
-# Nouvelle fonction pour afficher les tableaux avec AgGrid
-#def display_aggrid_table(dataframe, fixed_column="Lineup"):
-    # Création des options de configuration
-#    gb = GridOptionsBuilder.from_dataframe(dataframe)
-#    gb.configure_column(fixed_column, pinned="left")  # Fixe la colonne spécifiée
-    
-    # Génère les options de tableau avec une classe CSS pour les en-têtes
-#    grid_options = gb.build()
-#    grid_options["defaultColDef"] = {
-#        "headerClass": "custom-header"  # Applique la classe CSS personnalisée
-#    }
-
-    # CSS personnalisé pour les en-têtes
-#    custom_css = {
-#        ".custom-header": {
-#            "font-size": "14px",  # Taille du texte des en-têtes
-#            "font-weight": "bold"  # Gras pour les intitulés
-#        }
-#    }
-
-    # Affiche le tableau avec les options configurées
-#    AgGrid(
-#        dataframe,
- #       gridOptions=grid_options,
- #       height=400,
- #       fit_columns_on_grid_load=False,  # Ajuste automatiquement les colonnes
- #       custom_css=custom_css,  # Injecte le CSS personnalisé
- #       enable_enterprise_modules=False
- #   )
-
 # Nouvelle fonction pour afficher les tableaux avec AgGrid
 def display_aggrid_table(dataframe, fixed_column="Lineup"):
 
@@ -393,6 +321,146 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#|-----------------------------------------------------------------------------|
+#|--------------------------------- Mini Jeu! ---------------------------------|
+#|-----------------------------------------------------------------------------|
+def lancer_franc_avec_animation():
+    st.title("🎯 Mini-jeu : Lancer franc ! 🏀")
+
+    st.write("Ajustez l'angle et la puissance pour marquer un lancer franc. Bonne chance !")
+
+    # Widgets pour angle et puissance
+    angle = st.slider("Angle de lancer (en degrés)", min_value=0, max_value=90, value=45)
+    puissance = st.slider("Puissance du lancer", min_value=10, max_value=100, value=50)
+
+    # Variables physiques
+    g = 9.81  # Gravité
+    distance_cible = 15  # Distance fixe au panier
+
+    # Lancer du ballon
+    if st.button("Lancer le ballon 🏀"):
+        st.write("🏀 Lancer en cours...")
+        time.sleep(1)
+
+        # Calcul trajectoire
+        angle_rad = math.radians(angle)
+        vitesse_x = puissance * math.cos(angle_rad)
+        vitesse_y = puissance * math.sin(angle_rad)
+        temps_vol = (2 * vitesse_y) / g
+        x_values = [vitesse_x * t for t in [i * temps_vol / 100 for i in range(101)]]
+        y_values = [(vitesse_y * t - 0.5 * g * t**2) for t in [i * temps_vol / 100 for i in range(101)]]
+
+        # Vérifier si le ballon atteint le panier
+        ecart = abs(distance_cible - x_values[-1])
+        succes = ecart <= 2 and max(y_values) > 3  # Ajustement hauteur panier
+
+        # Afficher animation
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(x=x_values, y=y_values, mode="lines+markers", name="Trajectoire"))
+        fig.add_shape(type="rect", x0=distance_cible-0.5, x1=distance_cible+0.5, y0=3, y1=3.5,
+                      line=dict(color="Red", width=3), fillcolor="Red")
+        fig.update_layout(title="Trajectoire du Ballon", xaxis_title="Distance", yaxis_title="Hauteur",
+                          xaxis=dict(range=[0, max(x_values)+5]), yaxis=dict(range=[0, max(y_values)+2]))
+        st.plotly_chart(fig)
+
+        # Effets en fonction du résultat
+        if succes:
+            st.success("✨ Bravo ! Le ballon est rentré dans le panier ! 🥳")
+            #st.image("Easter egg/GIF/fireworks.gif")
+            #st.audio("Easter egg/sounds/crowd_cheer.mp3")
+            st.write("🔥 Vous êtes un champion !")
+        else:
+            st.error("💫 Oups ! Le ballon a raté le panier.")
+            #st.image("Easter egg/GIF/fail.gif")
+            #st.audio("Easter egg/sounds/fail_buzzer.mp3")
+            st.write("😅 Essayez encore ! Vous pouvez le faire !")
+
+
+
+
+def show_popup():
+    """
+    Affiche un pop-up interactif après un délai de 45 secondes d'inactivité.
+    """
+    html('<script src="sweetalert2.min.js"></script>', height=0)
+    html("""
+    <script>
+    function showGamePopup() {
+        Swal.fire({
+            title: "Tu veux t'amuser un peu ? 🤩",
+            text: "Voyons si tu as tes chances en PRO A !",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "OUI ! 🏀",
+            cancelButtonText: "NON !",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirige vers le mini-jeu
+                window.location.href = "#game";
+            } else {
+                // Signale au serveur que l'utilisateur a refusé
+                window.parent.postMessage({isStreamlitMessage: true, type: "setShowGameButton"}, "*");
+
+
+            }
+        });
+    }
+    setTimeout(showGamePopup, 45000); // Délai de 45 secondes
+    </script>
+    """, height=0)
+
+
+
+
+
+
+def add_game_button():
+    """
+    Ajoute un bouton pour accéder au mini-jeu après que l'utilisateur ait refusé la première proposition.
+    """
+    # Vérifie si l'utilisateur a refusé le jeu (show_game_button est True)
+    if st.session_state.get("show_game_button", False):  # Par défaut False si non défini
+        # Affiche un texte et le bouton dans la barre latérale
+        st.sidebar.markdown("""
+        ---
+        ### Si tu changes d'avis, tu peux toujours jouer 😉
+        """)
+        if st.sidebar.button("Jouer au mini-jeu"):
+            lancer_franc_avec_animation()  # Lance le mini-jeu
+
+
+
+#|-----------------------------------------------------------------------------|
+#|------------------------------------ FIN ------------------------------------|
+#|-----------------------------------------------------------------------------|
 
 
 
@@ -560,6 +628,71 @@ def page_statistiques_lineups():
     
 
     st.title("Statistiques des Lineups 🎯")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # Initialisation de game_proposed et show_game_button dans session_state
+    if "game_proposed" not in st.session_state:
+        st.session_state.game_proposed = False
+
+    if "show_game_button" not in st.session_state:
+        st.session_state.show_game_button = False  # Initialise à False au départ
+
+    # Ajout du gestionnaire de message JavaScript
+    html("""
+    <script>
+    window.addEventListener("message", (event) => {
+        if (event.data.type === "showGameButton") {
+            // Notifie Streamlit que le bouton doit être affiché
+            const streamlitHandler = window.parent;
+            streamlitHandler.postMessage({isStreamlitMessage: true, type: "setShowGameButton"}, "*");
+        }
+    });
+    </script>
+    """, height=0)
+
+
+    # Si le jeu n'a jamais été proposé, afficher le pop-up après 45 secondes
+    if not st.session_state.game_proposed:
+        show_popup()
+        st.session_state.game_proposed = True  # Empêche de reproposer le jeu
+
+    # Si le jeu a été refusé, afficher le bouton pour y jouer plus tard
+    if st.session_state.show_game_button:  # Plus besoin de vérifier si la clé existe
+        add_game_button()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     st.write("Cette page contient **4 tableaux** avec les statistiques clés des lineups. "
              "Vous pouvez cliquer sur les liens ci-dessous pour naviguer directement vers chaque tableau.")
     
@@ -722,7 +855,8 @@ def page_statistiques_lineups():
 pages = {
     "Accueil": page_accueil,
     "Analyse Rentabilité": page_analyse_rentabilite,
-    "Statistiques Lineups": page_statistiques_lineups
+    "Statistiques Lineups": page_statistiques_lineups,
+    "Mini-jeu : Lancer franc": lancer_franc_avec_animation
 }
 
 st.sidebar.title("Menu")
