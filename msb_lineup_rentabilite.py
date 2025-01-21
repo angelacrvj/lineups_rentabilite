@@ -251,8 +251,3 @@ team1_lineups = st.multiselect(f"Lineups de {team_name} :", options=team_data["L
 team2_lineups = st.multiselect(f"Lineups de {opponent_name} :", options=opponent_data["Lineup"].unique())
 radar_chart(team1_lineups, team2_lineups)
 
-
-st.title("Désolé pour le contre-temps bg : ma bouille en contre-partie")
-st.image("Easter egg/08.png")
-st.text("tu as le droit à un bonus pour le délai de maj et pour essayer de te changer les idées en espérant que tu ailles mieux 🤍")
-st.image("Easter egg/03.jpg")
