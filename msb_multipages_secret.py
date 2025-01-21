@@ -436,32 +436,16 @@ def page_analyse_rentabilite():
 
 
   # Affichage Heatmap : Équipe de référence vs Équipe adverse
-#    st.subheader(f"Heatmap : {team_name} vs {opponent_name}")
- #   col1, col2 = st.columns([0.5, 5])  
- #   with col1:
- #       if team_name in team_logos:
- #           # Si le logo du Mans est sélectionné, rediriger vers la page secrète
- #           if team_name == "Le Mans":
- #               if st.image(team_logos[team_name], use_container_width=True, output_format="auto"):
-  #                  st.session_state["page"] = "Page Secrète"
-  #          else:
-  #              st.image(team_logos[team_name], use_container_width=True, output_format="auto")
-
-
-
+    st.subheader(f"Heatmap : {team_name} vs {opponent_name}")
+    col1, col2 = st.columns([0.5, 5])  
     with col1:
         if team_name in team_logos:
+            # Si le logo du Mans est sélectionné, rediriger vers la page secrète
             if team_name == "Le Mans":
-                # Bouton invisible derrière l'image du logo
-                button_clicked = st.button(" ", key="hidden_button")  # Bouton avec un label invisible
-                st.image(team_logos[team_name], use_container_width=True)  # Affiche le logo
-                
-                # Si le bouton est cliqué, changer de page
-                if button_clicked:
+                if st.image(team_logos[team_name], use_container_width=True, output_format="auto"):
                     st.session_state["page"] = "Page Secrète"
             else:
-                st.image(team_logos[team_name], use_container_width=True)
-
+                st.image(team_logos[team_name], use_container_width=True, output_format="auto")
 
 
 
@@ -725,5 +709,9 @@ if selection != st.session_state["page"]:
     st.session_state["page"] = selection
 
 # Afficher la page correspondant à l'état
-pages[st.session_state["page"]]()
+#pages[st.session_state["page"]]()
 
+if st.session_state["page"] == "Page Secrète":
+    page_secrete()
+else:
+    pages[st.session_state["page"]]()
