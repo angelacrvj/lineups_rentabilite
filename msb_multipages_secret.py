@@ -444,6 +444,7 @@ def page_analyse_rentabilite():
             if team_name == "Le Mans":
                 if st.image(team_logos[team_name], use_container_width=True, output_format="auto"):
                     st.session_state["page"] = "Page Secrète"
+                    st.experimental_rerun()
             else:
                 st.image(team_logos[team_name], use_container_width=True, output_format="auto")
 
