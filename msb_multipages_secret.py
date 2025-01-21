@@ -728,7 +728,7 @@ pages = {
 }
 
 # Vérifie si l'utilisateur accède à la page secrète
-if "secret" in st.query_params():
+if "secret" in st.experimental_get_query_params():
     pages["Page Secrète"] = page_secret
 
 st.sidebar.title("Menu")
@@ -737,7 +737,7 @@ selection = st.sidebar.radio("Aller à :", list(pages.keys()))
 # Afficher la page sélectionnée
 #pages[selection]()
 
-query_params = st.query_params()
+query_params = st.experimental_get_query_params()
 if "secret" in query_params:
     page_secret()
 else:
