@@ -434,18 +434,43 @@ def page_analyse_rentabilite():
         opponent_data_filtered = opponent_data  # on prévoit les cas où monsieur basket ne filtre pas les joueurs 
 
 
-
-  # Affichage Heatmap : Équipe de référence vs Équipe adverse
+    # Affichage Heatmap : Équipe de référence vs Équipe adverse
     st.subheader(f"Heatmap : {team_name} vs {opponent_name}")
     col1, col2 = st.columns([0.5, 5])  
+    #with col1:
+    #    if team_name in team_logos:
+    #        st.image(team_logos[team_name], use_container_width=True, output_format="auto")
+
+
     with col1:
-        if team_name in team_logos:
-            # Si le logo du Mans est sélectionné, rediriger vers la page secrète
-            if team_name == "Le Mans":
-                if st.image(team_logos[team_name], use_container_width=True, output_format="auto"):
-                    st.session_state["page"] = "Page Secrète"
-            else:
-                st.image(team_logos[team_name], use_container_width=True, output_format="auto")
+        if team_name == "Le Mans":
+            # Logo du Mans avec bouton caché
+            st.markdown(
+                """
+                <div style="position: relative; display: inline-block;">
+                    <form action="?secret=true" method="get">
+                        <button type="submit" style="
+                            position: absolute; 
+                            width: 100%; 
+                            height: 100%; 
+                            background: none; 
+                            border: none; 
+                            cursor: pointer; 
+                            z-index: 2;">
+                        </button>
+                    </form>
+                    <img src="logos_equipes/Le_Mans.png" alt="Logo Le Mans" style="display: block;"/>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+        elif team_name in team_logos:
+            # Logos des autres équipes
+            st.image(team_logos[team_name], use_container_width=True, output_format="auto")
+
+
+
+
 
 
 
@@ -464,46 +489,11 @@ def page_analyse_rentabilite():
         plot_heatmap(matchup_df_opponent, f"Heatmap pour {opponent_name} contre {team_name}", plt.gca())
         
 
-
-
     # Affichage Radar Chart
     st.subheader("Radar Chart")
     team1_lineups = st.multiselect(f"Lineups de {team_name} :", options=team_data["Lineup"].unique())
     team2_lineups = st.multiselect(f"Lineups de {opponent_name} :", options=opponent_data["Lineup"].unique())
     radar_chart(team1_lineups, team2_lineups, team_name, opponent_name)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def page_secrete():
-    st.title("🎉 Page Secrète 🎉")
-    st.write("Bravo tu as trouvé la page secrète 🕵️‍♂️")
-    st.image("Easter egg/06.jpg")  
-
-
-
-
-
-
-
-
-
-
-
-
 
     #|----------------------------- Stats tableau -----------------------------|
 
@@ -684,34 +674,71 @@ def page_statistiques_lineups():
 
 
 
+
+
+
+
+
+
+
+
+def page_secret():
+    st.markdown("""
+    <h1 style="text-align: center; margin-bottom: 30px; ">🎉 Bravo Azouloulou 🎉</h1>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <h2 style="text-align: center; font-size: 22px;">Tes efforts ont payés, tu as trouvé la page secrète ! 🕵️</h2>
+    <br><br><br>
+    """, unsafe_allow_html=True)
+    
+    st.image("Easter egg/06.jpg")  # Ajoute une image secrète, si tu le souhaites.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 #|-----------------------------------------------------------------------------|
 
-# Définir toutes les pages (y compris la page secrète)
+# Définir la navigation
 pages = {
     "Accueil": page_accueil,
     "Analyse Rentabilité": page_analyse_rentabilite,
-    "Statistiques Lineups": page_statistiques_lineups,
-    "Page Secrète": page_secrete  # Incluse dans le dictionnaire mais pas dans le menu.
+    "Statistiques Lineups": page_statistiques_lineups
 }
 
-# Initialiser l'état de navigation
-if "page" not in st.session_state:
-    st.session_state["page"] = "Accueil"  # Page par défaut
+# Vérifie si l'utilisateur accède à la page secrète
+if "secret" in st.experimental_get_query_params():
+    pages["Page Secrète"] = page_secret
 
-# Générer le menu uniquement pour les pages visibles
-visible_pages = {key: value for key, value in pages.items() if key != "Page Secrète"}
 st.sidebar.title("Menu")
-selection = st.sidebar.radio("Aller à :", list(visible_pages.keys()))
+selection = st.sidebar.radio("Aller à :", list(pages.keys()))
 
-# Mettre à jour l'état si une nouvelle sélection est faite
-if selection != st.session_state["page"]:
-    st.session_state["page"] = selection
+# Afficher la page sélectionnée
+#pages[selection]()
 
-# Afficher la page correspondant à l'état
-#pages[st.session_state["page"]]()
-
-if st.session_state["page"] == "Page Secrète":
-    page_secrete()
+query_params = st.experimental_get_query_params()
+if "secret" in query_params:
+    page_secret()
 else:
-    pages[st.session_state["page"]]()
+    pages[selection]()
