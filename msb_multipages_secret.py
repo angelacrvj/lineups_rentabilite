@@ -437,30 +437,9 @@ def page_analyse_rentabilite():
     # Affichage Heatmap : Équipe de référence vs Équipe adverse
     st.subheader(f"Heatmap : {team_name} vs {opponent_name}")
     col1, col2 = st.columns([0.5, 5])  
-    #with col1:
-    #    if team_name in team_logos:
-    #        st.image(team_logos[team_name], use_container_width=True, output_format="auto")
-
-
     with col1:
-        if team_name == "Le Mans":
-            # Logo du Mans avec bouton caché
-            st.markdown(
-                """
-                <img src="logos_equipes/Le_Mans.png" alt="Logo Le Mans" style="width: 100%; display: block;"/>
-                """,
-                unsafe_allow_html=True
-            )
-        elif team_name in team_logos:
-            # Logos des autres équipes
+        if team_name in team_logos:
             st.image(team_logos[team_name], use_container_width=True, output_format="auto")
-
-
-
-
-
-
-
     with col2:
         matchup_df = calculate_matchup(team_data_filtered, opponent_data_filtered)
         plot_heatmap(matchup_df, f"Heatmap pour {team_name} contre {opponent_name}", plt.gca())
@@ -678,8 +657,7 @@ def page_secret():
     <h2 style="text-align: center; font-size: 22px;">Tes efforts ont payés, tu as trouvé la page secrète ! 🕵️</h2>
     <br><br><br>
     """, unsafe_allow_html=True)
-    
-    st.image("Easter egg/06.jpg")  # Ajoute une image secrète, si tu le souhaites.
+    st.image("Easter egg/secret.jpg")  # Ajoute une image secrète, si tu le souhaites.
 
 
 
@@ -711,21 +689,12 @@ def page_secret():
 pages = {
     "Accueil": page_accueil,
     "Analyse Rentabilité": page_analyse_rentabilite,
-    "Statistiques Lineups": page_statistiques_lineups
+    "Statistiques Lineups": page_statistiques_lineups,
+    "secret" : page_secret
 }
-
-# Vérifie si l'utilisateur accède à la page secrète
-if "secret" in st.experimental_get_query_params():
-    pages["Page Secrète"] = page_secret
 
 st.sidebar.title("Menu")
 selection = st.sidebar.radio("Aller à :", list(pages.keys()))
 
 # Afficher la page sélectionnée
-#pages[selection]()
-
-query_params = st.experimental_get_query_params()
-if "secret" in query_params:
-    page_secret()
-else:
-    pages[selection]()
+pages[selection]()
