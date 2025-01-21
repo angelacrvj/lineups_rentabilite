@@ -434,7 +434,8 @@ def page_analyse_rentabilite():
         opponent_data_filtered = opponent_data  # on prévoit les cas où monsieur basket ne filtre pas les joueurs 
 
 
-    # Affichage Heatmap : Équipe de référence vs Équipe adverse
+
+  # Affichage Heatmap : Équipe de référence vs Équipe adverse
     st.subheader(f"Heatmap : {team_name} vs {opponent_name}")
     col1, col2 = st.columns([0.5, 5])  
     with col1:
@@ -445,23 +446,6 @@ def page_analyse_rentabilite():
                     st.session_state["page"] = "Page Secrète"
             else:
                 st.image(team_logos[team_name], use_container_width=True, output_format="auto")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     with col2:
         matchup_df = calculate_matchup(team_data_filtered, opponent_data_filtered)
@@ -477,6 +461,8 @@ def page_analyse_rentabilite():
         matchup_df_opponent = calculate_matchup(opponent_data_filtered, team_data_filtered)
         plot_heatmap(matchup_df_opponent, f"Heatmap pour {opponent_name} contre {team_name}", plt.gca())
         
+
+
 
     # Affichage Radar Chart
     st.subheader("Radar Chart")
