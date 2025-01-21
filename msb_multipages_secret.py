@@ -443,9 +443,16 @@ def page_analyse_rentabilite():
             if team_name == "Le Mans":
                 if st.image(team_logos[team_name], use_column_width=True, output_format="auto"):
                     st.session_state["page"] = "Page Secrète"
-                    st.experimental_rerun()
             else:
                 st.image(team_logos[team_name], use_column_width=True)
+
+
+
+
+
+
+
+
 
     with col2:
         matchup_df = calculate_matchup(team_data_filtered, opponent_data_filtered)
