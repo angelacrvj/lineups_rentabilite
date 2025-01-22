@@ -464,7 +464,7 @@ def page_analyse_rentabilite():
         if not st.session_state["secret_unlocked"]:
             st.session_state["secret_unlocked"] = True
             st.sidebar.title("Menu")
-            st.success("Beau travail, je crois que tu viens de trouver quelque chose.")
+            st.success("Beau travail, je crois que tu viens de trouver quelque chose 😏. (je te conseille de clicker à nouveau au même endroit)")
             st.stop()
 
 
@@ -721,7 +721,7 @@ pages = {
 
 # Ajouter dynamiquement la page secrète si elle est débloquée
 if st.session_state["secret_unlocked"]:
-    pages["Page Secrète"] = page_secret
+    pages["🕵️"] = page_secret
 
 st.sidebar.title("Menu")
 selection = st.sidebar.radio("Aller à :", list(pages.keys()))
