@@ -678,9 +678,10 @@ def page_secret():
 
     st.markdown(
     """
-    <div style=" font-size: 16px; ">
+    <div style="text-align: center; font-size: 18px; ">
         Tu y retrouveras ma tête encore et encore dans ce que je qualifie de joli moment de vie.<br>
         On dirait un egotrip mais ce n’en est pas un je déteste ça.
+        <br><br>
     </div>
     """,
     unsafe_allow_html=True
