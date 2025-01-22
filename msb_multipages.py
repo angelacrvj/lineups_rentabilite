@@ -10,7 +10,7 @@ from st_aggrid import AgGrid, GridOptionsBuilder
 
 # Chargement des données
 script_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(script_dir, "lineups_rentabilite (2).csv")
+file_path = os.path.join(script_dir, "lineups_rentabilite.csv")
 data = pd.read_csv(file_path)
 data["minutes_filtre"] = pd.to_timedelta(data["minutes_filtre"])
 data["minutes_filtre_num"] = data["minutes_filtre"].dt.total_seconds() / 60

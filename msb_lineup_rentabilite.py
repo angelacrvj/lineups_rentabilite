@@ -7,7 +7,7 @@ import random
 import os
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(script_dir, "lineups_rentabilite (2).csv")
+file_path = os.path.join(script_dir, "lineups_rentabilite.csv")
 data = pd.read_csv(file_path)
 
 # Stats 

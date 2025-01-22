@@ -15,7 +15,7 @@ import math
 
 # Chargement des données
 script_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(script_dir, "lineups_rentabilite (2).csv")
+file_path = os.path.join(script_dir, "lineups_rentabilite.csv")
 data = pd.read_csv(file_path)
 data["minutes_filtre"] = pd.to_timedelta(data["minutes_filtre"])
 data["minutes_filtre_num"] = data["minutes_filtre"].dt.total_seconds() / 60
@@ -353,7 +353,7 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
 #|--------------------------------- Mini Jeu! ---------------------------------|
 #|-----------------------------------------------------------------------------|
 def lancer_franc_avec_animation():
-    """
+    
     st.title("🎯 Mini-jeu : Lancer franc ! 🏀")
 
     st.write("Ajustez l'angle et la puissance pour marquer un lancer franc. Bonne chance !")
@@ -403,86 +403,6 @@ def lancer_franc_avec_animation():
             #st.image("Easter egg/GIF/fail.gif")
             #st.audio("Easter egg/sounds/fail_buzzer.mp3")
             st.write("😅 Essayez encore ! Vous pouvez le faire !")
-        """
-    st.title("🏀 Mini-jeu : Lancer franc interactif !")
-    st.write("Ajustez l’angle et la puissance pour marquer dans le panier. Cliquez sur le terrain pour lancer !")
-
-    # HTML et JavaScript pour le Canvas
-    st.components.v1.html("""
-    <canvas id="basketCanvas" width="800" height="400" style="border:1px solid #000;"></canvas>
-    <script>
-        const canvas = document.getElementById('basketCanvas');
-        const ctx = canvas.getContext('2d');
-
-        // Dessiner le terrain de basket
-        function drawCourt() {
-            ctx.fillStyle = '#D9D9D9'; // Fond gris clair
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Panier
-            ctx.fillStyle = 'red';
-            ctx.fillRect(750, 150, 10, 50); // Panneau
-            ctx.beginPath();
-            ctx.arc(755, 170, 15, 0, Math.PI * 2); // Cercle du panier
-            ctx.strokeStyle = 'red';
-            ctx.stroke();
-        }
-
-        // Lancer le ballon
-        function shootBall(angle, power) {
-            let x = 50; // Position initiale
-            let y = 300;
-            const g = 0.2; // Gravité
-            const radianAngle = angle * (Math.PI / 180);
-            let vx = power * Math.cos(radianAngle);
-            let vy = -power * Math.sin(radianAngle);
-
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                drawCourt();
-
-                // Mettre à jour la position
-                x += vx;
-                y += vy;
-                vy += g; // Gravité
-
-                // Dessiner le ballon
-                ctx.beginPath();
-                ctx.arc(x, y, 10, 0, Math.PI * 2);
-                ctx.fillStyle = 'orange';
-                ctx.fill();
-
-                // Vérifier si le ballon atteint le panier
-                if (x > 750 && x < 780 && y > 140 && y < 190) {
-                    alert("✨ Bravo ! Vous avez marqué ! 🏀");
-                    return;
-                }
-
-                // Si le ballon sort du terrain, arrêter
-                if (x > canvas.width || y > canvas.height) {
-                    alert("💥 Oups ! Le ballon a raté le panier.");
-                    return;
-                }
-
-                // Continuer l'animation
-                requestAnimationFrame(animate);
-            }
-            animate();
-        }
-
-        // Gérer les clics sur le terrain
-        canvas.addEventListener('click', () => {
-            const angle = prompt("Entrez l'angle de tir (en degrés, entre 10 et 80) :");
-            const power = prompt("Entrez la puissance du tir (entre 10 et 50) :");
-            if (angle && power) {
-                shootBall(parseFloat(angle), parseFloat(power));
-            }
-        });
-
-        // Dessiner le terrain initial
-        drawCourt();
-    </script>
-    """, height=450)
 
 
 

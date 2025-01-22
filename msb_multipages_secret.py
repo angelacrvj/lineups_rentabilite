@@ -10,7 +10,7 @@ from st_aggrid import AgGrid, GridOptionsBuilder
 
 # Chargement des données
 script_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(script_dir, "lineups_rentabilite (2).csv")
+file_path = os.path.join(script_dir, "lineups_rentabilite.csv")
 data = pd.read_csv(file_path)
 data["minutes_filtre"] = pd.to_timedelta(data["minutes_filtre"])
 data["minutes_filtre_num"] = data["minutes_filtre"].dt.total_seconds() / 60
@@ -462,7 +462,7 @@ def page_analyse_rentabilite():
         if not st.session_state["secret_unlocked"]:
             st.session_state["secret_unlocked"] = True
             st.sidebar.title("Menu")
-            st.success("Beau travail, je crois que tu viens de trouver quelque chose 😏. (je te conseille de clicker à nouveau au même endroit)")
+            st.success("Beau travail, je crois que tu viens de trouver quelque chose 😏. (Tu es à un clic de l'objectif)")
             st.stop()
 
     team1_lineups = st.multiselect(f"Lineups de {team_name} :", options=team_data["Lineup"].unique())
