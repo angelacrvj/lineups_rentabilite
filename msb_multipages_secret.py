@@ -461,8 +461,16 @@ def page_analyse_rentabilite():
     
     
     if st.button("Radar Chart Secret"):
-        st.session_state["secret_unlocked"] = True
-        st.success("Bravo, tu as débloqué la page secrète ! Va dans le menu pour la consulter.")
+        if not st.session_state["secret_unlocked"]:
+            st.session_state["secret_unlocked"] = True
+            st.sidebar.title("Menu")
+            st.success("Beau travail, je crois que tu viens de trouver quelque chose.")
+            st.stop()
+
+
+
+
+
 
 
     team1_lineups = st.multiselect(f"Lineups de {team_name} :", options=team_data["Lineup"].unique())
