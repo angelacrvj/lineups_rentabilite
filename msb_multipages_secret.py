@@ -456,30 +456,16 @@ def page_analyse_rentabilite():
         
 
     # Affichage Radar Chart
-    #st.subheader("Radar Chart")
+    st.subheader("Radar Chart")
 
     
     
-    #if st.button(" "):
-    #    if not st.session_state["secret_unlocked"]:
-    #        st.session_state["secret_unlocked"] = True
-    #        st.sidebar.title("Menu")
-    #        st.success("Beau travail, je crois que tu viens de trouver quelque chose.")
-    #        st.stop()
-
-    # Affichage Radar Chart avec le bouton caché
-    with st.form("secret_form"):
-        st.markdown('<h2 style="margin-bottom: 20px;">Radar Chart</h2>', unsafe_allow_html=True)  # Titre stylisé
-        if st.form_submit_button(" "):  # Bouton invisible
-            if not st.session_state["secret_unlocked"]:
-                st.session_state["secret_unlocked"] = True
-                st.sidebar.title("Menu")
-                st.success("Beau travail, je crois que tu viens de trouver quelque chose.")
-                st.stop()  # Force l'arrêt pour rafraîchir l'interface
-
-
-
-
+    if st.button(" "):
+        if not st.session_state["secret_unlocked"]:
+            st.session_state["secret_unlocked"] = True
+            st.sidebar.title("Menu")
+            st.success("Beau travail, je crois que tu viens de trouver quelque chose.")
+            st.stop()
 
 
 
