@@ -669,7 +669,8 @@ def page_secret():
     st.markdown(
         """
         <div style="text-align: center;font-size: 22px;">
-            🌷🌸🌹🌺🌻🌼
+            🌷🌸🌹🌺🌻🌼\n
+
         </div>
         """,
         unsafe_allow_html=True
