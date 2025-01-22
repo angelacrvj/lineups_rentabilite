@@ -700,8 +700,7 @@ if "secret_unlocked" not in st.session_state:
 pages = {
     "Accueil": page_accueil,
     "Analyse Rentabilité": page_analyse_rentabilite,
-    "Statistiques Lineups": page_statistiques_lineups,
-    "secret" : page_secret
+    "Statistiques Lineups": page_statistiques_lineups
 }
 
 #st.sidebar.title("Menu")
