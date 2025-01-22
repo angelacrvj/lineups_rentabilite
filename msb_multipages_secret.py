@@ -443,6 +443,7 @@ def page_analyse_rentabilite():
             # Ajouter un bouton caché au logo
             if st.button(" ", key=f"hidden_button_{team_name}"):
                 st.session_state.current_page = "Secret"
+                st.experimental_rerun()  # Forcer le rechargement
 
             st.image(team_logos[team_name], use_container_width=True, output_format="auto")
     with col2:
