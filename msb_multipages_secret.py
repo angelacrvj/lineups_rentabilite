@@ -456,17 +456,36 @@ def page_analyse_rentabilite():
         
 
     # Affichage Radar Chart
-    st.subheader("Radar Chart")
+ #   st.subheader("Radar Chart")
 
     
     
-    if st.button(" "):
-        if not st.session_state["secret_unlocked"]:
-            st.session_state["secret_unlocked"] = True
-            st.sidebar.title("Menu")
-            st.success("Beau travail, je crois que tu viens de trouver quelque chose 😏. (je te conseille de clicker à nouveau au même endroit)")
-            st.stop()
+  #  if st.button(" "):
+  #      if not st.session_state["secret_unlocked"]:
+  #          st.session_state["secret_unlocked"] = True
+  #          st.sidebar.title("Menu")
+  #          st.success("Beau travail, je crois que tu viens de trouver quelque chose 😏. (je te conseille de clicker à nouveau au même endroit)")
+ #           st.stop()
 
+    # Radar Chart avec bouton caché
+    st.markdown("""
+        <div style="position: relative;">
+            <h2 style="margin-bottom: 20px;">Radar Chart</h2>
+            <form action="#" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;">
+                <button type="submit" style="width: 100%; height: 100%; border: none; background: none;"></button>
+            </form>
+        </div>
+    """, unsafe_allow_html=True)
+
+    # Logique d'accès à la page secrète
+    if st.session_state.get("button_clicked", False):
+        st.session_state["secret_unlocked"] = True
+        st.sidebar.title("Menu")
+        st.success("Beau travail, je crois que tu viens de trouver quelque chose 😏. (je te conseille de clicker à nouveau au même endroit)")
+        st.stop()
+    else:
+        if "secret_unlocked" not in st.session_state:
+            st.session_state["secret_unlocked"] = False
 
 
 
