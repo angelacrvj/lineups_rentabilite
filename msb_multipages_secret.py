@@ -458,9 +458,11 @@ def page_analyse_rentabilite():
     # Affichage Radar Chart
     st.subheader("Radar Chart")
 
+    
+    
     if st.button("Radar Chart Secret"):
-        page_secret()
-        return
+        st.session_state["secret_unlocked"] = True
+        st.success("Bravo, tu as débloqué la page secrète ! Va dans le menu pour la consulter.")
 
 
     team1_lineups = st.multiselect(f"Lineups de {team_name} :", options=team_data["Lineup"].unique())
@@ -690,6 +692,9 @@ def page_secret():
 
     
 #|-----------------------------------------------------------------------------|
+# Initialisation de l'état de session pour la page secrète
+if "secret_unlocked" not in st.session_state:
+    st.session_state["secret_unlocked"] = False
 
 # Définir la navigation
 pages = {
@@ -699,8 +704,18 @@ pages = {
     "secret" : page_secret
 }
 
-st.sidebar.title("Menu")
-selection = st.sidebar.radio("Aller à :", list(pages.keys()))
+#st.sidebar.title("Menu")
+#selection = st.sidebar.radio("Aller à :", list(pages.keys()))
 
 # Afficher la page sélectionnée
+#pages[selection]()
+
+
+
+# Ajouter dynamiquement la page secrète si elle est débloquée
+if st.session_state["secret_unlocked"]:
+    pages["Page Secrète"] = page_secret
+
+st.sidebar.title("Menu")
+selection = st.sidebar.radio("Aller à :", list(pages.keys()))
 pages[selection]()
