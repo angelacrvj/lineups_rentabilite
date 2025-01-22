@@ -458,20 +458,12 @@ def page_analyse_rentabilite():
     # Affichage Radar Chart
     st.subheader("Radar Chart")
 
-    
-    
     if st.button(" "):
         if not st.session_state["secret_unlocked"]:
             st.session_state["secret_unlocked"] = True
             st.sidebar.title("Menu")
             st.success("Beau travail, je crois que tu viens de trouver quelque chose 😏. (je te conseille de clicker à nouveau au même endroit)")
             st.stop()
-
-
-
-
-
-
 
     team1_lineups = st.multiselect(f"Lineups de {team_name} :", options=team_data["Lineup"].unique())
     team2_lineups = st.multiselect(f"Lineups de {opponent_name} :", options=opponent_data["Lineup"].unique())
@@ -670,15 +662,21 @@ def page_secret():
     """, unsafe_allow_html=True)
 
     st.markdown("""
-    <h2 style="text-align: center; font-size: 22px;">Tes efforts ont payés, tu as trouvé la page secrète ! 🕵️</h2>
+    <h2 style="text-align: center; font-size: 22px;">Tes efforts ont payé, tu as trouvé la page secrète ! 🕵️</h2>
     <br><br><br>
     """, unsafe_allow_html=True)
+
+    st.markdown(
+        """
+        <div style="text-align: center;">
+            :tulip::cherry_blossom::rose::hibiscus::sunflower::blossom:
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
     st.image("Easter egg/06.jpg")  # Ajoute une image secrète, si tu le souhaites.
-
-
-
-
-
 
 
 
