@@ -669,7 +669,7 @@ def page_secret():
     st.markdown(
         """
         <div style="text-align: center;">
-            :tulip::cherry_blossom::rose::hibiscus::sunflower::blossom:
+            🌷🌸🌹🌺🌻🌼
         </div>
         """,
         unsafe_allow_html=True
