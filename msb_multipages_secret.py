@@ -460,7 +460,7 @@ def page_analyse_rentabilite():
 
     
     
-    if st.button("Radar Chart Secret"):
+    if st.button(" "):
         if not st.session_state["secret_unlocked"]:
             st.session_state["secret_unlocked"] = True
             st.sidebar.title("Menu")
