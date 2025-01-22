@@ -676,6 +676,17 @@ def page_secret():
         unsafe_allow_html=True
     )
 
+    st.markdown(
+    """
+    <div style=" font-size: 16px; ">
+        Tu y retrouveras ma tête encore et encore dans ce que je qualifie de joli moment de vie.<br>
+        On dirait un egotrip mais ce n’en est pas un je déteste ça.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+
 
     st.image("Easter egg/06.jpg")  # Ajoute une image secrète, si tu le souhaites.
 
