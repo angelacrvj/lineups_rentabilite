@@ -439,12 +439,6 @@ def page_analyse_rentabilite():
     col1, col2 = st.columns([0.5, 5])  
     with col1:
         if team_name in team_logos:
-            
-            # Ajouter un bouton caché au logo
-            if st.button(" ", key=f"hidden_button_{team_name}"):
-                st.session_state.current_page = "Secret"
-                st.experimental_rerun()  # Forcer le rechargement
-
             st.image(team_logos[team_name], use_container_width=True, output_format="auto")
     with col2:
         matchup_df = calculate_matchup(team_data_filtered, opponent_data_filtered)
@@ -690,34 +684,17 @@ def page_secret():
 
     
 #|-----------------------------------------------------------------------------|
-# Gestion d'état pour la navigation
-if "current_page" not in st.session_state:
-    st.session_state.current_page = "Accueil"
-
-
 
 # Définir la navigation
 pages = {
     "Accueil": page_accueil,
     "Analyse Rentabilité": page_analyse_rentabilite,
-    "Statistiques Lineups": page_statistiques_lineups
+    "Statistiques Lineups": page_statistiques_lineups,
+    "secret" : page_secret
 }
 
 st.sidebar.title("Menu")
 selection = st.sidebar.radio("Aller à :", list(pages.keys()))
 
 # Afficher la page sélectionnée
-#pages[selection]()
-
-# Met à jour la page sélectionnée dans st.session_state
-st.session_state.current_page = selection
-
-# Afficher la page en fonction de l'état
-if st.session_state.current_page == "Accueil":
-    pages["Accueil"]()
-elif st.session_state.current_page == "Analyse Rentabilité":
-    pages["Analyse Rentabilité"]()
-elif st.session_state.current_page == "Statistiques Lineups":
-    pages["Statistiques Lineups"]()
-elif st.session_state.current_page == "Secret":
-    page_secret()
+pages[selection]()
