@@ -668,7 +668,7 @@ def page_secret():
 
     st.markdown(
         """
-        <div style="text-align: center;">
+        <div style="text-align: center;font-size: 22px;">
             🌷🌸🌹🌺🌻🌼
         </div>
         """,
