@@ -663,14 +663,14 @@ def page_secret():
 
     st.markdown("""
     <h2 style="text-align: center; font-size: 22px;">Tes efforts ont payé, tu as trouvé la page secrète ! 🕵️</h2>
-    <br><br><br>
+    <br><br>
     """, unsafe_allow_html=True)
 
     st.markdown(
         """
         <div style="text-align: center;font-size: 22px;">
             🌷🌸🌹🌺🌻🌼
-        <br><br><br>
+        <br><br>
         </div>
         """,
         unsafe_allow_html=True
@@ -680,7 +680,7 @@ def page_secret():
     """
     <div style="text-align: center; font-size: 18px; ">
         Tu y retrouveras ma tête encore et encore dans ce que je qualifie de joli moment de vie.<br>
-        On dirait un egotrip mais ce n’en est pas un je déteste ça.
+        On dirait un egotrip, mais ce n’en est pas un, je déteste ça.
         <br><br>
     </div>
     """,
