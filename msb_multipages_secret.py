@@ -457,6 +457,12 @@ def page_analyse_rentabilite():
 
     # Affichage Radar Chart
     st.subheader("Radar Chart")
+
+    if st.button("Radar Chart Secret"):
+        page_secret()
+        return
+
+
     team1_lineups = st.multiselect(f"Lineups de {team_name} :", options=team_data["Lineup"].unique())
     team2_lineups = st.multiselect(f"Lineups de {opponent_name} :", options=opponent_data["Lineup"].unique())
     radar_chart(team1_lineups, team2_lineups, team_name, opponent_name)
