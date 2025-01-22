@@ -358,7 +358,7 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
 
 # Configuration générale
 st.set_page_config(
-    page_title="Analyse Rentabilité Lineups MSB 🏀",
+    page_title="b·AZ·ket 🏀",
     page_icon="🏀",
     layout="wide",
 )
