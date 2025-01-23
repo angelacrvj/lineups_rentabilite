@@ -697,7 +697,7 @@ def page_secret():
 
     st.markdown(
     """
-    <div style="text-align: center; font-size: 14px; ">
+    <div style="text-align: center; font-size: 16px; ">
         Après je vais pas te mentir, la meilleure photo c'est celle-ci<br>
         fucking cute !!! 
     </div>
@@ -705,7 +705,9 @@ def page_secret():
     unsafe_allow_html=True
     )
 
-    st.image("Easter egg/12.jpg")
+    col1, col2, col3 = st.columns([2, 1, 2])  # Création de 3 colonnes
+    with col2:
+        st.image("Easter egg/12.jpg")
 
     st.markdown(
     """
