@@ -396,8 +396,6 @@ def page_accueil():
 
     st.title("Désolé pour le contre-temps bg : ma bouille en contre-partie")
     st.image("Easter egg/08.png")
-    st.text("tu as le droit à un bonus pour le délai de maj et pour essayer de te changer les idées en espérant que tu ailles mieux 🤍")
-    st.image("Easter egg/03.jpg")
     #|----------------------------- Renta lineups -----------------------------|
 
 
