@@ -680,24 +680,137 @@ def page_secret():
     """
     <div style="text-align: center; font-size: 18px; ">
         Tu y retrouveras ma tête encore et encore dans ce que je qualifie de joli moment de vie.<br>
-        On dirait un egotrip, mais ce n’en est pas un, je déteste ça.
+        On dirait un egotrip, mais ce n’en est pas un, je déteste ça.<br>
+        Enjoy ! 
         <br><br>
     </div>
     """,
     unsafe_allow_html=True
 )
 
+    st.image("Easter egg/07.png")  # Ajoute une image secrète, si tu le souhaites.
+
+    st.markdown(
+    """
+    <div style="text-align: center; font-size: 14px; ">
+        Après je vais pas te mentir, la meilleure photo c'est celle-ci<br>
+        fucking cute !!! 
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
+
+    st.image("Easter egg/12.jpg")
+
+    st.markdown(
+    """
+    <div style="text-align: center; font-size: 16px; ">
+        Capture de moi sous la menace
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
+
+    # Exemple de contenu pour l'album photo
+    album_content_io = [
+        {"photo": "Easter egg/01.png", "text": "Description de la photo 1."},
+        {"photo": "Easter egg/02.jpg", "text": "Description de la photo 2."},
+        {"photo": "Easter egg/03.jpg", "text": "Description de la photo 3."},
+        {"photo": "Easter egg/10.jpg", "text": "Description de la photo 4."},
+        {"photo": "Easter egg/13.jpg", "text": "Description de la photo 4."},
+        {"photo": "Easter egg/16.jpg", "text": "Description de la photo 4."},
+        {"photo": "Easter egg/14.jpg", "text": "Description de la photo 4."},
+    ]
+
+    # Parcourir les contenus de l'album et les afficher
+    for i, item in enumerate(album_content_io):
+        # Grille avec 3 colonnes (ratio 2:1 ou 1:2 selon la ligne)
+        if i % 2 == 0:  # Ligne paire : Photo à gauche, texte à droite
+            col1, col2 = st.columns([2, 1])
+        else:  # Ligne impaire : Texte à gauche, photo à droite
+            col2, col1 = st.columns([1, 2])
+        
+        # Afficher la photo dans une colonne
+        with col1:
+            st.image(item["photo"], use_column_width=True)
+        
+        # Afficher le texte dans l'autre colonne
+        with col2:
+            st.markdown(f"<p style='font-size: 18px;'>{item['text']}</p>", unsafe_allow_html=True)
 
 
-    st.image("Easter egg/06.jpg")  # Ajoute une image secrète, si tu le souhaites.
+    st.markdown(
+    """
+    <div style="text-align: center; font-size: 16px; ">
+        Des moments flous mais mémorables
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
+
+    # Exemple de contenu pour l'album photo
+    album_content_festa = [
+        {"photo": "Easter egg/04.jpg", "text": "Description de la photo 1."},
+        {"photo": "Easter egg/06.jpg", "text": "Description de la photo 2."},
+        {"photo": "Easter egg/15.jpg", "text": "Description de la photo 3."}
+    ]
+
+    # Parcourir les contenus de l'album et les afficher
+    for i, item in enumerate(album_content_festa):
+        # Grille avec 3 colonnes (ratio 2:1 ou 1:2 selon la ligne)
+        if i % 2 == 0:  # Ligne paire : Photo à gauche, texte à droite
+            col1, col2 = st.columns([2, 1])
+        else:  # Ligne impaire : Texte à gauche, photo à droite
+            col2, col1 = st.columns([1, 2])
+        
+        # Afficher la photo dans une colonne
+        with col1:
+            st.image(item["photo"], use_column_width=True)
+        
+        # Afficher le texte dans l'autre colonne
+        with col2:
+            st.markdown(f"<p style='font-size: 18px;'>{item['text']}</p>", unsafe_allow_html=True)
 
 
 
 
 
+    st.markdown(
+    """
+    <div style="text-align: center; font-size: 16px; ">
+        Instants de vie familiaux
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
 
+    # Exemple de contenu pour l'album photo
+    album_content_fam = [
+        {"photo": "Easter egg/fam01.jpg", "text": "Description de la photo 1."},
+        {"photo": "Easter egg/fam03.jpg", "text": "Description de la photo 2."},
+        {"photo": "Easter egg/fam02.jpg", "text": "Description de la photo 3."},
+        {"photo": "Easter egg/fam04.jpg", "text": "Description de la photo 4."},
+        {"video": "Easter egg/procissao_o_mar.mp4", "text": "Description de la photo 4."}
+    ]
 
-
+    # Parcourir les contenus de l'album et les afficher
+    for i, item in enumerate(album_content_fam):
+        # Grille avec 3 colonnes (ratio 2:1 ou 1:2 selon la ligne)
+        if i % 2 == 0:  # Ligne paire : Photo à gauche, texte à droite
+            col1, col2 = st.columns([2, 1])
+        else:  # Ligne impaire : Texte à gauche, photo à droite
+            col2, col1 = st.columns([1, 2])
+        
+        # Afficher la photo dans une colonne
+        with col1:
+            if "photo" in item:
+                st.image(item["photo"], use_column_width=True)
+            elif "video" in item:
+                st.video(item["video"], use_column_width=True)
+        
+        # Afficher le texte dans l'autre colonne
+        with col2:
+            st.markdown(f"<p style='font-size: 18px;'>{item['text']}</p>", unsafe_allow_html=True)
 
 
 
