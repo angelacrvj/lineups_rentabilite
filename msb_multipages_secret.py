@@ -705,7 +705,7 @@ def page_secret():
     unsafe_allow_html=True
     )
 
-    col1, col2, col3 = st.columns([2, 1, 2])  # Création de 3 colonnes
+    col1, col2, col3 = st.columns([1, 1, 1])  # Création de 3 colonnes
     with col2:
         st.image("Easter egg/12.jpg")
 
