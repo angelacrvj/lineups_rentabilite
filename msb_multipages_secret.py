@@ -714,8 +714,10 @@ def page_secret():
 
     st.markdown(
     """
-    <div style="text-align: center; font-size: 16px; ">
+    <div style="text-align: center; font-size: 26px; ">
+        <br><br><br><br>
         Capture de moi sous la menace
+        <br><br><br><br>
     </div>
     """,
     unsafe_allow_html=True
@@ -742,7 +744,7 @@ def page_secret():
         
         # Afficher la photo dans une colonne
         with col1:
-            st.image(item["photo"], use_column_width=True)
+            st.image(item["photo"], use_container_width=True)
         
         # Afficher le texte dans l'autre colonne
         with col2:
@@ -751,8 +753,10 @@ def page_secret():
 
     st.markdown(
     """
-    <div style="text-align: center; font-size: 16px; ">
+    <div style="text-align: center; font-size: 26px; ">
+        <br><br><br><br>
         Des moments flous mais mémorables
+        <br><br><br><br>
     </div>
     """,
     unsafe_allow_html=True
@@ -775,7 +779,7 @@ def page_secret():
         
         # Afficher la photo dans une colonne
         with col1:
-            st.image(item["photo"], use_column_width=True)
+            st.image(item["photo"], use_container_width=True)
         
         # Afficher le texte dans l'autre colonne
         with col2:
@@ -787,8 +791,10 @@ def page_secret():
 
     st.markdown(
     """
-    <div style="text-align: center; font-size: 16px; ">
+    <div style="text-align: center; font-size: 26px; ">
+        <br><br><br><br>
         Instants de vie familiaux
+        <br><br><br><br>
     </div>
     """,
     unsafe_allow_html=True
@@ -814,9 +820,9 @@ def page_secret():
         # Afficher la photo dans une colonne
         with col1:
             if "photo" in item:
-                st.image(item["photo"], use_column_width=True)
+                st.image(item["photo"], use_container_width=True)
             elif "video" in item:
-                st.video(item["video"], use_column_width=True)
+                st.video(item["video"], use_container_width=True)
         
         # Afficher le texte dans l'autre colonne
         with col2:
