@@ -722,13 +722,13 @@ def page_secret():
 
     # Exemple de contenu pour l'album photo
     album_content_io = [
-        {"photo": "Easter egg/01.png", "text": "Description de la photo 1."},
-        {"photo": "Easter egg/02.jpg", "text": "Description de la photo 2."},
-        {"photo": "Easter egg/03.jpg", "text": "Description de la photo 3."},
-        {"photo": "Easter egg/10.jpg", "text": "Description de la photo 4."},
-        {"photo": "Easter egg/13.jpg", "text": "Description de la photo 4."},
-        {"photo": "Easter egg/16.jpg", "text": "Description de la photo 4."},
-        {"photo": "Easter egg/14.jpg", "text": "Description de la photo 4."},
+        {"photo": "Easter egg/01.png", "text": " "},
+        {"photo": "Easter egg/02.jpg", "text": " "},
+        {"photo": "Easter egg/03.jpg", "text": " "},
+        {"photo": "Easter egg/10.jpg", "text": " "},
+        {"photo": "Easter egg/13.jpg", "text": " "},
+        {"photo": "Easter egg/16.jpg", "text": " "},
+        {"photo": "Easter egg/14.jpg", "text": " "},
     ]
 
     # Parcourir les contenus de l'album et les afficher
@@ -761,9 +761,9 @@ def page_secret():
 
     # Exemple de contenu pour l'album photo
     album_content_festa = [
-        {"photo": "Easter egg/04.jpg", "text": "Description de la photo 1."},
-        {"photo": "Easter egg/06.jpg", "text": "Description de la photo 2."},
-        {"photo": "Easter egg/15.jpg", "text": "Description de la photo 3."}
+        {"photo": "Easter egg/04.jpg", "text": " "},
+        {"photo": "Easter egg/06.jpg", "text": " "},
+        {"photo": "Easter egg/15.jpg", "text": " "}
     ]
 
     # Parcourir les contenus de l'album et les afficher
@@ -799,10 +799,10 @@ def page_secret():
 
     # Exemple de contenu pour l'album photo
     album_content_fam = [
-        {"photo": "Easter egg/fam01.jpg", "text": "Description de la photo 1."},
-        {"photo": "Easter egg/fam03.jpg", "text": "Description de la photo 2."},
-        {"photo": "Easter egg/fam02.jpg", "text": "Description de la photo 3."},
-        {"photo": "Easter egg/fam04.jpg", "text": "Description de la photo 4."}
+        {"photo": "Easter egg/fam01.jpg", "text": " "},
+        {"photo": "Easter egg/fam03.jpg", "text": " "},
+        {"photo": "Easter egg/fam02.jpg", "text": " "},
+        {"photo": "Easter egg/fam04.jpg", "text": " "}
     ]
 
     # Parcourir les contenus de l'album et les afficher
