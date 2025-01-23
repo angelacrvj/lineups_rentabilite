@@ -735,9 +735,9 @@ def page_secret():
     for i, item in enumerate(album_content_io):
         # Grille avec 3 colonnes (ratio 2:1 ou 1:2 selon la ligne)
         if i % 2 == 0:  # Ligne paire : Photo à gauche, texte à droite
-            col1, col2 = st.columns([3, 1])
+            col1, col2 = st.columns([5, 1])
         else:  # Ligne impaire : Texte à gauche, photo à droite
-            col2, col1 = st.columns([1, 3])
+            col2, col1 = st.columns([1, 5])
         
         # Afficher la photo dans une colonne
         with col1:
@@ -770,9 +770,9 @@ def page_secret():
     for i, item in enumerate(album_content_festa):
         # Grille avec 3 colonnes (ratio 2:1 ou 1:2 selon la ligne)
         if i % 2 == 0:  # Ligne paire : Photo à gauche, texte à droite
-            col1, col2 = st.columns([3, 1])
+            col1, col2 = st.columns([2, 1])
         else:  # Ligne impaire : Texte à gauche, photo à droite
-            col2, col1 = st.columns([1, 3])
+            col2, col1 = st.columns([1, 2])
         
         # Afficher la photo dans une colonne
         with col1:
