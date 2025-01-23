@@ -689,7 +689,7 @@ def page_secret():
     #st.image("Easter egg/07.png")  # Ajoute une image secrète, si tu le souhaites.
     col1, col2, col3 = st.columns([1, 2, 1])  # Création de 3 colonnes
     with col2:
-        st.image("Easter egg/07.png", use_column_width=True)    
+        st.image("Easter egg/07.png")    
 
 
 
