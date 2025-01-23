@@ -358,7 +358,7 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
 
 # Configuration générale
 st.set_page_config(
-    page_title="Analyse Rentabilité Lineups MSB 🏀",
+    page_title="b·AZ·ket 🏀",
     page_icon="🏀",
     layout="wide",
 )
@@ -396,8 +396,6 @@ def page_accueil():
 
     st.title("Désolé pour le contre-temps bg : ma bouille en contre-partie")
     st.image("Easter egg/08.png")
-    st.text("tu as le droit à un bonus pour le délai de maj et pour essayer de te changer les idées en espérant que tu ailles mieux 🤍")
-    st.image("Easter egg/03.jpg")
     #|----------------------------- Renta lineups -----------------------------|
 
 
@@ -457,6 +455,14 @@ def page_analyse_rentabilite():
 
     # Affichage Radar Chart
     st.subheader("Radar Chart")
+
+    if st.button(" "):
+        if not st.session_state["secret_unlocked"]:
+            st.session_state["secret_unlocked"] = True
+            st.sidebar.title("Menu")
+            st.success("Beau travail, je crois que tu viens de trouver quelque chose 😏. (Tu es à un clic de l'objectif)")
+            st.stop()
+
     team1_lineups = st.multiselect(f"Lineups de {team_name} :", options=team_data["Lineup"].unique())
     team2_lineups = st.multiselect(f"Lineups de {opponent_name} :", options=opponent_data["Lineup"].unique())
     radar_chart(team1_lineups, team2_lineups, team_name, opponent_name)
@@ -640,8 +646,196 @@ def page_statistiques_lineups():
 
 
 
+
+
+
+
+
+
+
+
+def page_secret():
+    st.markdown("""
+    <h1 style="text-align: center; margin-bottom: 30px; ">🎉 Bravo Azouloulou 🎉</h1>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <h2 style="text-align: center; font-size: 22px;">Tes efforts ont payé, tu as trouvé la page secrète ! 🕵️</h2>
+    <br><br>
+    """, unsafe_allow_html=True)
+
+    st.markdown(
+        """
+        <div style="text-align: center;font-size: 22px;">
+            🌷🌸🌹🌺🌻🌼
+        <br><br>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.markdown(
+    """
+    <div style="text-align: center; font-size: 18px; ">
+        Tu y retrouveras ma tête encore et encore dans ce que je qualifie de joli moment de vie.<br>
+        On dirait un egotrip, mais ce n’en est pas un, je déteste ça.<br>
+        Enjoy ! 
+        <br><br>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+    #st.image("Easter egg/07.png")  # Ajoute une image secrète, si tu le souhaites.
+    col1, col2, col3 = st.columns([2, 1, 2])  # Création de 3 colonnes
+    with col2:
+        st.image("Easter egg/07.png")    
+
+
+
+
+
+    st.markdown(
+    """
+    <div style="text-align: center; font-size: 16px; ">
+        Après je vais pas te mentir, la meilleure photo c'est celle-ci<br>
+        fucking cute !!! 
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
+
+    col1, col2, col3 = st.columns([1, 1, 1])  # Création de 3 colonnes
+    with col2:
+        st.image("Easter egg/12.jpg")
+
+    st.markdown(
+    """
+    <div style="text-align: center; font-size: 26px; ">
+        <br><br><br><br>
+        Capture de moi sous la menace
+        <br><br><br><br>
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
+
+    # Exemple de contenu pour l'album photo
+    album_content_io = [
+        {"photo": "Easter egg/01.png", "text": " "},
+        {"photo": "Easter egg/02.jpg", "text": " "},
+        {"photo": "Easter egg/03.jpg", "text": " "},
+        {"photo": "Easter egg/10.jpg", "text": " "},
+        {"photo": "Easter egg/13.jpg", "text": " "},
+        {"photo": "Easter egg/16.jpg", "text": " "},
+        {"photo": "Easter egg/14.jpg", "text": " "},
+    ]
+
+    # Parcourir les contenus de l'album et les afficher
+    for i, item in enumerate(album_content_io):
+        # Grille avec 3 colonnes (ratio 2:1 ou 1:2 selon la ligne)
+        if i % 2 == 0:  # Ligne paire : Photo à gauche, texte à droite
+            col1, col2 = st.columns([3, 2])
+        else:  # Ligne impaire : Texte à gauche, photo à droite
+            col2, col1 = st.columns([2, 3])
+        
+        # Afficher la photo dans une colonne
+        with col1:
+            st.image(item["photo"], use_container_width=True)
+        
+        # Afficher le texte dans l'autre colonne
+        with col2:
+            st.markdown(f"<p style='font-size: 18px;'>{item['text']}</p>", unsafe_allow_html=True)
+
+
+    st.markdown(
+    """
+    <div style="text-align: center; font-size: 26px; ">
+        <br><br><br><br>
+        Des moments flous mais mémorables
+        <br><br><br><br>
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
+
+    # Exemple de contenu pour l'album photo
+    album_content_festa = [
+        {"photo": "Easter egg/04.jpg", "text": " "},
+        {"photo": "Easter egg/06.jpg", "text": " "},
+        {"photo": "Easter egg/15.jpg", "text": " "}
+    ]
+
+    # Parcourir les contenus de l'album et les afficher
+    for i, item in enumerate(album_content_festa):
+        # Grille avec 3 colonnes (ratio 2:1 ou 1:2 selon la ligne)
+        if i % 2 == 0:  # Ligne paire : Photo à gauche, texte à droite
+            col1, col2 = st.columns([3, 2])
+        else:  # Ligne impaire : Texte à gauche, photo à droite
+            col2, col1 = st.columns([2, 3])
+        
+        # Afficher la photo dans une colonne
+        with col1:
+            st.image(item["photo"], use_container_width=True)
+        
+        # Afficher le texte dans l'autre colonne
+        with col2:
+            st.markdown(f"<p style='font-size: 18px;'>{item['text']}</p>", unsafe_allow_html=True)
+
+
+
+
+
+    st.markdown(
+    """
+    <div style="text-align: center; font-size: 26px; ">
+        <br><br><br><br>
+        Instants de vie familiaux
+        <br><br><br><br>
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
+
+    # Exemple de contenu pour l'album photo
+    album_content_fam = [
+        {"photo": "Easter egg/fam01.jpg", "text": " "},
+        {"photo": "Easter egg/fam03.jpg", "text": " "},
+        {"photo": "Easter egg/fam02.jpg", "text": " "},
+        {"photo": "Easter egg/fam04.jpg", "text": " "}
+    ]
+
+    # Parcourir les contenus de l'album et les afficher
+    for i, item in enumerate(album_content_fam):
+        # Grille avec 3 colonnes (ratio 2:1 ou 1:2 selon la ligne)
+        if i % 2 == 0:  # Ligne paire : Photo à gauche, texte à droite
+            col1, col2 = st.columns([3, 2])
+        else:  # Ligne impaire : Texte à gauche, photo à droite
+            col2, col1 = st.columns([2, 3])
+        
+        # Afficher la photo dans une colonne
+        with col1:
+            st.image(item["photo"], use_container_width=True)
+        
+        # Afficher le texte dans l'autre colonne
+        with col2:
+            st.markdown(f"<p style='font-size: 18px;'>{item['text']}</p>", unsafe_allow_html=True)
+
+
+
+
+
+
+
+
+
+
+
     
 #|-----------------------------------------------------------------------------|
+# Initialisation de l'état de session pour la page secrète
+if "secret_unlocked" not in st.session_state:
+    st.session_state["secret_unlocked"] = False
 
 # Définir la navigation
 pages = {
@@ -650,8 +844,18 @@ pages = {
     "Statistiques Lineups": page_statistiques_lineups
 }
 
-st.sidebar.title("Menu")
-selection = st.sidebar.radio("Aller à :", list(pages.keys()))
+#st.sidebar.title("Menu")
+#selection = st.sidebar.radio("Aller à :", list(pages.keys()))
 
 # Afficher la page sélectionnée
+#pages[selection]()
+
+
+
+# Ajouter dynamiquement la page secrète si elle est débloquée
+if st.session_state["secret_unlocked"]:
+    pages["🕵️"] = page_secret
+
+st.sidebar.title("Menu")
+selection = st.sidebar.radio("Aller à :", list(pages.keys()))
 pages[selection]()
