@@ -687,14 +687,9 @@ def page_secret():
 )
 
     #st.image("Easter egg/07.png")  # Ajoute une image secrète, si tu le souhaites.
-    st.markdown(
-    """
-    <div style="text-align: center;">
-        <img src="Easter egg/07.png" style="max-width: 100%; height: auto;">
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+    col1, col2, col3 = st.columns([1, 2, 1])  # Création de 3 colonnes
+    with col2:
+        st.image("Easter egg/07.png", use_column_width=True)    
 
 
 
