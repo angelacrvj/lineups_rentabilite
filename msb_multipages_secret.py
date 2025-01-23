@@ -802,8 +802,7 @@ def page_secret():
         {"photo": "Easter egg/fam01.jpg", "text": "Description de la photo 1."},
         {"photo": "Easter egg/fam03.jpg", "text": "Description de la photo 2."},
         {"photo": "Easter egg/fam02.jpg", "text": "Description de la photo 3."},
-        {"photo": "Easter egg/fam04.jpg", "text": "Description de la photo 4."},
-        {"video": "Easter egg/procissao_o_mar.mp4", "text": "Description de la photo 4."}
+        {"photo": "Easter egg/fam04.jpg", "text": "Description de la photo 4."}
     ]
 
     # Parcourir les contenus de l'album et les afficher
@@ -816,10 +815,7 @@ def page_secret():
         
         # Afficher la photo dans une colonne
         with col1:
-            if "photo" in item:
-                st.image(item["photo"], use_container_width=True)
-            elif "video" in item:
-                st.video(item["video"], use_container_width=True)
+            st.image(item["photo"], use_container_width=True)
         
         # Afficher le texte dans l'autre colonne
         with col2:
