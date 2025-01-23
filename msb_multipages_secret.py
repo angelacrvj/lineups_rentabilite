@@ -686,7 +686,19 @@ def page_secret():
     unsafe_allow_html=True
 )
 
-    st.image("Easter egg/07.png")  # Ajoute une image secrète, si tu le souhaites.
+    #st.image("Easter egg/07.png")  # Ajoute une image secrète, si tu le souhaites.
+    st.markdown(
+    """
+    <div style="text-align: center;">
+        <img src="Easter egg/07.png" style="max-width: 100%; height: auto;">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+
+
+
 
     st.markdown(
     """
