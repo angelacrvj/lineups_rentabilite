@@ -397,7 +397,6 @@ def page_accueil():
     **Commencez dès maintenant à optimiser vos rotations et à approfondir votre compréhension du jeu.**
     """)
 
-    st.image(r"Easter egg/GIF/stephen_curry.gif")
 
     col1, col2, col3 = st.columns([1, 1, 1])  # Ajuste les proportions pour le centrage
 
