@@ -399,6 +399,11 @@ def page_accueil():
 
     st.image(r"Easter egg/GIF/stephen_curry.gif")
 
+    col1, col2, col3 = st.columns([1, 1, 1])  # Ajuste les proportions pour le centrage
+
+    with col2:
+        st.image(r"Easter egg/GIF/stephen_curry.gif")  # Image centrée
+
 
 
     #|----------------------------- Renta lineups -----------------------------|
