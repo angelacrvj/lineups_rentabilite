@@ -381,17 +381,9 @@ def page_accueil():
 
     st.markdown("""
     **Bienvenue sur votre outil d’analyse des lineups de la Betclic Élite**
+                
     Plongez dans un environnement conçu pour explorer, comparer et optimiser les rotations d’équipes en fonction des futurs matchups. Cet outil interactif vous permet d’accéder à des données précises et visuelles pour maximiser les performances collectives.
                 
-    **Fonctionnalités principales :**
-    - **Analyse Rentabilité** : Compare les performances des équipes/lineups grâce à mes viz trop waow.
-    - **Statistiques des Lineups** : Explorez les statistiques détaillées des lineups dans des tables trop waow.
-    
-    Pas folichon pour le moment mais bon je n'ai pas reçu la prose de la frappe de Chicagre 😢
-                
-    """)
-
-    st.markdown("""
     **Analyse Rentabilité**  
     Explorez les performances des lineups grâce à des outils visuels intuitifs :  
     - **Heatmap comparative par équipe** : Sélectionnez deux équipes et comparez leurs lineups en fonction des performances moyennes contre leurs adversaires. Identifiez rapidement les forces et faiblesses de chaque combinaison.  
@@ -404,6 +396,10 @@ def page_accueil():
     Cet outil est conçu pour fournir des insights stratégiques et faciliter les prises de décision, que vous soyez coach, analyste, ou passionné de basketball.  
     **Commencez dès maintenant à optimiser vos rotations et à approfondir votre compréhension du jeu.**
     """)
+
+    st.image(r"Easter egg/GIF/stephen_curry.gif")
+
+
 
     #|----------------------------- Renta lineups -----------------------------|
 
