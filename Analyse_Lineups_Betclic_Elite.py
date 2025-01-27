@@ -50,6 +50,7 @@ team_logos = {
     'SIG Strasbourg': "logos_equipes/SIG_Strasbourg.png"
 }
 
+
 # --------------------- Calculs comparaisons de matchups --------------------- #
 def calculate_matchup(team_lineups, opponent_lineups):
     results = []
@@ -69,6 +70,7 @@ def calculate_matchup(team_lineups, opponent_lineups):
 
         results.append(row)
     return pd.DataFrame(results)
+
 
 # ---------------------- Fonction heatmap pete sa mère ---------------------- #
 
@@ -103,6 +105,7 @@ def plot_heatmap(df, title, ax):
     # Titre global
     fig.suptitle(title, fontsize=16)
     st.pyplot(fig)
+
 
 # -------------------- Fonction radar chart pete sa mère -------------------- #
 def radar_chart(team1_lineups, team2_lineups, team_name, opponent_name):    
@@ -178,7 +181,10 @@ def radar_chart(team1_lineups, team2_lineups, team_name, opponent_name):
     )
     st.plotly_chart(fig)
 
+
+
 # --------------------- Création des filtres centralisés --------------------- #
+
 # Filtres pour la page : Analyse Rentabilité 
 def filters_analyse_rentabilite(data):
     """
@@ -219,8 +225,8 @@ def filters_analyse_rentabilite(data):
 
     return team_name, opponent_name, player_filter_team, player_filter_opponent, filtre_temporel
 
-# Filtres pour la page : Statistiques Lineups 
 
+# Filtres pour la page : Statistiques Lineups 
 def filters_stats_lineups(data):
     """
     Crée les filtres pour la page Statistiques Lineups : sélection des équipes et des joueurs.
@@ -263,28 +269,6 @@ def filters_stats_lineups(data):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Nouvelle fonction pour afficher les tableaux avec AgGrid (Hagrid)
 def display_aggrid_table(dataframe, fixed_column="Lineup"):
 
@@ -298,6 +282,33 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
     columns = dataframe.columns.tolist()  # Liste des noms de colonnes
     for col in columns:
         gb.configure_column(col, headerClass='custom-header')  # Applique à chaque colonne
+
+    # Ajoute la mise en forme pour les colonnes "centile"
+    centile_columns = [col for col in dataframe.columns if col.startswith("centile")]
+    for col in centile_columns:
+        gb.configure_column(
+            col,
+            cellStyle={"backgroundColor": "function(params) { return getCoolwarmColor(params.value); }"}
+        )
+
+    # Ajouter le script JS pour calculer la couleur
+    gb.configure_grid_options(
+        customJSCode="""
+        function getCoolwarmColor(value) {
+            if (value === null || value === undefined) return '';
+            const min = 0
+            const max = 100
+            const ratio = (value - min) / (max - min);
+            const r = Math.floor(255 * Math.max(0, Math.min(1, 1 - 2 * Math.abs(ratio - 0.5))));
+            const b = Math.floor(255 * Math.max(0, Math.min(1, 2 * (0.5 - ratio))));
+            return `rgb(${r}, 0, ${b})`;
+        }
+        """
+    )
+
+
+
+
 
     # Génère les options de tableau avec les colonnes configurées
     grid_options = gb.build()
@@ -327,31 +338,6 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #|-----------------------------------------------------------------------------|
 #|------------------------------- Création Site -------------------------------|
 #|-----------------------------------------------------------------------------|
@@ -364,7 +350,9 @@ st.set_page_config(
 )
 
 #|-----------------------------------------------------------------------------|
+
 # Définition des pages
+
     #|----------------------------- Page d'acceuil ----------------------------|
 def page_accueil():
 
@@ -383,15 +371,18 @@ def page_accueil():
     **Bienvenue sur votre outil d’analyse des lineups de la Betclic Élite**
                 
     Plongez dans un environnement conçu pour explorer, comparer et optimiser les rotations d’équipes en fonction des futurs matchups. Cet outil interactif vous permet d’accéder à des données précises et visuelles pour maximiser les performances collectives.
-                
+    
+
     **Analyse Rentabilité**  
     Explorez les performances des lineups grâce à des outils visuels intuitifs :  
     - **Heatmap comparative par équipe** : Sélectionnez deux équipes et comparez leurs lineups en fonction des performances moyennes contre leurs adversaires. Identifiez rapidement les forces et faiblesses de chaque combinaison.  
     - **Radar chart** : Examinez plusieurs lineups simultanément pour mettre en lumière leurs atouts spécifiques et leurs marges d’amélioration.  
 
+
     **Statistiques Lineups**  
     Plongez dans une base de données exhaustive pour analyser chaque détail :  
     - **Quatre tableaux personnalisables** : Classez, filtrez et triez les lineups de la Betclic Élite pour découvrir les combinaisons les plus rentables et comprendre les dynamiques des équipes.  
+
 
     Cet outil est conçu pour fournir des insights stratégiques et faciliter les prises de décision, que vous soyez coach, analyste, ou passionné de basketball.  
     **Commencez dès maintenant à optimiser vos rotations et à approfondir votre compréhension du jeu.**
@@ -406,7 +397,6 @@ def page_accueil():
 
 
     #|----------------------------- Renta lineups -----------------------------|
-
 
 def page_analyse_rentabilite():
     # Interface Streamlit
@@ -468,6 +458,7 @@ def page_analyse_rentabilite():
     team2_lineups = st.multiselect(f"Lineups de {opponent_name} :", options=opponent_data["Lineup"].unique())
     radar_chart(team1_lineups, team2_lineups, team_name, opponent_name)
 
+
     #|----------------------------- Stats tableau -----------------------------|
 
 def page_statistiques_lineups():
@@ -504,8 +495,6 @@ def page_statistiques_lineups():
 #    - [Defense / Shooting](#defense-shooting)
 #    """)
 
-
-
     # Liste des tableaux avec liens cliquables et descriptions à côté
     st.markdown("""
     **Tableaux disponibles :**
@@ -514,8 +503,6 @@ def page_statistiques_lineups():
     - [Defense / Overall](#defense-overall) : Ce tableau résume les statistiques globales défensives des lineups.
     - [Defense / Shooting](#defense-shooting) : Ce tableau met en avant les statistiques défensives liées au tir.
     """)
-
-
 
 
     # Table 1 : Offense  / Overall
@@ -539,7 +526,6 @@ def page_statistiques_lineups():
         "Assists Equipe": "Assists Equipe",
         "Turnovers Equipe": "Turnovers Equipe"
     }
-    #st.dataframe(filtered_data[offense_columns.keys()].rename(columns=offense_columns).round(1))
 
     df1 = filtered_data[offense_columns.keys()].rename(columns=offense_columns).round(1)
     display_aggrid_table(df1)
@@ -576,11 +562,9 @@ def page_statistiques_lineups():
         "Turnovers Equipe": "Turnovers Equipe",
         "Fouls Equipe": "Fouls Equipe"
     }
-    #st.dataframe(filtered_data[offense_shooting_columns.keys()].rename(columns=offense_shooting_columns).round(1))
 
     df2 = filtered_data[offense_shooting_columns.keys()].rename(columns=offense_shooting_columns).round(1)
     display_aggrid_table(df2)
-
 
 
     # Table 3 : Defense / Overall
@@ -604,7 +588,6 @@ def page_statistiques_lineups():
         "Assists Opposant": "Assists Opposant",
         "Turnovers Opposant": "Turnovers Opposant"
     }
-    #st.dataframe(filtered_data[defense_overall_columns.keys()].rename(columns=defense_overall_columns).round(1))
 
     df3 = filtered_data[defense_overall_columns.keys()].rename(columns=defense_overall_columns).round(1)
     display_aggrid_table(df3)
@@ -638,13 +621,9 @@ def page_statistiques_lineups():
         "Turnovers Opposant": "Turnovers Opposant",
         "Fouls Opposant": "Fouls Opposant"
     }
-    #st.dataframe(filtered_data[defense_shooting_columns.keys()].rename(columns=defense_shooting_columns).round(1))
-
 
     df4 = filtered_data[defense_shooting_columns.keys()].rename(columns=defense_shooting_columns).round(1)
     display_aggrid_table(df4)
-
-
 
 
     
