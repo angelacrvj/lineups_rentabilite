@@ -6,6 +6,8 @@ import plotly.graph_objects as go
 import random
 import os
 from st_aggrid import AgGrid, GridOptionsBuilder
+from matplotlib import cm
+from matplotlib.colors import Normalize
 
 
 # Chargement des données
@@ -283,28 +285,25 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
     for col in columns:
         gb.configure_column(col, headerClass='custom-header')  # Applique à chaque colonne
 
+
     # Ajoute la mise en forme pour les colonnes "centile"
     centile_columns = [col for col in dataframe.columns if col.startswith("centile")]
+    norm = Normalize(vmin=dataframe[centile_columns].min().min(), vmax=dataframe[centile_columns].max().max())
+    cmap = cm.get_cmap("coolwarm")
+
     for col in centile_columns:
+        # Définit le style de cellule avec Python
         gb.configure_column(
             col,
-            cellStyle={"backgroundColor": "function(params) { return getCoolwarmColor(params.value); }"}
+            cellStyle=lambda params: {
+                "backgroundColor": f"rgb({int(cmap(norm(params.value))[0]*255)},"
+                                   f"{int(cmap(norm(params.value))[1]*255)},"
+                                   f"{int(cmap(norm(params.value))[2]*255)})"
+                if params.value is not None else ""
+            }
         )
 
-    # Ajouter le script JS pour calculer la couleur
-    gb.configure_grid_options(
-        customJSCode="""
-        function getCoolwarmColor(value) {
-            if (value === null || value === undefined) return '';
-            const min = 0
-            const max = 100
-            const ratio = (value - min) / (max - min);
-            const r = Math.floor(255 * Math.max(0, Math.min(1, 1 - 2 * Math.abs(ratio - 0.5))));
-            const b = Math.floor(255 * Math.max(0, Math.min(1, 2 * (0.5 - ratio))));
-            return `rgb(${r}, 0, ${b})`;
-        }
-        """
-    )
+
 
 
 
