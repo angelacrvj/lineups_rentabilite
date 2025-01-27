@@ -285,6 +285,32 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
 
 
 
+
+
+
+    # Ajoute la mise en forme conditionnelle pour les colonnes "centile"
+    centile_columns = [col for col in dataframe.columns if col.startswith("centile")]
+    for col in centile_columns:
+        gb.configure_column(
+            col,
+            cellStyle=lambda params: {
+                "backgroundColor": f"rgba(255, 0, 0, {params['value'] / 100})" if params["value"] >= 50 else f"rgba(0, 0, 255, {1 - params['value'] / 100})",
+                "color": "white" if params["value"] >= 50 else "black",
+            }
+        )
+
+
+
+
+
+
+
+
+
+
+
+
+
     # Génère les options de tableau avec les colonnes configurées
     grid_options = gb.build()
 
