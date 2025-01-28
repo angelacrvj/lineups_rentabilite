@@ -308,7 +308,7 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
 
 
     # Ajout de la mise en forme conditionnelle pour les colonnes "Centile"
-    centile_columns = [col for col in dataframe.columns if col.startswith("Centile")]
+    centile_columns = [col for col in dataframe.columns if col.startswith("centile")]
     for col in centile_columns:
         gb.configure_column(
             col,
