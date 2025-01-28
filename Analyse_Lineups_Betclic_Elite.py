@@ -307,8 +307,7 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
     for col in columns:
         gb.configure_column(col, headerClass='custom-header')  # Applique à chaque colonne
 
-    # Génère les options de tableau avec les colonnes configurées
-    grid_options = gb.build()
+
 
 
 
@@ -343,7 +342,8 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
 
 
 
-
+    # Génère les options de tableau avec les colonnes configurées
+    grid_options = gb.build()
 
 
 
