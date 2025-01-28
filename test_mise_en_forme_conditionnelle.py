@@ -13,36 +13,37 @@ data = {
 }
 df = pd.DataFrame(data)
 
-# Générer une fonction pour récupérer le dégradé coolwarm sous forme hexadécimale
+# Fonction pour générer une couleur en fonction de la valeur (coolwarm)
 def get_coolwarm_color(value):
     norm = mcolors.Normalize(vmin=0, vmax=100)
     cmap = plt.get_cmap("coolwarm")
     return mcolors.rgb2hex(cmap(norm(value)))
 
-# Créer une colonne supplémentaire avec les couleurs pour les colonnes "Centile"
+# Générer les couleurs pour les colonnes "Centile"
+color_mapping = {}
 for col in df.columns:
     if col.startswith("Centile"):
-        df[f"{col}_color"] = df[col].apply(get_coolwarm_color)
+        color_mapping[col] = {val: get_coolwarm_color(val) for val in df[col].unique()}
 
 # Construire les GridOptions pour AgGrid
 gb = GridOptionsBuilder.from_dataframe(df)
 
-# Appliquer des styles conditionnels sur les colonnes "Centile"
+# Appliquer les styles conditionnels en JavaScript
 for col in df.columns:
     if col.startswith("Centile"):
-        gb.configure_column(
-            col,
-            cellStyle=lambda params: {
-                "backgroundColor": params["data"][f"{col}_color"],
-                "color": "black",
-            },
-        )
+        js_code = f"""
+        function(params) {{
+            var colorMapping = {color_mapping[col]};
+            return {{
+                'backgroundColor': colorMapping[params.value] || 'white',
+                'color': 'black'
+            }};
+        }}
+        """
+        gb.configure_column(col, cellStyle=js_code)
 
-# Construire les options de la grille
+# Construire les options
 grid_options = gb.build()
-
-# Supprimer les colonnes "_color" de l'affichage
-df = df[[col for col in df.columns if not col.endswith("_color")]]
 
 # Afficher la table dans Streamlit
 AgGrid(df, gridOptions=grid_options)
