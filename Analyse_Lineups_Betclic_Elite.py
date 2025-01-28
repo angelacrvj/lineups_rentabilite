@@ -274,23 +274,15 @@ def filters_stats_lineups(data):
 
 
 
-#def generate_coolwarm_style(value):
- #   """Génère un style CSS basé sur un dégradé coolwarm."""
- #   norm = Normalize(vmin=0, vmax=100, clip=True)  # Normalisation des valeurs entre 0 et 100
-  #  cmap = cm.get_cmap("coolwarm")  # Palette de couleurs
-  #  rgba_color = cmap(norm(value))  # Génération de la couleur RGBA
-  #  return f"background-color: rgba({int(rgba_color[0]*255)}, {int(rgba_color[1]*255)}, {int(rgba_color[2]*255)}, {rgba_color[3]})"
-
-
-
 def generate_coolwarm_style(value):
     """Génère un style CSS basé sur un dégradé coolwarm."""
-    if not isinstance(value, (int, float)):  # Vérifie si la valeur est numérique
-        return ""  # Retourne un style vide si la valeur n'est pas valide
     norm = Normalize(vmin=0, vmax=100, clip=True)  # Normalisation des valeurs entre 0 et 100
     cmap = cm.get_cmap("coolwarm")  # Palette de couleurs
     rgba_color = cmap(norm(value))  # Génération de la couleur RGBA
     return f"background-color: rgba({int(rgba_color[0]*255)}, {int(rgba_color[1]*255)}, {int(rgba_color[2]*255)}, {rgba_color[3]})"
+
+
+
 
 
 
@@ -314,12 +306,12 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
 
 
     # Ajout de la mise en forme conditionnelle pour les colonnes "Centile"
-    centile_columns = [col for col in dataframe.columns if col.startswith("Centile")]
-    for col in centile_columns:
-        gb.configure_column(
-            col,
-            cellStyle=lambda params: generate_coolwarm_style(params["value"]),
-        )
+  #  centile_columns = [col for col in dataframe.columns if col.startswith("Centile")]
+  #  for col in centile_columns:
+  #      gb.configure_column(
+  #          col,
+  #          cellStyle=lambda params: generate_coolwarm_style(params["value"]),
+   #     )
 
 
 
