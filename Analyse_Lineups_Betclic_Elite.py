@@ -287,23 +287,32 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
 
 
 
-
-    # Ajoute la mise en forme conditionnelle pour les colonnes "centile"
+    # Identifier les colonnes qui commencent par "centile"
     centile_columns = [col for col in dataframe.columns if col.startswith("centile")]
-    for col in centile_columns:
-        gb.configure_column(
-            col,
-            cellStyle=lambda params: {
-                "backgroundColor": f"rgba(255, 0, 0, {params['value'] / 100})" if params["value"] >= 50 else f"rgba(0, 0, 255, {1 - params['value'] / 100})",
-                "color": "white" if params["value"] >= 50 else "black",
-            }
-        )
+    # Appliquer un style conditionnel aux colonnes "centile"
+    if centile_columns:
+        # Définir le script JS pour appliquer la colorimétrie coolwarm
+        color_renderer = JsCode("""
+        function(params) {
+            let value = params.value;
+            let min = 0;
+            let max = 100;
+            let percentage = (value - min) / (max - min);
+            let r = Math.floor(255 * percentage);
+            let b = 255 - r;
+            return {
+                'backgroundColor': `rgb(${r}, 0, ${b})`,
+                'color': 'white',
+                'fontWeight': 'bold'
+            };
+        }
+        """)
 
-
-
-
-
-
+        for col in centile_columns:
+            gb.configure_column(
+                col,
+                cellStyle=color_renderer
+            )
 
 
 
