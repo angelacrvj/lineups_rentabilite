@@ -280,30 +280,6 @@ def filters_stats_lineups(data):
 
 
 
-
-
-
-
-def color_scale(value):
-    """
-    Calcule une couleur basée sur la valeur dans une échelle coolwarm (0-100).
-    """
-    # Convertit la valeur (0-100) en une échelle de 0 à 1 pour Matplotlib
-    norm_value = value / 100
-    # Utilise la colorimétrie "coolwarm" de Matplotlib
-    cmap = cm.get_cmap("coolwarm")
-    rgba = cmap(norm_value)
-    # Convertit la couleur RGBA en format CSS (hexadécimal)
-    return f"rgba({int(rgba[0]*255)}, {int(rgba[1]*255)}, {int(rgba[2]*255)}, {rgba[3]})"
-
-
-
-
-
-
-
-
-
 # Nouvelle fonction pour afficher les tableaux avec AgGrid (Hagrid)
 def display_aggrid_table(dataframe, fixed_column="Lineup"):
 
@@ -317,25 +293,6 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
     columns = dataframe.columns.tolist()  # Liste des noms de colonnes
     for col in columns:
         gb.configure_column(col, headerClass='custom-header')  # Applique à chaque colonne
-
-
-
-        # Ajout du style pour les colonnes commençant par "Centile"
-        if col.startswith("Centile"):
-            gb.configure_column(
-                col,
-                cellStyle=lambda params: {
-                    "backgroundColor": color_scale(params.value) if 0 <= params.value <= 100 else "rgba(255, 255, 255, 0)",
-                    "color": "white" if params.value > 50 else "black"  # Contraste du texte
-                },
-            )
-
-
-
-
-
-
-
 
 
 
