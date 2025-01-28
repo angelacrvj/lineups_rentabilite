@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 import random
 import os
 from st_aggrid import AgGrid, GridOptionsBuilder
-
+from st_aggrid.shared import JsCode
 
 # Chargement des données
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -281,42 +281,124 @@ def filters_stats_lineups(data):
 
 
 # Nouvelle fonction pour afficher les tableaux avec AgGrid (Hagrid)
-def display_aggrid_table(dataframe, fixed_column="Lineup"):
+#def display_aggrid_table(dataframe, fixed_column="Lineup"):
 
     # Création des options de configuration
-    gb = GridOptionsBuilder.from_dataframe(dataframe)
+#    gb = GridOptionsBuilder.from_dataframe(dataframe)
     
     # Fixe la colonne spécifiée
-    gb.configure_column(fixed_column, pinned="left")
+#    gb.configure_column(fixed_column, pinned="left")
     
     # Applique la classe CSS personnalisée à chaque colonne
-    columns = dataframe.columns.tolist()  # Liste des noms de colonnes
-    for col in columns:
-        gb.configure_column(col, headerClass='custom-header')  # Applique à chaque colonne
-
-
-
+#    columns = dataframe.columns.tolist()  # Liste des noms de colonnes
+#    for col in columns:
+#        gb.configure_column(col, headerClass='custom-header')  # Applique à chaque colonne
 
     # Génère les options de tableau avec les colonnes configurées
+#    grid_options = gb.build()
+
+    # CSS personnalisé pour les en-têtes
+#    custom_css = {
+#        ".custom-header": {
+#            "font-size": "14px",  # Taille du texte des en-têtes
+#            "font-weight": "bold"  # Gras pour les intitulés
+#        }
+#    }
+
+    # Affiche le tableau avec les options configurées
+#    AgGrid(
+#        dataframe,
+#        gridOptions=grid_options,
+#        height=400,
+#        fit_columns_on_grid_load=False,  # Ajuste automatiquement les colonnes
+#        custom_css=custom_css,  # Injecte le CSS personnalisé
+#        enable_enterprise_modules=False
+#    )
+
+
+
+
+
+
+def display_aggrid_table(dataframe, fixed_column="Lineup"):
+    """
+    Affiche un tableau interactif AgGrid avec mise en forme conditionnelle pour les colonnes "Centile".
+    :param dataframe: pandas.DataFrame à afficher
+    :param fixed_column: colonne à fixer à gauche
+    """
+    # Création des options de configuration
+    gb = GridOptionsBuilder.from_dataframe(dataframe)
+
+    # Fixer une colonne (par défaut "Lineup")
+    gb.configure_column(fixed_column, pinned="left")
+
+    # Appliquer une mise en forme conditionnelle sur les colonnes commençant par "Centile"
+    centile_columns = [col for col in dataframe.columns if col.startswith("Centile")]
+    if centile_columns:
+        color_gradient_js = JsCode("""
+        function(params) {
+            let value = params.value;
+            if (value === null || value === undefined) return '';
+
+            let min = 0;
+            let max = 100;
+            let ratio = (value - min) / (max - min);
+
+            let r = Math.floor(255 * (1 - ratio));
+            let g = Math.floor(255 * ratio);
+            let b = 255 - Math.floor(255 * Math.abs(0.5 - ratio) * 2);
+
+            return `background-color: rgb(${r}, ${g}, ${b}); color: black;`;
+        }
+        """)
+
+        for col in centile_columns:
+            gb.configure_column(col, cellStyle=color_gradient_js)
+
+    # Ajouter d'autres personnalisations si nécessaire (existant dans ton code)
+    columns = dataframe.columns.tolist()  # Liste des noms de colonnes
+    for col in columns:
+        gb.configure_column(col, headerClass='custom-header')  # Applique un style personnalisé aux en-têtes
+
+    # Générer les options du tableau avec les colonnes configurées
     grid_options = gb.build()
 
     # CSS personnalisé pour les en-têtes
     custom_css = {
         ".custom-header": {
-            "font-size": "14px",  # Taille du texte des en-têtes
-            "font-weight": "bold"  # Gras pour les intitulés
+            "font-size": "14px",
+            "font-weight": "bold"
         }
     }
 
-    # Affiche le tableau avec les options configurées
+    # Afficher le tableau avec les options configurées
     AgGrid(
         dataframe,
         gridOptions=grid_options,
         height=400,
-        fit_columns_on_grid_load=False,  # Ajuste automatiquement les colonnes
-        custom_css=custom_css,  # Injecte le CSS personnalisé
+        fit_columns_on_grid_load=False,
+        custom_css=custom_css,
         enable_enterprise_modules=False
     )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
