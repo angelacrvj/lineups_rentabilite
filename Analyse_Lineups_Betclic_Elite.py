@@ -325,11 +325,10 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
             gb.configure_column(
                 col,
                 cellStyle=lambda params: {
-                    "backgroundColor": color_scale(params.value),
+                    "backgroundColor": color_scale(params.value) if 0 <= params.value <= 100 else "rgba(255, 255, 255, 0)",
                     "color": "white" if params.value > 50 else "black"  # Contraste du texte
                 },
             )
-
 
 
 
