@@ -288,7 +288,7 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
 
 
     # Identifier les colonnes qui commencent par "centile"
-    centile_columns = [col for col in dataframe.columns if col.startswith("centile")]
+    centile_columns = [col for col in dataframe.columns if col.startswith("Centile")]
     # Appliquer un style conditionnel aux colonnes "centile"
     if centile_columns:
         # Définir le script JS pour appliquer la colorimétrie coolwarm
