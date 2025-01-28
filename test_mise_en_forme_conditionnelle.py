@@ -19,31 +19,47 @@ def get_coolwarm_color(value):
     cmap = plt.get_cmap("coolwarm")
     return mcolors.rgb2hex(cmap(norm(value)))
 
-# Générer les couleurs pour les colonnes "Centile"
-color_mapping = {}
+# Ajouter une colonne "color" cachée pour chaque colonne Centile
 for col in df.columns:
     if col.startswith("Centile"):
-        color_mapping[col] = {val: get_coolwarm_color(val) for val in df[col].unique()}
+        df[f"{col}_color"] = df[col].apply(get_coolwarm_color)
 
-# Construire les GridOptions pour AgGrid
+# Configurer AgGrid
 gb = GridOptionsBuilder.from_dataframe(df)
 
-# Appliquer les styles conditionnels en JavaScript
+# Ajouter des règles CSS basées sur la couleur stockée dans "_color"
 for col in df.columns:
     if col.startswith("Centile"):
-        js_code = f"""
-        function(params) {{
-            var colorMapping = {color_mapping[col]};
-            return {{
-                'backgroundColor': colorMapping[params.value] || 'white',
-                'color': 'black'
-            }};
-        }}
-        """
-        gb.configure_column(col, cellStyle=js_code)
+        gb.configure_column(
+            col,
+            cellClassRules={
+                f"bg-{col.lower()}": "true"
+            },
+        )
 
-# Construire les options
+# Construire les options de la grille
 grid_options = gb.build()
 
-# Afficher la table dans Streamlit
+# Supprimer les colonnes "_color" de l'affichage
+df = df[[col for col in df.columns if not col.endswith("_color")]]
+
+# Générer le CSS dynamique pour les couleurs
+custom_css = "<style>\n"
+for col in df.columns:
+    if col.startswith("Centile"):
+        for value in df[col].unique():
+            color = get_coolwarm_color(value)
+            class_name = f"bg-{col.lower()}"
+            custom_css += f"""
+            .ag-theme-streamlit .{class_name} {{
+                background-color: {color} !important;
+                color: black !important;
+            }}
+            """
+custom_css += "</style>"
+
+# Injecter le CSS dans Streamlit
+st.markdown(custom_css, unsafe_allow_html=True)
+
+# Afficher le tableau interactif
 AgGrid(df, gridOptions=grid_options)
