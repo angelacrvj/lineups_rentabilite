@@ -318,8 +318,10 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
     for col in centile_columns:
         gb.configure_column(
             col,
-            cellStyle=lambda params: generate_coolwarm_style(params["value"]),
-        )
+            cellStyle=lambda params: "background-color: lightblue",  # Applique une couleur fixe
+    )
+  #          cellStyle=lambda params: generate_coolwarm_style(params["value"]),
+    #    )
 
 
 
