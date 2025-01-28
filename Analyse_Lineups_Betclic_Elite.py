@@ -308,12 +308,12 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
 
 
     # Ajout de la mise en forme conditionnelle pour les colonnes "Centile"
-  #  centile_columns = [col for col in dataframe.columns if col.startswith("Centile")]
- #  for col in centile_columns:
- #       gb.configure_column(
-  #          col,
-   #         cellStyle=lambda params: generate_coolwarm_style(params["value"]),
-  #      )
+    centile_columns = [col for col in dataframe.columns if col.startswith("Centile")]
+    for col in centile_columns:
+        gb.configure_column(
+            col,
+            cellStyle=lambda params: generate_coolwarm_style(params["value"]),
+        )
 
 
 
@@ -324,8 +324,6 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
 
     # Génère les options de tableau avec les colonnes configurées
     grid_options = gb.build()
-
-
 
     # CSS personnalisé pour les en-têtes
     custom_css = {
