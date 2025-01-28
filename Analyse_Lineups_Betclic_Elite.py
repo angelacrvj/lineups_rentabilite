@@ -290,6 +290,12 @@ def generate_coolwarm_style(value):
 #  fonction pour afficher les tableaux avec AgGrid (Hagrid)
 def display_aggrid_table(dataframe, fixed_column="Lineup"):
 
+
+
+    # Débogage : Afficher toutes les colonnes du DataFrame pour vérifier leur état
+    st.write("Colonnes du DataFrame :", dataframe.columns.tolist())
+
+
     # Création des options de configuration
     gb = GridOptionsBuilder.from_dataframe(dataframe)
     
@@ -309,14 +315,29 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
 
     # Ajout de la mise en forme conditionnelle pour les colonnes "Centile"
     centile_columns = [col for col in dataframe.columns if col.startswith("Centile")]
+
+
+# Débogage : Afficher les colonnes détectées pour la mise en forme conditionnelle
+    st.write("Colonnes identifiées pour la mise en forme conditionnelle :", centile_columns)
+
+
+
+
+   # for col in centile_columns:
+  #      gb.configure_column(
+   #         col,
+   #         cellStyle=lambda params: generate_coolwarm_style(params["value"]),
+   #     )
+
+# Débogage
     for col in centile_columns:
-        gb.configure_column(
-            col,
-            cellStyle=lambda params: generate_coolwarm_style(params["value"]),
-        )
-
-
-
+        if col in dataframe.columns:  # Vérifie que la colonne existe
+            gb.configure_column(
+                col,
+                cellStyle=lambda params: generate_coolwarm_style(params["value"]),
+            )
+        else:
+            st.warning(f"La colonne '{col}' n'existe pas dans le DataFrame.")
 
 
 
