@@ -276,7 +276,7 @@ def filters_stats_lineups(data):
 
 def generate_coolwarm_style(value):
     """Génère un style CSS basé sur un dégradé coolwarm."""
-    norm = Normalize(vmin=0, vmax=100)  # Normalisation des valeurs entre 0 et 100
+    norm = Normalize(vmin=0, vmax=100, clip=True)  # Normalisation des valeurs entre 0 et 100
     cmap = cm.get_cmap("coolwarm")  # Palette de couleurs
     rgba_color = cmap(norm(value))  # Génération de la couleur RGBA
     return f"background-color: rgba({int(rgba_color[0]*255)}, {int(rgba_color[1]*255)}, {int(rgba_color[2]*255)}, {rgba_color[3]})"
@@ -301,14 +301,6 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
     for col in columns:
         gb.configure_column(col, headerClass='custom-header')  # Applique à chaque colonne
 
-    # Test direct de generate_coolwarm_style
-    st.write("Test de la fonction generate_coolwarm_style :")
-    for test_value in [0, 50, 100, None, -10, 150]:
-        try:
-            style = generate_coolwarm_style(test_value)
-            st.write(f"Valeur : {test_value} -> Style : {style}")
-        except Exception as e:
-            st.error(f"Erreur avec la valeur {test_value} : {e}")
 
 
 
