@@ -333,7 +333,7 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
     gb.configure_column(fixed_column, pinned="left")
 
     # Appliquer une mise en forme conditionnelle sur les colonnes commençant par "Centile"
-    centile_columns = [col for col in dataframe.columns if col.startswith("centile")]
+    centile_columns = [col for col in dataframe.columns if col.startswith("Centile")]
     if centile_columns:
         color_gradient_js = JsCode("""
         function(params) {
