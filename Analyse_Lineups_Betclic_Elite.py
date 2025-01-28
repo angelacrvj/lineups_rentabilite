@@ -301,27 +301,17 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
     for col in columns:
         gb.configure_column(col, headerClass='custom-header')  # Applique à chaque colonne
 
-    # Test direct de generate_coolwarm_style
-    st.write("Test de la fonction generate_coolwarm_style :")
-    for test_value in [0, 50, 100, None, -10, 150]:
-        try:
-            style = generate_coolwarm_style(test_value)
-            st.write(f"Valeur : {test_value} -> Style : {style}")
-        except Exception as e:
-            st.error(f"Erreur avec la valeur {test_value} : {e}")
 
 
 
 
     # Ajout de la mise en forme conditionnelle pour les colonnes "Centile"
-    centile_columns = [col for col in dataframe.columns if col.startswith("Centile")]
-    for col in centile_columns:
-        gb.configure_column(
-            col,
-            cellStyle=lambda params: "background-color: lightblue",  # Applique une couleur fixe
-    )
+  #  centile_columns = [col for col in dataframe.columns if col.startswith("Centile")]
+  #  for col in centile_columns:
+  #      gb.configure_column(
+  #          col,
   #          cellStyle=lambda params: generate_coolwarm_style(params["value"]),
-    #    )
+   #     )
 
 
 
