@@ -13,31 +13,36 @@ data = {
 }
 df = pd.DataFrame(data)
 
-# Générer une fonction pour appliquer le dégradé "coolwarm" à une valeur entre 0 et 100
-def get_color(value):
+# Générer une fonction pour récupérer le dégradé coolwarm sous forme hexadécimale
+def get_coolwarm_color(value):
     norm = mcolors.Normalize(vmin=0, vmax=100)
-    cmap = plt.get_cmap("coolwarm")  # Dégradé coolwarm
-    color = mcolors.rgb2hex(cmap(norm(value)))  # Convertir en code hexadécimal
-    return color
+    cmap = plt.get_cmap("coolwarm")
+    return mcolors.rgb2hex(cmap(norm(value)))
 
-# Fonction de style conditionnel pour les colonnes "Centile"
-def cell_style(params):
-    if "Centile" in params["colDef"]["field"]:  # Vérifier si la colonne commence par "Centile"
-        color = get_color(params["value"])
-        return {"backgroundColor": color, "color": "black"}  # Appliquer la couleur
-    return None
+# Créer une colonne supplémentaire avec les couleurs pour les colonnes "Centile"
+for col in df.columns:
+    if col.startswith("Centile"):
+        df[f"{col}_color"] = df[col].apply(get_coolwarm_color)
 
-# Configurer la table AgGrid
+# Construire les GridOptions pour AgGrid
 gb = GridOptionsBuilder.from_dataframe(df)
 
-# Appliquer la fonction de style conditionnel à toutes les colonnes
-gb.configure_columns(
-    [col for col in df.columns if col.startswith("Centile")],  # Colonnes ciblées
-    cellStyle=cell_style,  # Fonction de style conditionnel
-)
+# Appliquer des styles conditionnels sur les colonnes "Centile"
+for col in df.columns:
+    if col.startswith("Centile"):
+        gb.configure_column(
+            col,
+            cellStyle=lambda params: {
+                "backgroundColor": params["data"][f"{col}_color"],
+                "color": "black",
+            },
+        )
 
-# Construire les options de configuration
+# Construire les options de la grille
 grid_options = gb.build()
 
-# Afficher la table avec AgGrid
+# Supprimer les colonnes "_color" de l'affichage
+df = df[[col for col in df.columns if not col.endswith("_color")]]
+
+# Afficher la table dans Streamlit
 AgGrid(df, gridOptions=grid_options)
