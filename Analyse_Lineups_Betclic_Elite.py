@@ -6,8 +6,7 @@ import plotly.graph_objects as go
 import random
 import os
 from st_aggrid import AgGrid, GridOptionsBuilder
-from matplotlib.colors import Normalize
-import matplotlib.cm as cm
+
 
 
 # Chargement des données
@@ -274,19 +273,6 @@ def filters_stats_lineups(data):
 
 
 
-def generate_coolwarm_style(value):
-    """Génère un style CSS basé sur un dégradé coolwarm."""
-    norm = Normalize(vmin=0, vmax=100, clip=True)  # Normalisation des valeurs entre 0 et 100
-    cmap = cm.get_cmap("coolwarm")  # Palette de couleurs
-    rgba_color = cmap(norm(value))  # Génération de la couleur RGBA
-    return f"background-color: rgba({int(rgba_color[0]*255)}, {int(rgba_color[1]*255)}, {int(rgba_color[2]*255)}, {rgba_color[3]})"
-
-
-
-
-
-
-
 #  fonction pour afficher les tableaux avec AgGrid (Hagrid)
 def display_aggrid_table(dataframe, fixed_column="Lineup"):
 
@@ -300,19 +286,6 @@ def display_aggrid_table(dataframe, fixed_column="Lineup"):
     columns = dataframe.columns.tolist()  # Liste des noms de colonnes
     for col in columns:
         gb.configure_column(col, headerClass='custom-header')  # Applique à chaque colonne
-
-
-
-
-
-    # Ajout de la mise en forme conditionnelle pour les colonnes "Centile"
-  #  centile_columns = [col for col in dataframe.columns if col.startswith("Centile")]
-  #  for col in centile_columns:
-  #      gb.configure_column(
-  #          col,
-  #          cellStyle=lambda params: generate_coolwarm_style(params["value"]),
-   #     )
-
 
 
 
