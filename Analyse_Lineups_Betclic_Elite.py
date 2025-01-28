@@ -281,53 +281,39 @@ def filters_stats_lineups(data):
 
 
 # Nouvelle fonction pour afficher les tableaux avec AgGrid (Hagrid)
-#def display_aggrid_table(dataframe, fixed_column="Lineup"):
+def display_aggrid_table(dataframe, fixed_column="Lineup"):
 
     # Création des options de configuration
-#    gb = GridOptionsBuilder.from_dataframe(dataframe)
+    gb = GridOptionsBuilder.from_dataframe(dataframe)
     
     # Fixe la colonne spécifiée
-#    gb.configure_column(fixed_column, pinned="left")
+    gb.configure_column(fixed_column, pinned="left")
     
     # Applique la classe CSS personnalisée à chaque colonne
-#    columns = dataframe.columns.tolist()  # Liste des noms de colonnes
-#    for col in columns:
-#        gb.configure_column(col, headerClass='custom-header')  # Applique à chaque colonne
+    columns = dataframe.columns.tolist()  # Liste des noms de colonnes
+    for col in columns:
+        gb.configure_column(col, headerClass='custom-header')  # Applique à chaque colonne
 
     # Génère les options de tableau avec les colonnes configurées
-#    grid_options = gb.build()
+    grid_options = gb.build()
 
     # CSS personnalisé pour les en-têtes
-#    custom_css = {
-#        ".custom-header": {
-#            "font-size": "14px",  # Taille du texte des en-têtes
-#            "font-weight": "bold"  # Gras pour les intitulés
-#        }
-#    }
+    custom_css = {
+        ".custom-header": {
+            "font-size": "14px",  # Taille du texte des en-têtes
+            "font-weight": "bold"  # Gras pour les intitulés
+        }
+    }
 
     # Affiche le tableau avec les options configurées
-#    AgGrid(
-#        dataframe,
-#        gridOptions=grid_options,
-#        height=400,
-#        fit_columns_on_grid_load=False,  # Ajuste automatiquement les colonnes
-#        custom_css=custom_css,  # Injecte le CSS personnalisé
-#        enable_enterprise_modules=False
-#    )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    AgGrid(
+        dataframe,
+        gridOptions=grid_options,
+        height=400,
+        fit_columns_on_grid_load=False,  # Ajuste automatiquement les colonnes
+        custom_css=custom_css,  # Injecte le CSS personnalisé
+        enable_enterprise_modules=False
+    )
 
 
 
