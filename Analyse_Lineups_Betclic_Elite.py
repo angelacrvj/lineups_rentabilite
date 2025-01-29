@@ -337,7 +337,7 @@ st.set_page_config(
 def page_accueil():
 
     st.markdown("""
-    <h1 style="text-align: center; margin-bottom: 30px; ">Analyse des Lineups MSB 🏀</h1>
+    <h1 style="text-align: center; margin-bottom: 30px; ">Analyse des Lineups Betclic Élite 🏀</h1>
     """, unsafe_allow_html=True)
 
     st.markdown("""
@@ -369,10 +369,7 @@ def page_accueil():
     """)
 
 
-    col1, col2, col3 = st.columns([1, 1, 1])  # Ajuste les proportions pour le centrage
 
-    with col2:
-        st.image(r"Easter egg/GIF/stephen_curry.gif")  # Image centrée
 
 
 
