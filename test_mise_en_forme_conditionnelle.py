@@ -14,40 +14,31 @@ data = {
 }
 df = pd.DataFrame(data)
 
+# 📌 Fonction de style conditionnel avec `cellStyle`
+def cell_style(params):
+    """Applique un fond rouge si la valeur est ≥ 50, sinon bleu."""
+    try:
+        value = params["value"]
+        if value is None:
+            return {}
+        elif value >= 50:
+            return {"backgroundColor": "red", "color": "white"}
+        else:
+            return {"backgroundColor": "blue", "color": "white"}
+    except Exception:
+        return {}
+
 # 📌 Configuration de la table AgGrid
 gb = GridOptionsBuilder.from_dataframe(df)
 
 # 📌 Appliquer la mise en forme conditionnelle sur les colonnes "Centile"
 for col in df.columns:
     if col.startswith("Centile"):
-        gb.configure_column(
-            col,
-            cellClassRules={
-                "cell-red": "params.value >= 50",
-                "cell-blue": "params.value < 50",
-            }
-        )
+        gb.configure_column(col, cellStyle=cell_style)
 
 # 📌 Construire les options de la table
 grid_options = gb.build()
 
-# 📌 Ajouter du CSS pour styliser les cellules
-custom_css = """
-<style>
-    .ag-theme-streamlit .cell-red {
-        background-color: red !important;
-        color: white !important;
-        font-weight: bold !important;
-    }
-    .ag-theme-streamlit .cell-blue {
-        background-color: blue !important;
-        color: white !important;
-        font-weight: bold !important;
-    }
-</style>
-"""
-st.markdown(custom_css, unsafe_allow_html=True)
-
 # 📌 Affichage de la table avec AgGrid
 st.subheader("📊 Tableau avec mise en forme conditionnelle")
-AgGrid(df, gridOptions=grid_options, theme="streamlit", enable_enterprise_modules=False)
+AgGrid(df, gridOptions=grid_options, theme="alpine", enable_enterprise_modules=False)
