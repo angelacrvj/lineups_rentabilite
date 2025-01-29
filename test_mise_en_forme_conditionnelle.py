@@ -3,37 +3,51 @@ from st_aggrid import AgGrid, GridOptionsBuilder
 import pandas as pd
 
 # 📌 Titre de l'application
-st.title("Test de mise en forme conditionnelle avec AgGrid 🎨")
+st.title("✅ Tableau avec mise en forme conditionnelle sur AgGrid")
 
 # 📌 Générer un DataFrame d'exemple
 data = {
     "Nom": ["Alice", "Bob", "Charlie", "David", "Emma"],
     "Centile_A": [10, 50, 90, 30, 70],
     "Centile_B": [20, 70, 30, 90, 50],
-    "Score": [3, 5, 8, 2, 7],  # Une colonne normale pour comparaison
+    "Score": [3, 5, 8, 2, 7],
 }
 df = pd.DataFrame(data)
-
-# 📌 Fonction de style conditionnel simple (ROUGE >= 50, BLEU < 50)
-def cell_style(params):
-    if params["value"] is not None:
-        if params["value"] >= 50:
-            return {"backgroundColor": "red", "color": "white"}
-        else:
-            return {"backgroundColor": "blue", "color": "white"}
-    return {}
 
 # 📌 Configuration de la table AgGrid
 gb = GridOptionsBuilder.from_dataframe(df)
 
-# Appliquer la mise en forme conditionnelle aux colonnes "Centile"
+# 📌 Appliquer la mise en forme conditionnelle sur les colonnes "Centile"
 for col in df.columns:
-    if col.startswith("Centile"):  
-        gb.configure_column(col, cellStyle=cell_style)
+    if col.startswith("Centile"):
+        gb.configure_column(
+            col,
+            cellClassRules={
+                "cell-red": "params.value >= 50",
+                "cell-blue": "params.value < 50",
+            }
+        )
 
 # 📌 Construire les options de la table
 grid_options = gb.build()
 
+# 📌 Ajouter du CSS pour styliser les cellules
+custom_css = """
+<style>
+    .ag-theme-streamlit .cell-red {
+        background-color: red !important;
+        color: white !important;
+        font-weight: bold !important;
+    }
+    .ag-theme-streamlit .cell-blue {
+        background-color: blue !important;
+        color: white !important;
+        font-weight: bold !important;
+    }
+</style>
+"""
+st.markdown(custom_css, unsafe_allow_html=True)
+
 # 📌 Affichage de la table avec AgGrid
-st.subheader("📊 Tableau avec mise en forme conditionnelle simple")
-AgGrid(df, gridOptions=grid_options, theme="streamlit")
+st.subheader("📊 Tableau avec mise en forme conditionnelle")
+AgGrid(df, gridOptions=grid_options, theme="streamlit", enable_enterprise_modules=False)
